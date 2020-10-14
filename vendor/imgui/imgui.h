@@ -37,7 +37,7 @@ Index of this file:
 
 #pragma once
 
-// Configuration file with compile-time options (edit imconfig.h or #define IMGUI_USER_CONFIG to your own filename)
+// Configurations file with compile-time options (edit imconfig.h or #define IMGUI_USER_CONFIG to your own filename)
 #ifdef IMGUI_USER_CONFIG
 #include IMGUI_USER_CONFIG
 #endif
@@ -120,7 +120,7 @@ struct ImDrawListSplitter;          // Helper to split a draw list into differen
 struct ImDrawVert;                  // A single vertex (pos + uv + col = 20 bytes by default. Override layout with IMGUI_OVERRIDE_DRAWVERT_STRUCT_LAYOUT)
 struct ImFont;                      // Runtime data for a single font within a parent ImFontAtlas
 struct ImFontAtlas;                 // Runtime data for multiple fonts, bake multiple fonts into a single texture, TTF/OTF font loader
-struct ImFontConfig;                // Configuration data when adding a font or merging fonts
+struct ImFontConfig;                // Configurations data when adding a font or merging fonts
 struct ImFontGlyph;                 // A single font glyph (code point + coordinates within in ImFontAtlas + offset)
 struct ImFontGlyphRangesBuilder;    // Helper to build glyph ranges from text/string data
 struct ImColor;                     // Helper functions to create a color that can be converted to either u32 or float4 (*OBSOLETE* please avoid using)
@@ -1095,7 +1095,7 @@ enum ImGuiNavInput_
     ImGuiNavInput_InternalStart_ = ImGuiNavInput_KeyMenu_
 };
 
-// Configuration flags stored in io.ConfigFlags. Set by user/application.
+// Configurations flags stored in io.ConfigFlags. Set by user/application.
 enum ImGuiConfigFlags_
 {
     ImGuiConfigFlags_None                   = 0,
@@ -1457,7 +1457,7 @@ struct ImGuiStyle
 struct ImGuiIO
 {
     //------------------------------------------------------------------
-    // Configuration (fill once)                // Default value
+    // Configurations (fill once)                // Default value
     //------------------------------------------------------------------
 
     ImGuiConfigFlags   ConfigFlags;             // = 0              // See ImGuiConfigFlags_ enum. Set by user/application. Gamepad/keyboard navigation options, etc.

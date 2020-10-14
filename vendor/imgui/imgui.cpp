@@ -3659,7 +3659,7 @@ void ImGui::NewFrame()
     ImGuiTestEngineHook_PreNewFrame(&g);
 #endif
 
-    // Check and assert for various common IO and Configuration mistakes
+    // Check and assert for various common IO and Configurations mistakes
     ErrorCheckNewFrameSanityChecks();
 
     // Load settings on first frame, save settings when modified (after a delay)
