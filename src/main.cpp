@@ -10,10 +10,11 @@
 #include "tests/Test.h"
 #include "tests/TestClearColor.h"
 #include "Configurations.h"
+#include "Ui/ConsoleWidget.h"
 
 int main() {
   GLFWwindow *window;
-  const Configurations* configurations = new Configurations(true);
+  const Configurations *configurations = new Configurations;
 
   if (!glfwInit())
     return -1;
@@ -22,7 +23,7 @@ int main() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  window = glfwCreateWindow(960, 540, "OpenGL Template", NULL, NULL);
+  window = glfwCreateWindow(960, 540, "SlimShady", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
@@ -54,32 +55,18 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
-    test::Test* currentTest = nullptr;
-    test::TestMenu* testMenu = new test::TestMenu(currentTest);
-    currentTest = testMenu;
-
-    testMenu->RegisterTest<test::TestClearColor>("Clear color");
+    ConsoleWidget* consoleWidget = new ConsoleWidget;
 
     while (!glfwWindowShouldClose(window)) {
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+      glClear(GL_COLOR_BUFFER_BIT);
 
       ImGui_ImplOpenGL3_NewFrame();
       ImGui_ImplGlfw_NewFrame();
       ImGui::NewFrame();
 
-      if (currentTest)
-      {
-        currentTest->OnUpdate(0.0f);
-        currentTest->OnRender();
-        ImGui::Begin("Test");
-        if (currentTest != testMenu && ImGui::Button("<-"))
-        {
-          delete currentTest;
-          currentTest = testMenu;
-        }
-        currentTest->OnImGuiRender();
-        ImGui::End();
-      }
+      //Initialize widgets
+      consoleWidget->InitializeWidget();
 
       ImGui::Render();
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -88,10 +75,7 @@ int main() {
 
       glfwPollEvents();
     }
-    delete currentTest;
-
-    if (currentTest != testMenu)
-      delete testMenu;
+    delete consoleWidget;
   }
 
   ImGui_ImplOpenGL3_Shutdown();

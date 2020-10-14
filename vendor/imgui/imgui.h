@@ -76,6 +76,8 @@ Index of this file:
 // Helper Macros
 #ifndef IM_ASSERT
 #include <assert.h>
+#include <string>
+
 #define IM_ASSERT(_EXPR)            assert(_EXPR)                               // You can override the default assert handler by editing imconfig.h
 #endif
 #if !defined(IMGUI_USE_STB_SPRINTF) && (defined(__clang__) || defined(__GNUC__))
@@ -776,6 +778,8 @@ namespace ImGui
     IMGUI_API void*         MemAlloc(size_t size);
     IMGUI_API void          MemFree(void* ptr);
 
+    bool InputText(const char *label, std::basic_string<char, std::char_traits<char>, std::allocator<char>> *str,
+                   ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void *user_data);
 } // namespace ImGui
 
 //-----------------------------------------------------------------------------
