@@ -7,10 +7,9 @@
 #include <iostream>
 
 #include "ErrorHandler.h"
-#include "tests/Test.h"
-#include "tests/TestClearColor.h"
 #include "Configurations.h"
 #include "Ui/ConsoleWidget.h"
+#include "Ui/TextEditorWidget.h"
 
 int main() {
   GLFWwindow *window;
@@ -22,8 +21,9 @@ int main() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-  window = glfwCreateWindow(960, 540, "SlimShady", NULL, NULL);
+  window = glfwCreateWindow(1920, 1080, "SlimShady", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
@@ -56,6 +56,7 @@ int main() {
     ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
     ConsoleWidget* consoleWidget = new ConsoleWidget;
+    TextEditorWidget* textEditorWidget = new TextEditorWidget;
 
     while (!glfwWindowShouldClose(window)) {
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -67,6 +68,8 @@ int main() {
 
       //Initialize widgets
       consoleWidget->InitializeWidget();
+      textEditorWidget->InitializeWidget();
+
 
       ImGui::Render();
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

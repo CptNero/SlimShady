@@ -7,7 +7,7 @@ class Configurations {
     bool m_IsDebugEnabled;
 
   public:
-    explicit Configurations(bool IsDebugEnabled);
+    Configurations();
     ~Configurations();
 
     bool GetIsDebugEnabled() const;

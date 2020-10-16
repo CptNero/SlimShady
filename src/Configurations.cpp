@@ -1,6 +1,8 @@
 #include "Configurations.h"
 
-Configurations::Configurations(bool IsDebugEnabled) : m_IsDebugEnabled(IsDebugEnabled) {}
+Configurations::Configurations() {
+  m_IsDebugEnabled = true;
+}
 
 Configurations::~Configurations() = default;
 
