@@ -33,7 +33,7 @@ void ConsoleWidget::OnImGuiRender() {
   };
 }
 
-void ConsoleWidget::InitializeWidget() {
+void ConsoleWidget::RenderWidget() {
   OnUpdate(0.0f);
   OnRender();
   ImGui::Begin("Console");

@@ -8,12 +8,13 @@
 
 #include "ErrorHandler.h"
 #include "Configurations.h"
-#include "Ui/ConsoleWidget.h"
-#include "Ui/TextEditorWidget.h"
+#include "Widgets/ConsoleWidget.h"
+#include "Widgets/TextEditorWidget.h"
+#include "Renderer.h"
 
 int main() {
   GLFWwindow *window;
-  const Configurations *configurations = new Configurations;
+  const auto *configurations = new Configurations;
 
   if (!glfwInit())
     return -1;
@@ -55,21 +56,22 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
-    ConsoleWidget* consoleWidget = new ConsoleWidget;
-    TextEditorWidget* textEditorWidget = new TextEditorWidget;
+    auto renderer = new Renderer();
+
+    auto consoleWidget = new ConsoleWidget;
+    auto textEditorWidget = new TextEditorWidget;
 
     while (!glfwWindowShouldClose(window)) {
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-      glClear(GL_COLOR_BUFFER_BIT);
+      renderer->Clear();
 
       ImGui_ImplOpenGL3_NewFrame();
       ImGui_ImplGlfw_NewFrame();
       ImGui::NewFrame();
 
       //Initialize widgets
-      consoleWidget->InitializeWidget();
-      textEditorWidget->InitializeWidget();
-
+      consoleWidget->RenderWidget();
+      textEditorWidget->RenderWidget();
 
       ImGui::Render();
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -79,6 +81,7 @@ int main() {
       glfwPollEvents();
     }
     delete consoleWidget;
+    delete textEditorWidget;
   }
 
   ImGui_ImplOpenGL3_Shutdown();

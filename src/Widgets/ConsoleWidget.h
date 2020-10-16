@@ -16,7 +16,7 @@ class ConsoleWidget : public Widget {
     void OnUpdate(float deltaTime) override;
     void OnRender() override;
     void OnImGuiRender() override;
-    void InitializeWidget() override;
+    void RenderWidget() override;
 
     void LogInput(char* logInput);
     void LogMessage(char* logMessage);

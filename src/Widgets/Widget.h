@@ -10,7 +10,7 @@ class Widget {
     virtual void OnUpdate(float deltaTime) {};
     virtual void OnRender() {};
     virtual void OnImGuiRender() {};
-    virtual void InitializeWidget() {};
+    virtual void RenderWidget() {};
 };
 
 

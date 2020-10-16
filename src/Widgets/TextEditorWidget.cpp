@@ -11,12 +11,7 @@ TextEditorWidget::TextEditorWidget() {
   m_Editor.SetErrorMarkers(m_Markers);
 
   {
-    std::ifstream t(m_FileToEditPath);
-    if (t.good())
-    {
-      std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
-      m_Editor.SetText(str);
-    }
+    LoadFile(m_FileToEditPath);
   }
 }
 
@@ -37,6 +32,14 @@ void TextEditorWidget::OnImGuiRender() {
       if (ImGui::MenuItem("Save"))
       {
         auto textToSave = m_Editor.GetText();
+      }
+      if (ImGui::MenuItem("Vertex"))
+      {
+        LoadFile(R"(src/res/shaders/Vertex.shader)");
+      }
+      if (ImGui::MenuItem("Fragment"))
+      {
+        LoadFile(R"(src/res/shaders/Fragment.shader)");
       }
       ImGui::MenuItem("Quit");
       ImGui::EndMenu();
@@ -93,10 +96,19 @@ void TextEditorWidget::OnImGuiRender() {
   m_Editor.Render("TextEditor");
 }
 
-void TextEditorWidget::InitializeWidget() {
+void TextEditorWidget::RenderWidget() {
   OnUpdate(0.0f);
   OnRender();
   ImGui::Begin("Editor", nullptr, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar);
   OnImGuiRender();
   ImGui::End();
+}
+
+void TextEditorWidget::LoadFile(const char* filePath) {
+  std::ifstream t(filePath);
+  if (t.good())
+  {
+    std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+    m_Editor.SetText(str);
+  }
 }

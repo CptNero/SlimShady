@@ -10,7 +10,7 @@ class TextEditorWidget : public Widget {
     TextEditor m_Editor;
     TextEditor::LanguageDefinition m_Lang = TextEditor::LanguageDefinition::GLSL();
     TextEditor::ErrorMarkers m_Markers;
-    const char* m_FileToEditPath = R"(legacy/res/shaders/Basic.shader)";
+    const char* m_FileToEditPath = R"(src/res/shaders/Fragment.shader)";
     TextEditor::Coordinates m_CursorPosition = m_Editor.GetCursorPosition();
 
 
@@ -22,7 +22,9 @@ class TextEditorWidget : public Widget {
     void OnUpdate(float deltaTime) override;
     void OnRender() override;
     void OnImGuiRender() override;
-    void InitializeWidget() override;
+    void RenderWidget() override;
+
+    void LoadFile(const char* filePath);
 };
 
 
