@@ -3,16 +3,15 @@
 #include <fstream>
 
 #include "TextEditorWidget.h"
+#include "../VertexArray.h"
+
+const char* TextEditorWidget::m_VertexShaderSource = ReadFile(Configurations::GetVertexShaderSourcePath()).c_str();
+const char* TextEditorWidget::m_FragmentShaderSource = ReadFile(Configurations::GetFragmentShaderSourcePath()).c_str();
 
 TextEditorWidget::TextEditorWidget() {
   m_Editor.SetLanguageDefinition(m_Lang);
-  m_Markers.insert(std::make_pair<int, std::string>(6, "Example error here:\nInclude file not found: \"TextEditor.h\""));
-  m_Markers.insert(std::make_pair<int, std::string>(41, "Another example error"));
   m_Editor.SetErrorMarkers(m_Markers);
-
-  {
-    LoadFile(m_FileToEditPath);
-  }
+  m_Editor.SetText(ReadFile(m_FileToEditPath));
 }
 
 TextEditorWidget::~TextEditorWidget() = default;
@@ -35,11 +34,14 @@ void TextEditorWidget::OnImGuiRender() {
       }
       if (ImGui::MenuItem("Vertex"))
       {
-        LoadFile(R"(src/res/shaders/Vertex.shader)");
+        ReadFile(R"(src/res/shaders/Vertex.shader)");
       }
       if (ImGui::MenuItem("Fragment"))
       {
-        LoadFile(R"(src/res/shaders/Fragment.shader)");
+        ReadFile(R"(src/res/shaders/Fragment.shader)");
+      }
+      if (ImGui::MenuItem("Render"))
+      {
       }
       ImGui::MenuItem("Quit");
       ImGui::EndMenu();
@@ -104,11 +106,20 @@ void TextEditorWidget::RenderWidget() {
   ImGui::End();
 }
 
-void TextEditorWidget::LoadFile(const char* filePath) {
-  std::ifstream t(filePath);
-  if (t.good())
+std::string TextEditorWidget::ReadFile(const char* filePath) {
+  std::ifstream file(filePath);
+  if (file.good())
   {
-    std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
-    m_Editor.SetText(str);
+    std::string file_content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    return file_content;
   }
+  return "";
+}
+
+const char* TextEditorWidget::GetVertexShaderSource() {
+  return m_VertexShaderSource;
+}
+
+const char* TextEditorWidget::GetFragmentShaderSource() {
+  return m_FragmentShaderSource;
 }

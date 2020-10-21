@@ -3,18 +3,19 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <filesystem>
 
 #include "Shader.h"
+#include "Widgets/TextEditorWidget.h"
 
-Shader::Shader(const std::string& file_path)
+Shader::Shader()
         : m_RendererID(0)
 {
-  m_VertexShaderFilePath = R"(res/shaders/Vertex.shader)";
-  m_FragmentShaderFilePath = R"(res/shaders/Fragment.Shader)";
+  std::cout << TextEditorWidget::GetVertexShaderSource() << std::endl;
 
   m_RendererID = CreateShader(
-          ParseShader(m_VertexShaderFilePath),
-          ParseShader(m_FragmentShaderFilePath));
+          TextEditorWidget::GetVertexShaderSource(),
+          TextEditorWidget::GetFragmentShaderSource());
 }
 
 Shader::~Shader()
@@ -24,6 +25,9 @@ Shader::~Shader()
 
 std::string Shader::ParseShader(const std::string& shaderFilePath)
 {
+  if(!std::filesystem::exists(shaderFilePath))
+    std::cout << "File does not exist at:" << shaderFilePath << std::endl;
+
   std::ifstream shaderStream(shaderFilePath);
   std::string line;
   std::stringstream stringStream[1];
@@ -31,6 +35,8 @@ std::string Shader::ParseShader(const std::string& shaderFilePath)
   while (getline(shaderStream, line)) {
     stringStream[0] << line << '\n';
   }
+
+  std::cout << stringStream[0].str() << std::endl;
 
   return stringStream[0].str();
 }
@@ -68,6 +74,16 @@ unsigned int Shader::CreateShader(const std::string &vertexShader, const std::st
   glAttachShader(program, vs);
   glAttachShader(program, fs);
   glLinkProgram(program);
+
+  int success;
+  char infoLog[512];
+  glGetProgramiv(program, GL_LINK_STATUS, &success);
+
+  if(!success) {
+    glGetProgramInfoLog(program, 512, NULL, infoLog);
+    std::cout << infoLog << std::endl;
+  }
+
   glValidateProgram(program);
 
   glDeleteShader(vs);
@@ -114,4 +130,6 @@ void Shader::SetUniformMat4f(const std::string &name, const glm::mat4 &matrix)
 {
   glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]);
 }
+
+
 

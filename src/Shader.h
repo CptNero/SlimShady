@@ -1,3 +1,6 @@
+#ifndef SLIMSHADY_SHADER_H
+#define SLIMSHADY_SHADER_H
+
 #include <string>
 #include <unordered_map>
 #include <glm/glm.hpp>
@@ -18,7 +21,7 @@ private:
     };
 
 public:
-    explicit Shader(const std::string& file_path);
+    Shader();
     ~Shader();
     void Bind() const;
     void UnBind() const;
@@ -33,3 +36,5 @@ private:
 
     int GetUniformLocation(const std::string& name);
 };
+
+#endif //SLIMSHADY_SHADER_H

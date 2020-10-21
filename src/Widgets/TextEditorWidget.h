@@ -4,27 +4,31 @@
 
 #include <ImGuiColorTextEdit/TextEditor.h>
 #include "Widget.h"
+#include "../Configurations.h"
 
 class TextEditorWidget : public Widget {
   private:
     TextEditor m_Editor;
     TextEditor::LanguageDefinition m_Lang = TextEditor::LanguageDefinition::GLSL();
     TextEditor::ErrorMarkers m_Markers;
-    const char* m_FileToEditPath = R"(src/res/shaders/Fragment.shader)";
     TextEditor::Coordinates m_CursorPosition = m_Editor.GetCursorPosition();
-
+    const char* m_FileToEditPath = R"(src/res/shaders/Fragment.shader)";
+    static const char* m_VertexShaderSource;
+    static const char* m_FragmentShaderSource;
 
   public:
     TextEditorWidget();
     ~TextEditorWidget();
 
+    static const char* GetVertexShaderSource();
+    static const char* GetFragmentShaderSource();
 
     void OnUpdate(float deltaTime) override;
     void OnRender() override;
     void OnImGuiRender() override;
     void RenderWidget() override;
 
-    void LoadFile(const char* filePath);
+    static std::string ReadFile(const char* filePath);
 };
 
 

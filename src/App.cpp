@@ -11,6 +11,7 @@
 #include "Widgets/ConsoleWidget.h"
 #include "Widgets/TextEditorWidget.h"
 #include "Renderer.h"
+#include "RenderedContent.h"
 
 int main() {
   GLFWwindow *window;
@@ -61,6 +62,10 @@ int main() {
     auto consoleWidget = new ConsoleWidget;
     auto textEditorWidget = new TextEditorWidget;
 
+    auto renderedContent = new RenderedContent;
+
+    float m_ClearColor[4] = { 0.2f, 0.3f, 0.8f, 1.0f };
+
     while (!glfwWindowShouldClose(window)) {
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
       renderer->Clear();
@@ -72,6 +77,14 @@ int main() {
       //Initialize widgets
       consoleWidget->RenderWidget();
       textEditorWidget->RenderWidget();
+
+      glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
+      glClear(GL_COLOR_BUFFER_BIT);
+
+      ImGui::ColorEdit4("Clear color", m_ClearColor, 1);
+
+      //Content
+      renderedContent->Draw();
 
       ImGui::Render();
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
