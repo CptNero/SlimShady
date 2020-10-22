@@ -62,7 +62,9 @@ int main() {
     auto consoleWidget = new ConsoleWidget;
     auto textEditorWidget = new TextEditorWidget;
 
-    auto renderedContent = new RenderedContent;
+    auto renderedContent = new RenderedContent(
+            textEditorWidget->GetVertexShaderSource(),
+            textEditorWidget->GetFragmentShaderSource());
 
     float m_ClearColor[4] = { 0.2f, 0.3f, 0.8f, 1.0f };
 
@@ -73,6 +75,12 @@ int main() {
       ImGui_ImplOpenGL3_NewFrame();
       ImGui_ImplGlfw_NewFrame();
       ImGui::NewFrame();
+
+      if(ImGui::Button("Render")){
+        renderedContent = new RenderedContent(
+                textEditorWidget->GetVertexShaderSource(),
+                textEditorWidget->GetFragmentShaderSource());
+      }
 
       //Initialize widgets
       consoleWidget->RenderWidget();

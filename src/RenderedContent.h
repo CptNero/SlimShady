@@ -10,7 +10,7 @@
 
 class RenderedContent {
   public:
-    RenderedContent();
+    RenderedContent(const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
     ~RenderedContent();
 
     void Draw();
@@ -23,6 +23,9 @@ class RenderedContent {
 
     glm::mat4 m_Proj, m_View;
     glm::vec3 m_TranslationA, m_TranslationB;
+
+    std::string m_VertexShaderSource;
+    std::string m_FragmentShaderSource;
 };
 
 

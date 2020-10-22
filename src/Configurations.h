@@ -4,14 +4,14 @@
 
 class Configurations {
   private:
-    bool m_IsDebugEnabled;
+    static bool m_IsDebugEnabled;
+    static const char* VertexShaderSourcePath;
+    static const char* FragmentShaderSourcePath;
 
   public:
-    Configurations();
-    ~Configurations();
-
-    bool GetIsDebugEnabled() const;
+    static bool GetIsDebugEnabled();
+    static const char* GetVertexShaderSourcePath();
+    static const char* GetFragmentShaderSourcePath();
 };
-
 
 #endif //SLIMSHADY_CONFIGURATIONS_H

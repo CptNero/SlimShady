@@ -6,16 +6,19 @@
 #include <filesystem>
 
 #include "Shader.h"
-#include "Widgets/TextEditorWidget.h"
 
-Shader::Shader()
+Shader::Shader(const std::string& vertexShaderSource, const std::string& fragmentShaderSource)
         : m_RendererID(0)
 {
-  std::cout << TextEditorWidget::GetVertexShaderSource() << std::endl;
+  std::cout << vertexShaderSource << std::endl << fragmentShaderSource << std::endl;
 
   m_RendererID = CreateShader(
-          TextEditorWidget::GetVertexShaderSource(),
-          TextEditorWidget::GetFragmentShaderSource());
+          vertexShaderSource,
+          fragmentShaderSource);
+
+  // Free space for read in source files.
+  //delete vertexShaderSource;
+  //delete fragmentShaderSource;
 }
 
 Shader::~Shader()
@@ -56,7 +59,7 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string &source)
     glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
     char *message = (char *) alloca(length * sizeof(char));
     glGetShaderInfoLog(id, length, &length, message);
-    std::cout << "Failed to" << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << "compile shader!" << std::endl;
+    std::cout << "Failed to " << (type == GL_VERTEX_SHADER ? " vertex" : " fragment") << " compile shader!" << std::endl;
     std::cout << message << std::endl;
     glDeleteShader(id);
     return 0;

@@ -8,20 +8,11 @@
 class Shader
 {
 private:
-    std::string m_VertexShaderFilePath;
-    std::string m_FragmentShaderFilePath;
     unsigned int m_RendererID;
     std::unordered_map<std::string, int> m_UniformLocationCache;
 
-    enum class ShaderType
-    {
-        NONE = 0,
-        VERTEX = 1,
-        FRAGMENT = 2
-    };
-
 public:
-    Shader();
+    Shader(const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
     ~Shader();
     void Bind() const;
     void UnBind() const;

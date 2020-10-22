@@ -3,7 +3,8 @@
 #include "RenderedContent.h"
 #include "Renderer.h"
 
-RenderedContent::RenderedContent() :
+RenderedContent::RenderedContent(const std::string& vertexShaderSource, const std::string& fragmentShaderSource) :
+  m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
   m_TranslationA(0, 0, 0), m_TranslationB(0, 0, 0),
   m_Proj(glm::ortho(0.0f, 1920.0f, 0.0f, 1080.0f, -1.0f, 1.0f)),
   m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))){
@@ -25,7 +26,7 @@ RenderedContent::RenderedContent() :
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  m_Shader = std::make_unique<Shader>();
+  m_Shader = std::make_unique<Shader>(m_VertexShaderSource, m_FragmentShaderSource);
   m_VAO = std::make_unique<VertexArray>();
 
   VertexArray va;

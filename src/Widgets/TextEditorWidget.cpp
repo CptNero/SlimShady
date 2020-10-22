@@ -1,17 +1,16 @@
 #include <imgui/imgui.h>
 
 #include <fstream>
+#include <filesystem>
+#include <iostream>
 
 #include "TextEditorWidget.h"
 #include "../VertexArray.h"
 
-const char* TextEditorWidget::m_VertexShaderSource = ReadFile(Configurations::GetVertexShaderSourcePath()).c_str();
-const char* TextEditorWidget::m_FragmentShaderSource = ReadFile(Configurations::GetFragmentShaderSourcePath()).c_str();
 
 TextEditorWidget::TextEditorWidget() {
   m_Editor.SetLanguageDefinition(m_Lang);
   m_Editor.SetErrorMarkers(m_Markers);
-  m_Editor.SetText(ReadFile(m_FileToEditPath));
 }
 
 TextEditorWidget::~TextEditorWidget() = default;
@@ -30,18 +29,36 @@ void TextEditorWidget::OnImGuiRender() {
     {
       if (ImGui::MenuItem("Save"))
       {
-        auto textToSave = m_Editor.GetText();
+        if(!std::filesystem::exists(m_FileToEditPath))
+          std::cout << "File does not exist at:" << m_FileToEditPath << std::endl;
+
+        std::ofstream file;
+        file.open(m_FileToEditPath);
+        file << m_Editor.GetText();
+        file.close();
+
+        switch(m_CurrentShaderType) {
+          case ShaderType::VERTEX:
+            m_VertexShaderSource = m_Editor.GetText();
+            break;
+
+          case ShaderType::FRAGMENT:
+            m_FragmentShaderSource = m_Editor.GetText();
+            break;
+        };
+
       }
       if (ImGui::MenuItem("Vertex"))
       {
-        ReadFile(R"(src/res/shaders/Vertex.shader)");
+        m_FileToEditPath = Configurations::GetVertexShaderSourcePath();
+        m_CurrentShaderType = ShaderType::VERTEX;
+        m_Editor.SetText(ReadFile(m_FileToEditPath));
       }
       if (ImGui::MenuItem("Fragment"))
       {
-        ReadFile(R"(src/res/shaders/Fragment.shader)");
-      }
-      if (ImGui::MenuItem("Render"))
-      {
+        m_FileToEditPath = Configurations::GetFragmentShaderSourcePath();
+        m_CurrentShaderType = ShaderType::FRAGMENT;
+        m_Editor.SetText(ReadFile(m_FileToEditPath));
       }
       ImGui::MenuItem("Quit");
       ImGui::EndMenu();
@@ -106,20 +123,21 @@ void TextEditorWidget::RenderWidget() {
   ImGui::End();
 }
 
-std::string TextEditorWidget::ReadFile(const char* filePath) {
+const char* TextEditorWidget::ReadFile(const char* filePath) {
   std::ifstream file(filePath);
   if (file.good())
   {
-    std::string file_content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    return file_content;
+    auto* file_content = new std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+    return file_content->c_str();
   }
   return "";
 }
 
-const char* TextEditorWidget::GetVertexShaderSource() {
+std::string TextEditorWidget::GetVertexShaderSource() {
   return m_VertexShaderSource;
 }
 
-const char* TextEditorWidget::GetFragmentShaderSource() {
+std::string TextEditorWidget::GetFragmentShaderSource() {
   return m_FragmentShaderSource;
 }
