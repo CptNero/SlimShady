@@ -2,6 +2,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "RenderedContent.h"
 #include "Renderer.h"
+#include "Configurations.h"
+#include "Widgets/ConsoleWidget.h"
 
 RenderedContent::RenderedContent(const std::string& vertexShaderSource, const std::string& fragmentShaderSource) :
   m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
@@ -27,16 +29,42 @@ RenderedContent::RenderedContent(const std::string& vertexShaderSource, const st
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   m_Shader = std::make_unique<Shader>(m_VertexShaderSource, m_FragmentShaderSource);
-  m_VAO = std::make_unique<VertexArray>();
+
+  if (Configurations::GetIsDebugEnabled()) {
+    ConsoleWidget::LogMessage("Successfully created shader.");
+  }
+
+  m_VertexArrayObject = std::make_unique<VertexArray>();
+
+  if (Configurations::GetIsDebugEnabled()) {
+    ConsoleWidget::LogMessage("Successfully created vertex array.");
+  }
 
   VertexArray va;
   m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 4 * 3 * sizeof(float));
 
+  if (Configurations::GetIsDebugEnabled()) {
+    ConsoleWidget::LogMessage("Successfully created vertex buffer.");
+  }
+
   VertexBufferLayout layout;
   layout.Push<float>(3);
 
-  m_VAO->AddBuffer(*m_VertexBuffer, layout);
+  if (Configurations::GetIsDebugEnabled()) {
+    ConsoleWidget::LogMessage("Successfully initialized vertex layout");
+  }
+
+  m_VertexArrayObject->AddBuffer(*m_VertexBuffer, layout);
+
+  if (Configurations::GetIsDebugEnabled()) {
+    ConsoleWidget::LogMessage("Successfully added buffer to vertex array object.");
+  }
+
   m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 6);
+
+  if (Configurations::GetIsDebugEnabled()) {
+    ConsoleWidget::LogMessage("Successfully initialized index buffer");
+  }
 
   m_Shader->Bind();
 }
@@ -52,7 +80,7 @@ void RenderedContent::Draw() {
     glm::mat4 mvp = m_Proj * m_View * model;
     m_Shader->Bind();
     m_Shader->SetUniformMat4f("u_MVP", mvp);
-    renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
+    renderer.Draw(*m_VertexArrayObject, *m_IndexBuffer, *m_Shader);
   }
 
 //  {
@@ -60,6 +88,6 @@ void RenderedContent::Draw() {
 //    glm::mat4 mvp = m_Proj * m_View * model;
 //    m_Shader->Bind();
 //    m_Shader->SetUniformMat4f("u_MVP", mvp);
-//    renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
+//    renderer.Draw(*m_VertexArrayObject, *m_IndexBuffer, *m_Shader);
 //  }
 }

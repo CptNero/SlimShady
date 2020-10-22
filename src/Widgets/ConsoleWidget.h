@@ -6,8 +6,8 @@
 
 class ConsoleWidget : public Widget {
   private:
+    static char* m_ConsoleLogBuffer;
     char m_ConsoleInputBuffer[1024] = "";
-    char m_ConsoleLogBuffer[1024] = "";
 
   public:
     ConsoleWidget();
@@ -18,8 +18,8 @@ class ConsoleWidget : public Widget {
     void OnImGuiRender() override;
     void RenderWidget() override;
 
-    void LogInput(char* logInput);
-    void LogMessage(char* logMessage);
+    void LogInput();
+    void static LogMessage(const std::string& logMessage);
     void HandleInput(char* logInput);
 };
 

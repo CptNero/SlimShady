@@ -8,5 +8,5 @@ Clock::Clock() = default;
 Clock::~Clock() = default;
 
 std::string Clock::GetCurrentTimeAsString() {
-  return date::format("%F %T", std::chrono::system_clock::now());
+  return date::format("%F %R", std::chrono::system_clock::now());
 }

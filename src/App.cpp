@@ -15,7 +15,6 @@
 
 int main() {
   GLFWwindow *window;
-  const auto *configurations = new Configurations;
 
   if (!glfwInit())
     return -1;
@@ -38,12 +37,13 @@ int main() {
 
   if (glewInit() != GLEW_OK)
   {
-    std::cout << "Error!" << std::endl;
+    std::cout << "Couldn't initialize glew." << std::endl;
   }
+
   {
     glEnable(GL_BLEND);
 
-    if (configurations->GetIsDebugEnabled()) {
+    if (Configurations::GetIsDebugEnabled()) {
       glEnable(GL_DEBUG_OUTPUT);
       glDebugMessageCallback(ErrorHandler::MessageCallback, nullptr);
     }
@@ -67,6 +67,8 @@ int main() {
             textEditorWidget->GetFragmentShaderSource());
 
     float m_ClearColor[4] = { 0.2f, 0.3f, 0.8f, 1.0f };
+
+    ConsoleWidget::LogMessage("Successfully initialized.");
 
     while (!glfwWindowShouldClose(window)) {
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -101,8 +103,10 @@ int main() {
 
       glfwPollEvents();
     }
+    delete renderer;
     delete consoleWidget;
     delete textEditorWidget;
+    delete renderedContent;
   }
 
   ImGui_ImplOpenGL3_Shutdown();

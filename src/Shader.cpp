@@ -1,47 +1,22 @@
 #include <glew.h>
 
 #include <fstream>
-#include <iostream>
-#include <sstream>
-#include <filesystem>
 
 #include "Shader.h"
+#include "Configurations.h"
+#include "Widgets/ConsoleWidget.h"
 
 Shader::Shader(const std::string& vertexShaderSource, const std::string& fragmentShaderSource)
         : m_RendererID(0)
 {
-  std::cout << vertexShaderSource << std::endl << fragmentShaderSource << std::endl;
-
   m_RendererID = CreateShader(
           vertexShaderSource,
           fragmentShaderSource);
-
-  // Free space for read in source files.
-  //delete vertexShaderSource;
-  //delete fragmentShaderSource;
 }
 
 Shader::~Shader()
 {
   glDeleteProgram(m_RendererID);
-}
-
-std::string Shader::ParseShader(const std::string& shaderFilePath)
-{
-  if(!std::filesystem::exists(shaderFilePath))
-    std::cout << "File does not exist at:" << shaderFilePath << std::endl;
-
-  std::ifstream shaderStream(shaderFilePath);
-  std::string line;
-  std::stringstream stringStream[1];
-
-  while (getline(shaderStream, line)) {
-    stringStream[0] << line << '\n';
-  }
-
-  std::cout << stringStream[0].str() << std::endl;
-
-  return stringStream[0].str();
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string &source)
@@ -59,8 +34,11 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string &source)
     glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
     char *message = (char *) alloca(length * sizeof(char));
     glGetShaderInfoLog(id, length, &length, message);
-    std::cout << "Failed to " << (type == GL_VERTEX_SHADER ? " vertex" : " fragment") << " compile shader!" << std::endl;
-    std::cout << message << std::endl;
+
+    if (Configurations::GetIsDebugEnabled()) {
+      ConsoleWidget::LogMessage(std::string("Failed to compile ") +
+      (type == GL_VERTEX_SHADER ? "vertex " : "fragment ") + "shader" + "\n" + message);
+    }
     glDeleteShader(id);
     return 0;
   }
@@ -83,8 +61,9 @@ unsigned int Shader::CreateShader(const std::string &vertexShader, const std::st
   glGetProgramiv(program, GL_LINK_STATUS, &success);
 
   if(!success) {
-    glGetProgramInfoLog(program, 512, NULL, infoLog);
-    std::cout << infoLog << std::endl;
+    if (Configurations::GetIsDebugEnabled()) {
+      ConsoleWidget::LogMessage(std::string("Failed to create shader: ") + infoLog);
+    }
   }
 
   glValidateProgram(program);
@@ -117,7 +96,9 @@ int Shader::GetUniformLocation(const std::string &name)
 
   int location = glGetUniformLocation(m_RendererID, name.c_str());
   if (location == -1)
-    std::cout << "Warning: uniform '" << name << "doesn't exist!" << std::endl;
+    if (Configurations::GetIsDebugEnabled()) {
+      ConsoleWidget::LogMessage(std::string("Couldn't find uniform " + name));
+    }
 
   m_UniformLocationCache[name] = location;
 

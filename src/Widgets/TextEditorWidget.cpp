@@ -6,9 +6,11 @@
 
 #include "TextEditorWidget.h"
 #include "../VertexArray.h"
+#include "ConsoleWidget.h"
 
 
-TextEditorWidget::TextEditorWidget() {
+TextEditorWidget::TextEditorWidget()
+{
   m_Editor.SetLanguageDefinition(m_Lang);
   m_Editor.SetErrorMarkers(m_Markers);
 }
@@ -46,7 +48,6 @@ void TextEditorWidget::OnImGuiRender() {
             m_FragmentShaderSource = m_Editor.GetText();
             break;
         };
-
       }
       if (ImGui::MenuItem("Vertex"))
       {
@@ -124,6 +125,13 @@ void TextEditorWidget::RenderWidget() {
 }
 
 const char* TextEditorWidget::ReadFile(const char* filePath) {
+
+  if(!std::filesystem::exists(filePath)) {
+    if (Configurations::GetIsDebugEnabled()) {
+      ConsoleWidget::LogMessage(std::string("File at: ") + filePath + " couldn't be found.");
+    }
+  }
+
   std::ifstream file(filePath);
   if (file.good())
   {
@@ -131,6 +139,11 @@ const char* TextEditorWidget::ReadFile(const char* filePath) {
 
     return file_content->c_str();
   }
+
+  if (Configurations::GetIsDebugEnabled()) {
+    ConsoleWidget::LogMessage(std::string("Failed to read file"));
+  }
+
   return "";
 }
 
