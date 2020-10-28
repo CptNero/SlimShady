@@ -18,9 +18,9 @@ class ConsoleWidget : public Widget {
     void OnImGuiRender() override;
     void RenderWidget() override;
 
-    void LogInput();
+    void LogInput(const std::string& logInput);
     void static LogMessage(const std::string& logMessage);
-    void HandleInput(char* logInput);
+    void HandleInput(const std::string& logInput);
 };
 
 

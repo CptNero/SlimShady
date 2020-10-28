@@ -38,29 +38,8 @@ void TextEditorWidget::OnImGuiRender() {
         file.open(m_FileToEditPath);
         file << m_Editor.GetText();
         file.close();
+      }
 
-        switch(m_CurrentShaderType) {
-          case ShaderType::VERTEX:
-            m_VertexShaderSource = m_Editor.GetText();
-            break;
-
-          case ShaderType::FRAGMENT:
-            m_FragmentShaderSource = m_Editor.GetText();
-            break;
-        };
-      }
-      if (ImGui::MenuItem("Vertex"))
-      {
-        m_FileToEditPath = Configurations::GetVertexShaderSourcePath();
-        m_CurrentShaderType = ShaderType::VERTEX;
-        m_Editor.SetText(ReadFile(m_FileToEditPath));
-      }
-      if (ImGui::MenuItem("Fragment"))
-      {
-        m_FileToEditPath = Configurations::GetFragmentShaderSourcePath();
-        m_CurrentShaderType = ShaderType::FRAGMENT;
-        m_Editor.SetText(ReadFile(m_FileToEditPath));
-      }
       ImGui::MenuItem("Quit");
       ImGui::EndMenu();
     }
@@ -111,7 +90,7 @@ void TextEditorWidget::OnImGuiRender() {
   ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", m_CursorPosition.mLine + 1, m_CursorPosition.mColumn + 1, m_Editor.GetTotalLines(),
               m_Editor.IsOverwrite() ? "Ovr" : "Ins",
               m_Editor.CanUndo() ? "*" : " ",
-              m_Editor.GetLanguageDefinition().mName.c_str(), m_FileToEditPath);
+              m_Editor.GetLanguageDefinition().mName.c_str(), m_FileToEditPath.c_str());
 
   m_Editor.Render("TextEditor");
 }
@@ -119,7 +98,7 @@ void TextEditorWidget::OnImGuiRender() {
 void TextEditorWidget::RenderWidget() {
   OnUpdate(0.0f);
   OnRender();
-  ImGui::Begin("Editor", nullptr, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar);
+  ImGui::Begin("Code Editor", nullptr, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar);
   OnImGuiRender();
   ImGui::End();
 }
@@ -147,10 +126,14 @@ const char* TextEditorWidget::ReadFile(const char* filePath) {
   return "";
 }
 
-std::string TextEditorWidget::GetVertexShaderSource() {
-  return m_VertexShaderSource;
+std::string TextEditorWidget::GetEditorText() {
+  return m_Editor.GetText();
 }
 
-std::string TextEditorWidget::GetFragmentShaderSource() {
-  return m_FragmentShaderSource;
+void TextEditorWidget::SetEditorText(std::string text, ShaderType shaderType, std::string filePath) {
+  m_FileToEditPath = filePath;
+  m_CurrentShaderType = shaderType;
+  m_Editor.SetText(text);
 }
+
+

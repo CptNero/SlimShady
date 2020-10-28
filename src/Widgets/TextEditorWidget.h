@@ -13,17 +13,17 @@ class TextEditorWidget : public Widget {
     TextEditor::LanguageDefinition m_Lang = TextEditor::LanguageDefinition::GLSL();
     TextEditor::ErrorMarkers m_Markers;
     TextEditor::Coordinates m_CursorPosition = m_Editor.GetCursorPosition();
-    const char* m_FileToEditPath = "";
-    std::string m_VertexShaderSource = ReadFile(Configurations::GetVertexShaderSourcePath());
-    std::string m_FragmentShaderSource = ReadFile(Configurations::GetFragmentShaderSourcePath());
+    std::string m_FileToEditPath;
+    std::string m_CurrentShaderSource;
     ShaderType m_CurrentShaderType = ShaderType::NONE;
 
   public:
     TextEditorWidget();
     ~TextEditorWidget();
 
-    std::string GetVertexShaderSource();
-    std::string GetFragmentShaderSource();
+    std::string GetEditorText();
+
+    void SetEditorText(std::string text, ShaderType shaderType, std::string filePath);
 
     void OnUpdate(float deltaTime) override;
     void OnRender() override;

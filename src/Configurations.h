@@ -2,16 +2,18 @@
 #define SLIMSHADY_CONFIGURATIONS_H
 
 
+#include <string>
+
 class Configurations {
   private:
     static bool m_IsDebugEnabled;
-    static const char* VertexShaderSourcePath;
-    static const char* FragmentShaderSourcePath;
+    static const std::string DefaultVertexShaderSource;
+    static const std::string DefaultFragmentShaderSource;
 
   public:
     static bool GetIsDebugEnabled();
-    static const char* GetVertexShaderSourcePath();
-    static const char* GetFragmentShaderSourcePath();
+    static std::string GetDefaultVertexShaderSource();
+    static std::string GetDefaultFragmentShaderSource();
 };
 
 #endif //SLIMSHADY_CONFIGURATIONS_H

@@ -11,7 +11,8 @@
 #include "Widgets/ConsoleWidget.h"
 #include "Widgets/TextEditorWidget.h"
 #include "Renderer.h"
-#include "RenderedContent.h"
+#include "SceneElement.h"
+#include "Widgets/SceneEditorWidget.h"
 
 int main() {
   GLFWwindow *window;
@@ -45,6 +46,8 @@ int main() {
 
     if (Configurations::GetIsDebugEnabled()) {
       glEnable(GL_DEBUG_OUTPUT);
+      glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+      glDisable(GL_DEBUG_SEVERITY_NOTIFICATION);
       glDebugMessageCallback(ErrorHandler::MessageCallback, nullptr);
     }
 
@@ -57,16 +60,12 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
+    auto scene = new std::unordered_map<std::string, SceneElement*>;
     auto renderer = new Renderer();
 
     auto consoleWidget = new ConsoleWidget;
     auto textEditorWidget = new TextEditorWidget;
-
-    auto renderedContent = new RenderedContent(
-            textEditorWidget->GetVertexShaderSource(),
-            textEditorWidget->GetFragmentShaderSource());
-
-    float m_ClearColor[4] = { 0.2f, 0.3f, 0.8f, 1.0f };
+    auto sceneEditorWidget = new SceneEditorWidget(scene, textEditorWidget);
 
     ConsoleWidget::LogMessage("Successfully initialized.");
 
@@ -78,23 +77,19 @@ int main() {
       ImGui_ImplGlfw_NewFrame();
       ImGui::NewFrame();
 
-      if(ImGui::Button("Render")){
-        renderedContent = new RenderedContent(
-                textEditorWidget->GetVertexShaderSource(),
-                textEditorWidget->GetFragmentShaderSource());
-      }
-
       //Initialize widgets
       consoleWidget->RenderWidget();
       textEditorWidget->RenderWidget();
+      sceneEditorWidget->RenderWidget();
 
-      glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
+
       glClear(GL_COLOR_BUFFER_BIT);
 
-      ImGui::ColorEdit4("Clear color", m_ClearColor, 1);
-
-      //Content
-      renderedContent->Draw();
+      if (!scene->empty()) {
+        for (auto const &sceneElement2 : *scene) {
+          sceneElement2.second->Draw();
+        }
+      }
 
       ImGui::Render();
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -106,7 +101,8 @@ int main() {
     delete renderer;
     delete consoleWidget;
     delete textEditorWidget;
-    delete renderedContent;
+    delete sceneEditorWidget;
+    delete scene;
   }
 
   ImGui_ImplOpenGL3_Shutdown();

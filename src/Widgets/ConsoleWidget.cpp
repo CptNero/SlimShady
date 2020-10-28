@@ -33,7 +33,7 @@ void ConsoleWidget::OnImGuiRender()
   //Append and handle the user input when the user presses enter
   if(ImGui::InputText("<", m_ConsoleInputBuffer, IM_ARRAYSIZE(m_ConsoleInputBuffer), ImGuiInputTextFlags_EnterReturnsTrue)) {
     HandleInput(m_ConsoleInputBuffer);
-    LogInput();
+    LogInput(m_ConsoleInputBuffer);
   };
 }
 
@@ -46,13 +46,15 @@ void ConsoleWidget::RenderWidget()
   ImGui::End();
 }
 
-void ConsoleWidget::HandleInput(char* logInput)
+void ConsoleWidget::HandleInput(const std::string& logInput)
 {
-  //Todo
+  if(logInput == "clear") {
+    strcpy_s(m_ConsoleLogBuffer, strlen("") + 1,"");
+  }
 }
 
 // Append the user input to the console log then empty the input buffer.
-void ConsoleWidget::LogInput()
+void ConsoleWidget::LogInput(const std::string& logInput)
 {
   std::string preparedString = std::string(m_ConsoleLogBuffer) + Clock::GetCurrentTimeAsString() + ": " + m_ConsoleInputBuffer + "\n";
 

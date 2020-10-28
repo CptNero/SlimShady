@@ -3,7 +3,7 @@
 precision mediump float;
 
 #define BLACK vec3(0.0, 0.0, 0.0)
-#define GREEN vec3(0.2, 0.4, 0.3)
+#define GREEN vec3(0.2, 1.0, 0.3)
 
 void main()
 {
@@ -18,6 +18,7 @@ void main()
     }
     gl_FragColor = color;
 }
+
 
 
 
