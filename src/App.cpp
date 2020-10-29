@@ -13,6 +13,7 @@
 #include "Renderer.h"
 #include "SceneElement.h"
 #include "Widgets/SceneEditorWidget.h"
+#include "SceneLoader.h"
 
 int main() {
   GLFWwindow *window;
@@ -61,6 +62,9 @@ int main() {
     ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
     auto scene = new std::unordered_map<std::string, SceneElement*>;
+    auto sceneLoader = new SceneLoader(scene);
+    sceneLoader->InitializeScene();
+
     auto renderer = new Renderer();
 
     auto consoleWidget = new ConsoleWidget;
@@ -101,6 +105,7 @@ int main() {
     delete renderer;
     delete consoleWidget;
     delete textEditorWidget;
+    delete sceneLoader;
     delete sceneEditorWidget;
     delete scene;
   }

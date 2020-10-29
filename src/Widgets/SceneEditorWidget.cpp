@@ -1,6 +1,7 @@
 #include <imgui/imgui.h>
 #include "SceneEditorWidget.h"
 #include "ConsoleWidget.h"
+#include "../Frameworks/ShaderFileManager.h"
 
 SceneEditorWidget::SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene, TextEditorWidget* textEditorWidget) :
         m_Scene(scene),
@@ -32,18 +33,19 @@ void SceneEditorWidget::OnImGuiRender() {
         m_TextEditorWidget->SetEditorText(
                 sceneElement->GetShaderSource(ShaderType::VERTEX),
                 ShaderType::VERTEX,
-                sceneElement->GetShaderSourcePath(ShaderType::VERTEX));
+                ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::VERTEX));
       }
       ImGui::SameLine();
       if (ImGui::Button("Fragment")) {
         m_TextEditorWidget->SetEditorText(
                 sceneElement->GetShaderSource(ShaderType::FRAGMENT),
                 ShaderType::FRAGMENT,
-                sceneElement->GetShaderSourcePath(ShaderType::FRAGMENT));
+                ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::FRAGMENT));
       }
       ImGui::SameLine();
       //Delete element from tree view
       if (ImGui::Button("Delete")) {
+        ShaderFileManager::DeleteVertexAndFragmentShaderFilesyName(sceneNameAndElement->first);
         sceneNameAndElement = m_Scene->erase(sceneNameAndElement);
 
         if (sceneNameAndElement == m_Scene->end()) {

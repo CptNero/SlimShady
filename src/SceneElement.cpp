@@ -5,12 +5,68 @@
 #include "Renderer.h"
 #include "Configurations.h"
 #include "Widgets/ConsoleWidget.h"
+#include "Frameworks/ShaderFileManager.h"
 
-SceneElement::SceneElement(const std::string& sceneName) :
-  m_sceneName(sceneName),
+SceneElement::SceneElement(const std::string& sceneElementName) :
+  m_sceneName(sceneElementName),
   m_TranslationA(0, 0, 0), m_TranslationB(0, 0, 0),
   m_Proj(glm::ortho(0.0f, 1920.0f, 0.0f, 1080.0f, -1.0f, 1.0f)),
   m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))){
+
+  auto vertexShaderFile = ShaderFileManager::CreateShaderFile(sceneElementName, ShaderType::VERTEX);
+  auto fragmentShaderFile = ShaderFileManager::CreateShaderFile(sceneElementName, ShaderType::FRAGMENT);
+
+  m_VertexShaderSource = vertexShaderFile.ShaderSource;
+  m_VertexShaderSourcePath = vertexShaderFile.Path;
+
+  m_FragmentShaderSource = fragmentShaderFile.ShaderSource;
+  m_FragmentShaderSourcePath = fragmentShaderFile.Path;
+
+  InitializeSceneElement();
+}
+
+SceneElement::SceneElement(const std::string& sceneName,
+                           const std::string& vertexShaderSource,
+                           const std::string& fragmentShaderSource) :
+  m_sceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
+  m_TranslationA(0, 0, 0), m_TranslationB(0, 0, 0),
+  m_Proj(glm::ortho(0.0f, 1920.0f, 0.0f, 1080.0f, -1.0f, 1.0f)),
+  m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))){
+  InitializeSceneElement();
+}
+
+
+SceneElement::~SceneElement() = default;
+
+std::string SceneElement::GetShaderSourcePath(ShaderType shaderType) {
+  switch(shaderType) {
+    case ShaderType::VERTEX:
+      return m_VertexShaderSourcePath;
+    case ShaderType::FRAGMENT:
+      return m_FragmentShaderSourcePath;
+  }
+}
+
+std::string SceneElement::GetShaderSource(ShaderType shaderType) {
+  switch(shaderType) {
+    case ShaderType::VERTEX:
+      return m_VertexShaderSource;
+    case ShaderType::FRAGMENT:
+      return m_FragmentShaderSource;
+  }
+}
+
+void SceneElement::Draw() {
+  Renderer renderer;
+
+  glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
+  glm::mat4 mvp = m_Proj * m_View * model;
+  m_Shader->Bind();
+  m_Shader->SetUniformMat4f("u_MVP", mvp);
+  renderer.Draw(*m_VertexArrayObject, *m_IndexBuffer, *m_Shader);
+}
+
+void SceneElement::InitializeSceneElement() {
   glm::vec3 translationA(200, 200, 0);
   glm::vec3 translationB(400, 200, 0);
 
@@ -28,9 +84,6 @@ SceneElement::SceneElement(const std::string& sceneName) :
 
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-  CreateShaderFile(ShaderType::VERTEX);
-  CreateShaderFile(ShaderType::FRAGMENT);
 
   m_Shader = std::make_unique<Shader>(m_VertexShaderSource, m_FragmentShaderSource);
 
@@ -73,65 +126,3 @@ SceneElement::SceneElement(const std::string& sceneName) :
   m_Shader->Bind();
 }
 
-
-SceneElement::~SceneElement() = default;
-
-std::string SceneElement::GetShaderSourcePath(ShaderType shaderType) {
-  switch(shaderType) {
-    case ShaderType::VERTEX:
-      return m_VertexShaderSourcePath;
-    case ShaderType::FRAGMENT:
-      return m_FragmentShaderSourcePath;
-  }
-}
-
-std::string SceneElement::GetShaderSource(ShaderType shaderType) {
-  switch(shaderType) {
-    case ShaderType::VERTEX:
-      return m_VertexShaderSource;
-    case ShaderType::FRAGMENT:
-      return m_FragmentShaderSource;
-  }
-}
-
-void SceneElement::Draw() {
-  Renderer renderer;
-
-  glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
-  glm::mat4 mvp = m_Proj * m_View * model;
-  m_Shader->Bind();
-  m_Shader->SetUniformMat4f("u_MVP", mvp);
-  renderer.Draw(*m_VertexArrayObject, *m_IndexBuffer, *m_Shader);
-}
-
-void SceneElement::CreateShaderFile(ShaderType shaderType) {
-  std::string fileName = "src/res/shaders/" + m_sceneName;
-
-  switch(shaderType){
-    case ShaderType::VERTEX:
-      fileName += "_Vertex.shader";
-      m_VertexShaderSourcePath = fileName;
-      break;
-    case ShaderType::FRAGMENT:
-      fileName += "_Fragment.shader";
-      m_FragmentShaderSourcePath = fileName;
-      break;
-  }
-
-  std::ofstream shaderFile(fileName);
-
-  switch(shaderType){
-    case ShaderType::VERTEX:
-      shaderFile << Configurations::GetDefaultVertexShaderSource();
-      m_VertexShaderSource = Configurations::GetDefaultVertexShaderSource();
-      break;
-    case ShaderType::FRAGMENT:
-      shaderFile << Configurations::GetDefaultFragmentShaderSource();
-      m_FragmentShaderSource = Configurations::GetDefaultFragmentShaderSource();
-      break;
-  }
-
-  shaderFile.close();
-
-  ConsoleWidget::LogMessage("Successfully created " + fileName);
-}

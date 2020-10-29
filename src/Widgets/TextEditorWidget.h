@@ -23,14 +23,12 @@ class TextEditorWidget : public Widget {
 
     std::string GetEditorText();
 
-    void SetEditorText(std::string text, ShaderType shaderType, std::string filePath);
+    void SetEditorText(const std::string& text, ShaderType shaderType, const std::string& filePath);
 
     void OnUpdate(float deltaTime) override;
     void OnRender() override;
     void OnImGuiRender() override;
     void RenderWidget() override;
-
-    static const char* ReadFile(const char* filePath);
 };
 
 

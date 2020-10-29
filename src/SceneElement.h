@@ -11,7 +11,8 @@
 
 class SceneElement {
   public:
-    explicit SceneElement(const std::string& sceneName);
+    explicit SceneElement(const std::string& sceneElementName);
+    SceneElement(const std::string& sceneName, const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
     ~SceneElement();
 
     std::string GetShaderSourcePath(ShaderType shaderType);
@@ -37,7 +38,7 @@ class SceneElement {
     std::string m_VertexShaderSource;
     std::string m_FragmentShaderSource;
 
-    void CreateShaderFile(ShaderType shaderType);
+    void InitializeSceneElement();
 };
 
 

@@ -1,37 +1,20 @@
 #include "Configurations.h"
 
 bool Configurations::m_IsDebugEnabled{true};
-const std::string Configurations::DefaultVertexShaderSource{R"(
+const std::string Configurations::m_VertexShaderFilesPath = R"(src/res/VertexShaders\)";
+const std::string Configurations::m_FragmentShaderFilesPath = R"(src/res/FragmentShaders\)";
+const std::string Configurations::m_DefaultVertexShaderSource{R"(
 #version 330 core
-
-layout(location = 0) in vec4 position;
-
-uniform mat4 u_MVP;
 
 void main()
 {
-    gl_Position = position;
-})"};
-const std::string Configurations::DefaultFragmentShaderSource{R"(
+}
+)"};
+const std::string Configurations::m_DefaultFragmentShaderSource{R"(
 #version 330 core
-
-precision mediump float;
-
-#define BLACK vec3(0.0, 0.0, 0.0)
-#define GREEN vec3(0.2, 1.0, 0.3)
 
 void main()
 {
-    vec2 uv = floor(gl_FragCoord.xy / 20.0);
-    vec4 color;
-    bool isEven = mod(uv.x + uv.y, 2.0) == 0.0;
-    if(isEven) {
-        color = vec4(BLACK, 1.0);
-    }
-    else {
-        color = vec4(GREEN, 1.0);
-    }
-    gl_FragColor = color;
 }
 )"};
 
@@ -40,10 +23,18 @@ bool Configurations::GetIsDebugEnabled()
   return m_IsDebugEnabled;
 }
 
+std::string Configurations::GetVertexShaderFilesPath() {
+  return m_VertexShaderFilesPath;
+}
+
+std::string Configurations::GetFragmentShaderFilesPath() {
+  return m_FragmentShaderFilesPath;
+}
+
 std::string Configurations::GetDefaultVertexShaderSource() {
-  return DefaultVertexShaderSource;
+  return m_DefaultVertexShaderSource;
 }
 
 std::string Configurations::GetDefaultFragmentShaderSource() {
-  return DefaultFragmentShaderSource;
+  return m_DefaultFragmentShaderSource;
 }

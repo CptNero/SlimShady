@@ -7,6 +7,7 @@
 #include "TextEditorWidget.h"
 #include "../VertexArray.h"
 #include "ConsoleWidget.h"
+#include "../Frameworks/ShaderFileManager.h"
 
 
 TextEditorWidget::TextEditorWidget()
@@ -29,18 +30,12 @@ void TextEditorWidget::OnImGuiRender() {
   {
     if (ImGui::BeginMenu("File"))
     {
-      if (ImGui::MenuItem("Save"))
+      if (ImGui::MenuItem("Save", "Ctrl-S"))
       {
-        if(!std::filesystem::exists(m_FileToEditPath))
-          std::cout << "File does not exist at:" << m_FileToEditPath << std::endl;
-
-        std::ofstream file;
-        file.open(m_FileToEditPath);
-        file << m_Editor.GetText();
-        file.close();
+        ShaderFileManager::UpdateShaderFile(m_FileToEditPath, m_Editor.GetText());
+        m_CurrentShaderSource = m_Editor.GetText();
       }
 
-      ImGui::MenuItem("Quit");
       ImGui::EndMenu();
     }
     if (ImGui::BeginMenu("Edit"))
@@ -103,34 +98,11 @@ void TextEditorWidget::RenderWidget() {
   ImGui::End();
 }
 
-const char* TextEditorWidget::ReadFile(const char* filePath) {
-
-  if(!std::filesystem::exists(filePath)) {
-    if (Configurations::GetIsDebugEnabled()) {
-      ConsoleWidget::LogMessage(std::string("File at: ") + filePath + " couldn't be found.");
-    }
-  }
-
-  std::ifstream file(filePath);
-  if (file.good())
-  {
-    auto* file_content = new std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-
-    return file_content->c_str();
-  }
-
-  if (Configurations::GetIsDebugEnabled()) {
-    ConsoleWidget::LogMessage(std::string("Failed to read file"));
-  }
-
-  return "";
-}
-
 std::string TextEditorWidget::GetEditorText() {
   return m_Editor.GetText();
 }
 
-void TextEditorWidget::SetEditorText(std::string text, ShaderType shaderType, std::string filePath) {
+void TextEditorWidget::SetEditorText(const std::string& text, ShaderType shaderType, const std::string& filePath) {
   m_FileToEditPath = filePath;
   m_CurrentShaderType = shaderType;
   m_Editor.SetText(text);
