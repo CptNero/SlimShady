@@ -3,7 +3,7 @@
 #include <fstream>
 
 #include "Shader.h"
-#include "Configurations.h"
+#include "Frameworks/Configurations.h"
 #include "Widgets/ConsoleWidget.h"
 
 Shader::Shader(const std::string& vertexShaderSource, const std::string& fragmentShaderSource)

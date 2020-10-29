@@ -43,19 +43,19 @@ NULL=nul
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\ravai\CLionProjects\SlimShady
+CMAKE_SOURCE_DIR = C:\Users\Neresis\CLionProjects\SlimShady
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -74,7 +74,7 @@ edit_cache\fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -84,9 +84,9 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -127,32 +127,653 @@ SlimShady\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\build
 .PHONY : SlimShady\fast
 
-main.obj: main.cpp.obj
+Vendor\ImGuiColorTextEdit\TextEditor.obj: Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj
 
-.PHONY : main.obj
+.PHONY : Vendor\ImGuiColorTextEdit\TextEditor.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\main.cpp.obj
-.PHONY : main.cpp.obj
+Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj
+.PHONY : Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj
 
-main.i: main.cpp.i
+Vendor\ImGuiColorTextEdit\TextEditor.i: Vendor\ImGuiColorTextEdit\TextEditor.cpp.i
 
-.PHONY : main.i
+.PHONY : Vendor\ImGuiColorTextEdit\TextEditor.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\main.cpp.i
-.PHONY : main.cpp.i
+Vendor\ImGuiColorTextEdit\TextEditor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.i
+.PHONY : Vendor\ImGuiColorTextEdit\TextEditor.cpp.i
 
-main.s: main.cpp.s
+Vendor\ImGuiColorTextEdit\TextEditor.s: Vendor\ImGuiColorTextEdit\TextEditor.cpp.s
 
-.PHONY : main.s
+.PHONY : Vendor\ImGuiColorTextEdit\TextEditor.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\main.cpp.s
-.PHONY : main.cpp.s
+Vendor\ImGuiColorTextEdit\TextEditor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.s
+.PHONY : Vendor\ImGuiColorTextEdit\TextEditor.cpp.s
+
+Vendor\imgui\imgui.obj: Vendor\imgui\imgui.cpp.obj
+
+.PHONY : Vendor\imgui\imgui.obj
+
+# target to build an object file
+Vendor\imgui\imgui.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.obj
+.PHONY : Vendor\imgui\imgui.cpp.obj
+
+Vendor\imgui\imgui.i: Vendor\imgui\imgui.cpp.i
+
+.PHONY : Vendor\imgui\imgui.i
+
+# target to preprocess a source file
+Vendor\imgui\imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.i
+.PHONY : Vendor\imgui\imgui.cpp.i
+
+Vendor\imgui\imgui.s: Vendor\imgui\imgui.cpp.s
+
+.PHONY : Vendor\imgui\imgui.s
+
+# target to generate assembly for a file
+Vendor\imgui\imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.s
+.PHONY : Vendor\imgui\imgui.cpp.s
+
+Vendor\imgui\imgui_draw.obj: Vendor\imgui\imgui_draw.cpp.obj
+
+.PHONY : Vendor\imgui\imgui_draw.obj
+
+# target to build an object file
+Vendor\imgui\imgui_draw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.obj
+.PHONY : Vendor\imgui\imgui_draw.cpp.obj
+
+Vendor\imgui\imgui_draw.i: Vendor\imgui\imgui_draw.cpp.i
+
+.PHONY : Vendor\imgui\imgui_draw.i
+
+# target to preprocess a source file
+Vendor\imgui\imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.i
+.PHONY : Vendor\imgui\imgui_draw.cpp.i
+
+Vendor\imgui\imgui_draw.s: Vendor\imgui\imgui_draw.cpp.s
+
+.PHONY : Vendor\imgui\imgui_draw.s
+
+# target to generate assembly for a file
+Vendor\imgui\imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.s
+.PHONY : Vendor\imgui\imgui_draw.cpp.s
+
+Vendor\imgui\imgui_impl_glfw.obj: Vendor\imgui\imgui_impl_glfw.cpp.obj
+
+.PHONY : Vendor\imgui\imgui_impl_glfw.obj
+
+# target to build an object file
+Vendor\imgui\imgui_impl_glfw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.obj
+.PHONY : Vendor\imgui\imgui_impl_glfw.cpp.obj
+
+Vendor\imgui\imgui_impl_glfw.i: Vendor\imgui\imgui_impl_glfw.cpp.i
+
+.PHONY : Vendor\imgui\imgui_impl_glfw.i
+
+# target to preprocess a source file
+Vendor\imgui\imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.i
+.PHONY : Vendor\imgui\imgui_impl_glfw.cpp.i
+
+Vendor\imgui\imgui_impl_glfw.s: Vendor\imgui\imgui_impl_glfw.cpp.s
+
+.PHONY : Vendor\imgui\imgui_impl_glfw.s
+
+# target to generate assembly for a file
+Vendor\imgui\imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.s
+.PHONY : Vendor\imgui\imgui_impl_glfw.cpp.s
+
+Vendor\imgui\imgui_impl_opengl3.obj: Vendor\imgui\imgui_impl_opengl3.cpp.obj
+
+.PHONY : Vendor\imgui\imgui_impl_opengl3.obj
+
+# target to build an object file
+Vendor\imgui\imgui_impl_opengl3.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.obj
+.PHONY : Vendor\imgui\imgui_impl_opengl3.cpp.obj
+
+Vendor\imgui\imgui_impl_opengl3.i: Vendor\imgui\imgui_impl_opengl3.cpp.i
+
+.PHONY : Vendor\imgui\imgui_impl_opengl3.i
+
+# target to preprocess a source file
+Vendor\imgui\imgui_impl_opengl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.i
+.PHONY : Vendor\imgui\imgui_impl_opengl3.cpp.i
+
+Vendor\imgui\imgui_impl_opengl3.s: Vendor\imgui\imgui_impl_opengl3.cpp.s
+
+.PHONY : Vendor\imgui\imgui_impl_opengl3.s
+
+# target to generate assembly for a file
+Vendor\imgui\imgui_impl_opengl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.s
+.PHONY : Vendor\imgui\imgui_impl_opengl3.cpp.s
+
+Vendor\imgui\imgui_stdlib.obj: Vendor\imgui\imgui_stdlib.cpp.obj
+
+.PHONY : Vendor\imgui\imgui_stdlib.obj
+
+# target to build an object file
+Vendor\imgui\imgui_stdlib.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.obj
+.PHONY : Vendor\imgui\imgui_stdlib.cpp.obj
+
+Vendor\imgui\imgui_stdlib.i: Vendor\imgui\imgui_stdlib.cpp.i
+
+.PHONY : Vendor\imgui\imgui_stdlib.i
+
+# target to preprocess a source file
+Vendor\imgui\imgui_stdlib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.i
+.PHONY : Vendor\imgui\imgui_stdlib.cpp.i
+
+Vendor\imgui\imgui_stdlib.s: Vendor\imgui\imgui_stdlib.cpp.s
+
+.PHONY : Vendor\imgui\imgui_stdlib.s
+
+# target to generate assembly for a file
+Vendor\imgui\imgui_stdlib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.s
+.PHONY : Vendor\imgui\imgui_stdlib.cpp.s
+
+Vendor\imgui\imgui_widgets.obj: Vendor\imgui\imgui_widgets.cpp.obj
+
+.PHONY : Vendor\imgui\imgui_widgets.obj
+
+# target to build an object file
+Vendor\imgui\imgui_widgets.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.obj
+.PHONY : Vendor\imgui\imgui_widgets.cpp.obj
+
+Vendor\imgui\imgui_widgets.i: Vendor\imgui\imgui_widgets.cpp.i
+
+.PHONY : Vendor\imgui\imgui_widgets.i
+
+# target to preprocess a source file
+Vendor\imgui\imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.i
+.PHONY : Vendor\imgui\imgui_widgets.cpp.i
+
+Vendor\imgui\imgui_widgets.s: Vendor\imgui\imgui_widgets.cpp.s
+
+.PHONY : Vendor\imgui\imgui_widgets.s
+
+# target to generate assembly for a file
+Vendor\imgui\imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.s
+.PHONY : Vendor\imgui\imgui_widgets.cpp.s
+
+src\App.obj: src\App.cpp.obj
+
+.PHONY : src\App.obj
+
+# target to build an object file
+src\App.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\App.cpp.obj
+.PHONY : src\App.cpp.obj
+
+src\App.i: src\App.cpp.i
+
+.PHONY : src\App.i
+
+# target to preprocess a source file
+src\App.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\App.cpp.i
+.PHONY : src\App.cpp.i
+
+src\App.s: src\App.cpp.s
+
+.PHONY : src\App.s
+
+# target to generate assembly for a file
+src\App.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\App.cpp.s
+.PHONY : src\App.cpp.s
+
+src\Frameworks\Clock.obj: src\Frameworks\Clock.cpp.obj
+
+.PHONY : src\Frameworks\Clock.obj
+
+# target to build an object file
+src\Frameworks\Clock.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.obj
+.PHONY : src\Frameworks\Clock.cpp.obj
+
+src\Frameworks\Clock.i: src\Frameworks\Clock.cpp.i
+
+.PHONY : src\Frameworks\Clock.i
+
+# target to preprocess a source file
+src\Frameworks\Clock.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.i
+.PHONY : src\Frameworks\Clock.cpp.i
+
+src\Frameworks\Clock.s: src\Frameworks\Clock.cpp.s
+
+.PHONY : src\Frameworks\Clock.s
+
+# target to generate assembly for a file
+src\Frameworks\Clock.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.s
+.PHONY : src\Frameworks\Clock.cpp.s
+
+src\Frameworks\Configurations.obj: src\Frameworks\Configurations.cpp.obj
+
+.PHONY : src\Frameworks\Configurations.obj
+
+# target to build an object file
+src\Frameworks\Configurations.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.obj
+.PHONY : src\Frameworks\Configurations.cpp.obj
+
+src\Frameworks\Configurations.i: src\Frameworks\Configurations.cpp.i
+
+.PHONY : src\Frameworks\Configurations.i
+
+# target to preprocess a source file
+src\Frameworks\Configurations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.i
+.PHONY : src\Frameworks\Configurations.cpp.i
+
+src\Frameworks\Configurations.s: src\Frameworks\Configurations.cpp.s
+
+.PHONY : src\Frameworks\Configurations.s
+
+# target to generate assembly for a file
+src\Frameworks\Configurations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.s
+.PHONY : src\Frameworks\Configurations.cpp.s
+
+src\Frameworks\ErrorHandler.obj: src\Frameworks\ErrorHandler.cpp.obj
+
+.PHONY : src\Frameworks\ErrorHandler.obj
+
+# target to build an object file
+src\Frameworks\ErrorHandler.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.obj
+.PHONY : src\Frameworks\ErrorHandler.cpp.obj
+
+src\Frameworks\ErrorHandler.i: src\Frameworks\ErrorHandler.cpp.i
+
+.PHONY : src\Frameworks\ErrorHandler.i
+
+# target to preprocess a source file
+src\Frameworks\ErrorHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.i
+.PHONY : src\Frameworks\ErrorHandler.cpp.i
+
+src\Frameworks\ErrorHandler.s: src\Frameworks\ErrorHandler.cpp.s
+
+.PHONY : src\Frameworks\ErrorHandler.s
+
+# target to generate assembly for a file
+src\Frameworks\ErrorHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.s
+.PHONY : src\Frameworks\ErrorHandler.cpp.s
+
+src\Frameworks\ShaderFileManager.obj: src\Frameworks\ShaderFileManager.cpp.obj
+
+.PHONY : src\Frameworks\ShaderFileManager.obj
+
+# target to build an object file
+src\Frameworks\ShaderFileManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.obj
+.PHONY : src\Frameworks\ShaderFileManager.cpp.obj
+
+src\Frameworks\ShaderFileManager.i: src\Frameworks\ShaderFileManager.cpp.i
+
+.PHONY : src\Frameworks\ShaderFileManager.i
+
+# target to preprocess a source file
+src\Frameworks\ShaderFileManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.i
+.PHONY : src\Frameworks\ShaderFileManager.cpp.i
+
+src\Frameworks\ShaderFileManager.s: src\Frameworks\ShaderFileManager.cpp.s
+
+.PHONY : src\Frameworks\ShaderFileManager.s
+
+# target to generate assembly for a file
+src\Frameworks\ShaderFileManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.s
+.PHONY : src\Frameworks\ShaderFileManager.cpp.s
+
+src\IndexBuffer.obj: src\IndexBuffer.cpp.obj
+
+.PHONY : src\IndexBuffer.obj
+
+# target to build an object file
+src\IndexBuffer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.obj
+.PHONY : src\IndexBuffer.cpp.obj
+
+src\IndexBuffer.i: src\IndexBuffer.cpp.i
+
+.PHONY : src\IndexBuffer.i
+
+# target to preprocess a source file
+src\IndexBuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.i
+.PHONY : src\IndexBuffer.cpp.i
+
+src\IndexBuffer.s: src\IndexBuffer.cpp.s
+
+.PHONY : src\IndexBuffer.s
+
+# target to generate assembly for a file
+src\IndexBuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.s
+.PHONY : src\IndexBuffer.cpp.s
+
+src\Renderer.obj: src\Renderer.cpp.obj
+
+.PHONY : src\Renderer.obj
+
+# target to build an object file
+src\Renderer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Renderer.cpp.obj
+.PHONY : src\Renderer.cpp.obj
+
+src\Renderer.i: src\Renderer.cpp.i
+
+.PHONY : src\Renderer.i
+
+# target to preprocess a source file
+src\Renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Renderer.cpp.i
+.PHONY : src\Renderer.cpp.i
+
+src\Renderer.s: src\Renderer.cpp.s
+
+.PHONY : src\Renderer.s
+
+# target to generate assembly for a file
+src\Renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Renderer.cpp.s
+.PHONY : src\Renderer.cpp.s
+
+src\SceneElement.obj: src\SceneElement.cpp.obj
+
+.PHONY : src\SceneElement.obj
+
+# target to build an object file
+src\SceneElement.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\SceneElement.cpp.obj
+.PHONY : src\SceneElement.cpp.obj
+
+src\SceneElement.i: src\SceneElement.cpp.i
+
+.PHONY : src\SceneElement.i
+
+# target to preprocess a source file
+src\SceneElement.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\SceneElement.cpp.i
+.PHONY : src\SceneElement.cpp.i
+
+src\SceneElement.s: src\SceneElement.cpp.s
+
+.PHONY : src\SceneElement.s
+
+# target to generate assembly for a file
+src\SceneElement.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\SceneElement.cpp.s
+.PHONY : src\SceneElement.cpp.s
+
+src\SceneLoader.obj: src\SceneLoader.cpp.obj
+
+.PHONY : src\SceneLoader.obj
+
+# target to build an object file
+src\SceneLoader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.obj
+.PHONY : src\SceneLoader.cpp.obj
+
+src\SceneLoader.i: src\SceneLoader.cpp.i
+
+.PHONY : src\SceneLoader.i
+
+# target to preprocess a source file
+src\SceneLoader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.i
+.PHONY : src\SceneLoader.cpp.i
+
+src\SceneLoader.s: src\SceneLoader.cpp.s
+
+.PHONY : src\SceneLoader.s
+
+# target to generate assembly for a file
+src\SceneLoader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.s
+.PHONY : src\SceneLoader.cpp.s
+
+src\Shader.obj: src\Shader.cpp.obj
+
+.PHONY : src\Shader.obj
+
+# target to build an object file
+src\Shader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Shader.cpp.obj
+.PHONY : src\Shader.cpp.obj
+
+src\Shader.i: src\Shader.cpp.i
+
+.PHONY : src\Shader.i
+
+# target to preprocess a source file
+src\Shader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Shader.cpp.i
+.PHONY : src\Shader.cpp.i
+
+src\Shader.s: src\Shader.cpp.s
+
+.PHONY : src\Shader.s
+
+# target to generate assembly for a file
+src\Shader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Shader.cpp.s
+.PHONY : src\Shader.cpp.s
+
+src\VertexArray.obj: src\VertexArray.cpp.obj
+
+.PHONY : src\VertexArray.obj
+
+# target to build an object file
+src\VertexArray.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexArray.cpp.obj
+.PHONY : src\VertexArray.cpp.obj
+
+src\VertexArray.i: src\VertexArray.cpp.i
+
+.PHONY : src\VertexArray.i
+
+# target to preprocess a source file
+src\VertexArray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexArray.cpp.i
+.PHONY : src\VertexArray.cpp.i
+
+src\VertexArray.s: src\VertexArray.cpp.s
+
+.PHONY : src\VertexArray.s
+
+# target to generate assembly for a file
+src\VertexArray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexArray.cpp.s
+.PHONY : src\VertexArray.cpp.s
+
+src\VertexBuffer.obj: src\VertexBuffer.cpp.obj
+
+.PHONY : src\VertexBuffer.obj
+
+# target to build an object file
+src\VertexBuffer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.obj
+.PHONY : src\VertexBuffer.cpp.obj
+
+src\VertexBuffer.i: src\VertexBuffer.cpp.i
+
+.PHONY : src\VertexBuffer.i
+
+# target to preprocess a source file
+src\VertexBuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.i
+.PHONY : src\VertexBuffer.cpp.i
+
+src\VertexBuffer.s: src\VertexBuffer.cpp.s
+
+.PHONY : src\VertexBuffer.s
+
+# target to generate assembly for a file
+src\VertexBuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.s
+.PHONY : src\VertexBuffer.cpp.s
+
+src\VertexBufferLayout.obj: src\VertexBufferLayout.cpp.obj
+
+.PHONY : src\VertexBufferLayout.obj
+
+# target to build an object file
+src\VertexBufferLayout.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.obj
+.PHONY : src\VertexBufferLayout.cpp.obj
+
+src\VertexBufferLayout.i: src\VertexBufferLayout.cpp.i
+
+.PHONY : src\VertexBufferLayout.i
+
+# target to preprocess a source file
+src\VertexBufferLayout.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.i
+.PHONY : src\VertexBufferLayout.cpp.i
+
+src\VertexBufferLayout.s: src\VertexBufferLayout.cpp.s
+
+.PHONY : src\VertexBufferLayout.s
+
+# target to generate assembly for a file
+src\VertexBufferLayout.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.s
+.PHONY : src\VertexBufferLayout.cpp.s
+
+src\Widgets\ConsoleWidget.obj: src\Widgets\ConsoleWidget.cpp.obj
+
+.PHONY : src\Widgets\ConsoleWidget.obj
+
+# target to build an object file
+src\Widgets\ConsoleWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.obj
+.PHONY : src\Widgets\ConsoleWidget.cpp.obj
+
+src\Widgets\ConsoleWidget.i: src\Widgets\ConsoleWidget.cpp.i
+
+.PHONY : src\Widgets\ConsoleWidget.i
+
+# target to preprocess a source file
+src\Widgets\ConsoleWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.i
+.PHONY : src\Widgets\ConsoleWidget.cpp.i
+
+src\Widgets\ConsoleWidget.s: src\Widgets\ConsoleWidget.cpp.s
+
+.PHONY : src\Widgets\ConsoleWidget.s
+
+# target to generate assembly for a file
+src\Widgets\ConsoleWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.s
+.PHONY : src\Widgets\ConsoleWidget.cpp.s
+
+src\Widgets\SceneEditorWidget.obj: src\Widgets\SceneEditorWidget.cpp.obj
+
+.PHONY : src\Widgets\SceneEditorWidget.obj
+
+# target to build an object file
+src\Widgets\SceneEditorWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.obj
+.PHONY : src\Widgets\SceneEditorWidget.cpp.obj
+
+src\Widgets\SceneEditorWidget.i: src\Widgets\SceneEditorWidget.cpp.i
+
+.PHONY : src\Widgets\SceneEditorWidget.i
+
+# target to preprocess a source file
+src\Widgets\SceneEditorWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.i
+.PHONY : src\Widgets\SceneEditorWidget.cpp.i
+
+src\Widgets\SceneEditorWidget.s: src\Widgets\SceneEditorWidget.cpp.s
+
+.PHONY : src\Widgets\SceneEditorWidget.s
+
+# target to generate assembly for a file
+src\Widgets\SceneEditorWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.s
+.PHONY : src\Widgets\SceneEditorWidget.cpp.s
+
+src\Widgets\TextEditorWidget.obj: src\Widgets\TextEditorWidget.cpp.obj
+
+.PHONY : src\Widgets\TextEditorWidget.obj
+
+# target to build an object file
+src\Widgets\TextEditorWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.obj
+.PHONY : src\Widgets\TextEditorWidget.cpp.obj
+
+src\Widgets\TextEditorWidget.i: src\Widgets\TextEditorWidget.cpp.i
+
+.PHONY : src\Widgets\TextEditorWidget.i
+
+# target to preprocess a source file
+src\Widgets\TextEditorWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.i
+.PHONY : src\Widgets\TextEditorWidget.cpp.i
+
+src\Widgets\TextEditorWidget.s: src\Widgets\TextEditorWidget.cpp.s
+
+.PHONY : src\Widgets\TextEditorWidget.s
+
+# target to generate assembly for a file
+src\Widgets\TextEditorWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.s
+.PHONY : src\Widgets\TextEditorWidget.cpp.s
+
+src\Widgets\Widget.obj: src\Widgets\Widget.cpp.obj
+
+.PHONY : src\Widgets\Widget.obj
+
+# target to build an object file
+src\Widgets\Widget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.obj
+.PHONY : src\Widgets\Widget.cpp.obj
+
+src\Widgets\Widget.i: src\Widgets\Widget.cpp.i
+
+.PHONY : src\Widgets\Widget.i
+
+# target to preprocess a source file
+src\Widgets\Widget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.i
+.PHONY : src\Widgets\Widget.cpp.i
+
+src\Widgets\Widget.s: src\Widgets\Widget.cpp.s
+
+.PHONY : src\Widgets\Widget.s
+
+# target to generate assembly for a file
+src\Widgets\Widget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.s
+.PHONY : src\Widgets\Widget.cpp.s
 
 # Help Target
 help:
@@ -163,9 +784,78 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... SlimShady
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... Vendor/ImGuiColorTextEdit/TextEditor.obj
+	@echo ... Vendor/ImGuiColorTextEdit/TextEditor.i
+	@echo ... Vendor/ImGuiColorTextEdit/TextEditor.s
+	@echo ... Vendor/imgui/imgui.obj
+	@echo ... Vendor/imgui/imgui.i
+	@echo ... Vendor/imgui/imgui.s
+	@echo ... Vendor/imgui/imgui_draw.obj
+	@echo ... Vendor/imgui/imgui_draw.i
+	@echo ... Vendor/imgui/imgui_draw.s
+	@echo ... Vendor/imgui/imgui_impl_glfw.obj
+	@echo ... Vendor/imgui/imgui_impl_glfw.i
+	@echo ... Vendor/imgui/imgui_impl_glfw.s
+	@echo ... Vendor/imgui/imgui_impl_opengl3.obj
+	@echo ... Vendor/imgui/imgui_impl_opengl3.i
+	@echo ... Vendor/imgui/imgui_impl_opengl3.s
+	@echo ... Vendor/imgui/imgui_stdlib.obj
+	@echo ... Vendor/imgui/imgui_stdlib.i
+	@echo ... Vendor/imgui/imgui_stdlib.s
+	@echo ... Vendor/imgui/imgui_widgets.obj
+	@echo ... Vendor/imgui/imgui_widgets.i
+	@echo ... Vendor/imgui/imgui_widgets.s
+	@echo ... src/App.obj
+	@echo ... src/App.i
+	@echo ... src/App.s
+	@echo ... src/Frameworks/Clock.obj
+	@echo ... src/Frameworks/Clock.i
+	@echo ... src/Frameworks/Clock.s
+	@echo ... src/Frameworks/Configurations.obj
+	@echo ... src/Frameworks/Configurations.i
+	@echo ... src/Frameworks/Configurations.s
+	@echo ... src/Frameworks/ErrorHandler.obj
+	@echo ... src/Frameworks/ErrorHandler.i
+	@echo ... src/Frameworks/ErrorHandler.s
+	@echo ... src/Frameworks/ShaderFileManager.obj
+	@echo ... src/Frameworks/ShaderFileManager.i
+	@echo ... src/Frameworks/ShaderFileManager.s
+	@echo ... src/IndexBuffer.obj
+	@echo ... src/IndexBuffer.i
+	@echo ... src/IndexBuffer.s
+	@echo ... src/Renderer.obj
+	@echo ... src/Renderer.i
+	@echo ... src/Renderer.s
+	@echo ... src/SceneElement.obj
+	@echo ... src/SceneElement.i
+	@echo ... src/SceneElement.s
+	@echo ... src/SceneLoader.obj
+	@echo ... src/SceneLoader.i
+	@echo ... src/SceneLoader.s
+	@echo ... src/Shader.obj
+	@echo ... src/Shader.i
+	@echo ... src/Shader.s
+	@echo ... src/VertexArray.obj
+	@echo ... src/VertexArray.i
+	@echo ... src/VertexArray.s
+	@echo ... src/VertexBuffer.obj
+	@echo ... src/VertexBuffer.i
+	@echo ... src/VertexBuffer.s
+	@echo ... src/VertexBufferLayout.obj
+	@echo ... src/VertexBufferLayout.i
+	@echo ... src/VertexBufferLayout.s
+	@echo ... src/Widgets/ConsoleWidget.obj
+	@echo ... src/Widgets/ConsoleWidget.i
+	@echo ... src/Widgets/ConsoleWidget.s
+	@echo ... src/Widgets/SceneEditorWidget.obj
+	@echo ... src/Widgets/SceneEditorWidget.i
+	@echo ... src/Widgets/SceneEditorWidget.s
+	@echo ... src/Widgets/TextEditorWidget.obj
+	@echo ... src/Widgets/TextEditorWidget.i
+	@echo ... src/Widgets/TextEditorWidget.s
+	@echo ... src/Widgets/Widget.obj
+	@echo ... src/Widgets/Widget.i
+	@echo ... src/Widgets/Widget.s
 .PHONY : help
 
 

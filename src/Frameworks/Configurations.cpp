@@ -1,8 +1,8 @@
 #include "Configurations.h"
 
 bool Configurations::m_IsDebugEnabled{true};
-const std::string Configurations::m_VertexShaderFilesPath = R"(src/res/VertexShaders\)";
-const std::string Configurations::m_FragmentShaderFilesPath = R"(src/res/FragmentShaders\)";
+const std::string Configurations::m_VertexShaderFilesPath = R"(src/Resources/VertexShaders\)";
+const std::string Configurations::m_FragmentShaderFilesPath = R"(src/Resources/FragmentShaders\)";
 const std::string Configurations::m_DefaultVertexShaderSource{R"(
 #version 330 core
 

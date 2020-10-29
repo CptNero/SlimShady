@@ -1,7 +1,7 @@
 #include <unordered_map>
 #include <filesystem>
 #include "SceneLoader.h"
-#include "Configurations.h"
+#include "Frameworks/Configurations.h"
 #include "Frameworks/ShaderFileManager.h"
 
 SceneLoader::SceneLoader(std::unordered_map<std::string, SceneElement*>* scene) : m_Scene(scene) {}

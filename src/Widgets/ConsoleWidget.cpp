@@ -4,7 +4,7 @@
 #include <chrono>
 
 #include "ConsoleWidget.h"
-#include "../Clock.h"
+#include "../Frameworks/Clock.h"
 
 char* ConsoleWidget::m_ConsoleLogBuffer = "";
 

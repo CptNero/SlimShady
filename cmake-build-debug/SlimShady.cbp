@@ -5,25 +5,31 @@
 		<Option title="SlimShady"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="msvc8"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Neresis/CLionProjects/SlimShady/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 all"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SlimShady">
-				<Option output="C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug/SlimShady.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug"/>
+				<Option output="C:/Users/Neresis/CLionProjects/SlimShady/cmake-build-debug/SlimShady.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Neresis/CLionProjects/SlimShady/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="msvc8"/>
 				<Compiler>
+					<Add option="-DGLEW_STATIC"/>
+					<Add option="-DIMGUI_IMPL_OPENGL_LOADER_GLEW"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/tests"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/Vendor"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/Dependencies/GLFW/include"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/Dependencies/GLEW/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
@@ -32,19 +38,25 @@
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 SlimShady"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 SlimShady"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SlimShady/fast">
-				<Option output="C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug/SlimShady.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug"/>
+				<Option output="C:/Users/Neresis/CLionProjects/SlimShady/cmake-build-debug/SlimShady.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Neresis/CLionProjects/SlimShady/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="msvc8"/>
 				<Compiler>
+					<Add option="-DGLEW_STATIC"/>
+					<Add option="-DIMGUI_IMPL_OPENGL_LOADER_GLEW"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/tests"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/Vendor"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/Dependencies/GLFW/include"/>
+					<Add directory="C:/Users/Neresis/CLionProjects/SlimShady/Dependencies/GLEW/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
@@ -53,38 +65,182 @@
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 SlimShady/fast"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 SlimShady/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Neresis/CLionProjects/SlimShady/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Neresis/CLionProjects/SlimShady/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/ravai/CLionProjects/SlimShady/main.cpp">
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/ImGuiColorTextEdit/TextEditor.cpp">
 			<Option target="SlimShady"/>
 		</Unit>
-		<Unit filename="C:/Users/ravai/CLionProjects/SlimShady/CMakeLists.txt">
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/ImGuiColorTextEdit/TextEditor.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/date/date.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_draw.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_impl_glfw.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_impl_glfw.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_impl_opengl3.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_impl_opengl3.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_stdlib.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_stdlib.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/Vendor/imgui/imgui_widgets.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/App.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/Clock.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/Clock.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/Configurations.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/Configurations.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/ErrorHandler.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/ErrorHandler.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/ShaderFileManager.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Frameworks/ShaderFileManager.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/IndexBuffer.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/IndexBuffer.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Renderer.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Renderer.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/SceneElement.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/SceneElement.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/SceneLoader.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/SceneLoader.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Shader.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Shader.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/ShaderTypes.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/VertexArray.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/VertexArray.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/VertexBuffer.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/VertexBuffer.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/VertexBufferLayout.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/VertexBufferLayout.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/ConsoleWidget.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/ConsoleWidget.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/SceneEditorWidget.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/SceneEditorWidget.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/TextEditorWidget.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/TextEditorWidget.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/Widget.cpp">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/src/Widgets/Widget.h">
+			<Option target="SlimShady"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/cmake/FindGLEW.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/Neresis/CLionProjects/SlimShady/cmake/FindGLFW.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

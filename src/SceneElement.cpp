@@ -3,7 +3,7 @@
 #include <fstream>
 #include "SceneElement.h"
 #include "Renderer.h"
-#include "Configurations.h"
+#include "Frameworks/Configurations.h"
 #include "Widgets/ConsoleWidget.h"
 #include "Frameworks/ShaderFileManager.h"
 

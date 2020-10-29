@@ -38,19 +38,19 @@ NULL=nul
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\ravai\CLionProjects\SlimShady
+CMAKE_SOURCE_DIR = C:\Users\Neresis\CLionProjects\SlimShady
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles\SlimShady.dir\depend.make
@@ -61,38 +61,523 @@ include CMakeFiles\SlimShady.dir\progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles\SlimShady.dir\flags.make
 
-CMakeFiles\SlimShady.dir\main.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
-CMakeFiles\SlimShady.dir\main.cpp.obj: ..\main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SlimShady.dir/main.cpp.obj"
-	C:\PROGRA~2\MICROS~2\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\main.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\ravai\CLionProjects\SlimShady\main.cpp
+CMakeFiles\SlimShady.dir\src\App.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\App.cpp.obj: ..\src\App.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SlimShady.dir/src/App.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\App.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\App.cpp
 <<
 
-CMakeFiles\SlimShady.dir\main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/main.cpp.i"
-	C:\PROGRA~2\MICROS~2\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\main.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ravai\CLionProjects\SlimShady\main.cpp
+CMakeFiles\SlimShady.dir\src\App.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/App.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\App.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\App.cpp
 <<
 
-CMakeFiles\SlimShady.dir\main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/main.cpp.s"
-	C:\PROGRA~2\MICROS~2\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\main.cpp.s /c C:\Users\ravai\CLionProjects\SlimShady\main.cpp
+CMakeFiles\SlimShady.dir\src\App.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/App.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\App.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\App.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.obj: ..\src\Frameworks\ErrorHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SlimShady.dir/src/Frameworks/ErrorHandler.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\ErrorHandler.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Frameworks/ErrorHandler.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\ErrorHandler.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Frameworks/ErrorHandler.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\ErrorHandler.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.obj: ..\Vendor\imgui\imgui.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SlimShady.dir/Vendor/imgui/imgui.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/Vendor/imgui/imgui.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/Vendor/imgui/imgui.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.obj: ..\Vendor\imgui\imgui_impl_glfw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_glfw.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_impl_glfw.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_glfw.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_impl_glfw.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_glfw.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_impl_glfw.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.obj: ..\Vendor\imgui\imgui_impl_opengl3.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_opengl3.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_impl_opengl3.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_opengl3.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_impl_opengl3.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_opengl3.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_impl_opengl3.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.obj: ..\Vendor\imgui\imgui_draw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_draw.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_draw.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_draw.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_draw.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_draw.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_draw.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.obj: ..\Vendor\imgui\imgui_widgets.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_widgets.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_widgets.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_widgets.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_widgets.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_widgets.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_widgets.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.obj: ..\src\Frameworks\Configurations.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SlimShady.dir/src/Frameworks/Configurations.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\Configurations.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Frameworks/Configurations.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\Configurations.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Frameworks/Configurations.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\Configurations.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.obj: ..\src\Widgets\ConsoleWidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SlimShady.dir/src/Widgets/ConsoleWidget.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\ConsoleWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Widgets/ConsoleWidget.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\ConsoleWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Widgets/ConsoleWidget.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\ConsoleWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.obj: ..\src\Widgets\Widget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SlimShady.dir/src/Widgets/Widget.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\Widget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Widgets/Widget.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\Widget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Widgets/Widget.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\Widget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.obj: ..\Vendor\imgui\imgui_stdlib.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_stdlib.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_stdlib.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_stdlib.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_stdlib.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_stdlib.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\imgui\imgui_stdlib.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.obj: ..\src\Frameworks\Clock.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SlimShady.dir/src/Frameworks/Clock.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\Clock.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Frameworks/Clock.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\Clock.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Frameworks/Clock.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\Clock.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj: ..\Vendor\ImGuiColorTextEdit\TextEditor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/SlimShady.dir/Vendor/ImGuiColorTextEdit/TextEditor.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\ImGuiColorTextEdit\TextEditor.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/Vendor/ImGuiColorTextEdit/TextEditor.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\Vendor\ImGuiColorTextEdit\TextEditor.cpp
+<<
+
+CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/Vendor/ImGuiColorTextEdit/TextEditor.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\Vendor\ImGuiColorTextEdit\TextEditor.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.obj: ..\src\Widgets\TextEditorWidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/SlimShady.dir/src/Widgets/TextEditorWidget.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\TextEditorWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Widgets/TextEditorWidget.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\TextEditorWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Widgets/TextEditorWidget.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\TextEditorWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Renderer.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Renderer.cpp.obj: ..\src\Renderer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/SlimShady.dir/src/Renderer.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Renderer.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Renderer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Renderer.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Renderer.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Renderer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Renderer.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Renderer.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Renderer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexArray.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\VertexArray.cpp.obj: ..\src\VertexArray.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/SlimShady.dir/src/VertexArray.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\VertexArray.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\VertexArray.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexArray.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/VertexArray.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\VertexArray.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\VertexArray.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexArray.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/VertexArray.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\VertexArray.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\VertexArray.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.obj: ..\src\VertexBufferLayout.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/SlimShady.dir/src/VertexBufferLayout.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\VertexBufferLayout.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/VertexBufferLayout.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\VertexBufferLayout.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/VertexBufferLayout.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\VertexBufferLayout.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.obj: ..\src\VertexBuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/SlimShady.dir/src/VertexBuffer.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\VertexBuffer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/VertexBuffer.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\VertexBuffer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/VertexBuffer.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\VertexBuffer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.obj: ..\src\IndexBuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/SlimShady.dir/src/IndexBuffer.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\IndexBuffer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/IndexBuffer.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\IndexBuffer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/IndexBuffer.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\IndexBuffer.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Shader.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Shader.cpp.obj: ..\src\Shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/SlimShady.dir/src/Shader.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Shader.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Shader.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Shader.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Shader.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Shader.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Shader.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Shader.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Shader.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\SceneElement.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\SceneElement.cpp.obj: ..\src\SceneElement.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/SlimShady.dir/src/SceneElement.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\SceneElement.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\SceneElement.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\SceneElement.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/SceneElement.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\SceneElement.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\SceneElement.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\SceneElement.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/SceneElement.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\SceneElement.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\SceneElement.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.obj: ..\src\Widgets\SceneEditorWidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/SlimShady.dir/src/Widgets/SceneEditorWidget.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\SceneEditorWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Widgets/SceneEditorWidget.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\SceneEditorWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Widgets/SceneEditorWidget.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Widgets\SceneEditorWidget.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.obj: ..\src\SceneLoader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/SlimShady.dir/src/SceneLoader.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\SceneLoader.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\SceneLoader.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/SceneLoader.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\SceneLoader.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/SceneLoader.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\SceneLoader.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\SceneLoader.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.obj: CMakeFiles\SlimShady.dir\flags.make
+CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.obj: ..\src\Frameworks\ShaderFileManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/SlimShady.dir/src/Frameworks/ShaderFileManager.cpp.obj"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.obj /FdCMakeFiles\SlimShady.dir\ /FS -c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\ShaderFileManager.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SlimShady.dir/src/Frameworks/ShaderFileManager.cpp.i"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe > CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\ShaderFileManager.cpp
+<<
+
+CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SlimShady.dir/src/Frameworks/ShaderFileManager.cpp.s"
+	C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.s /c C:\Users\Neresis\CLionProjects\SlimShady\src\Frameworks\ShaderFileManager.cpp
 <<
 
 # Object files for target SlimShady
 SlimShady_OBJECTS = \
-"CMakeFiles\SlimShady.dir\main.cpp.obj"
+"CMakeFiles\SlimShady.dir\src\App.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.obj" \
+"CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.obj" \
+"CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.obj" \
+"CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.obj" \
+"CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.obj" \
+"CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.obj" \
+"CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.obj" \
+"CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Renderer.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\VertexArray.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Shader.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\SceneElement.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.obj" \
+"CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.obj"
 
 # External object files for target SlimShady
 SlimShady_EXTERNAL_OBJECTS =
 
-SlimShady.exe: CMakeFiles\SlimShady.dir\main.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\App.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\Vendor\imgui\imgui.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_glfw.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_impl_opengl3.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_draw.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_widgets.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Widgets\ConsoleWidget.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Widgets\Widget.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\Vendor\imgui\imgui_stdlib.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\Vendor\ImGuiColorTextEdit\TextEditor.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Widgets\TextEditorWidget.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Renderer.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\VertexArray.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\VertexBufferLayout.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\VertexBuffer.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\IndexBuffer.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Shader.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\SceneElement.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Widgets\SceneEditorWidget.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\SceneLoader.cpp.obj
+SlimShady.exe: CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.obj
 SlimShady.exe: CMakeFiles\SlimShady.dir\build.make
+SlimShady.exe: ..\Dependencies\GLFW\lib\glfw3.lib
+SlimShady.exe: ..\Dependencies\GLEW\lib\glew32s.lib
 SlimShady.exe: CMakeFiles\SlimShady.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable SlimShady.exe"
-	"C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\SlimShady.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100177~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100177~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~2\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\SlimShady.dir\objects1.rsp @<<
- /out:SlimShady.exe /implib:SlimShady.lib /pdb:C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\SlimShady.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Linking CXX executable SlimShady.exe"
+	"C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\SlimShady.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100177~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100177~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2017\BUILDT~1\VC\Tools\MSVC\1416~1.270\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\SlimShady.dir\objects1.rsp @<<
+ /out:SlimShady.exe /implib:SlimShady.lib /pdb:C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\SlimShady.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:console  ..\Dependencies\GLFW\lib\glfw3.lib ..\Dependencies\GLEW\lib\glew32s.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<
 
 # Rule to build all files generated by this target.
@@ -105,6 +590,6 @@ CMakeFiles\SlimShady.dir\clean:
 .PHONY : CMakeFiles\SlimShady.dir\clean
 
 CMakeFiles\SlimShady.dir\depend:
-	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" C:\Users\ravai\CLionProjects\SlimShady C:\Users\ravai\CLionProjects\SlimShady C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles\SlimShady.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" C:\Users\Neresis\CLionProjects\SlimShady C:\Users\Neresis\CLionProjects\SlimShady C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles\SlimShady.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles\SlimShady.dir\depend
 

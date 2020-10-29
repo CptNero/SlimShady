@@ -6,8 +6,8 @@
 
 #include <iostream>
 
-#include "ErrorHandler.h"
-#include "Configurations.h"
+#include "Frameworks/ErrorHandler.h"
+#include "Frameworks/Configurations.h"
 #include "Widgets/ConsoleWidget.h"
 #include "Widgets/TextEditorWidget.h"
 #include "Renderer.h"

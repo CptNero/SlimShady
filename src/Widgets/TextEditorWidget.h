@@ -4,7 +4,7 @@
 
 #include <ImGuiColorTextEdit/TextEditor.h>
 #include "Widget.h"
-#include "../Configurations.h"
+#include "../Frameworks/Configurations.h"
 #include "../ShaderTypes.h"
 
 class TextEditorWidget : public Widget {
