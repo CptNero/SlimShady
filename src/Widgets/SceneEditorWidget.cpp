@@ -19,7 +19,7 @@ void SceneEditorWidget::OnRender() {
 void SceneEditorWidget::OnImGuiRender() {
   ImGui::ColorEdit4("Clear color", m_ClearColor, 1);
 
-  ImGui::InputText("Element Name", m_SceneElementNameInputBuffer, IM_ARRAYSIZE(m_SceneElementNameInputBuffer));
+  ImGui::InputText("Element name", m_SceneElementNameInputBuffer, IM_ARRAYSIZE(m_SceneElementNameInputBuffer));
   if(ImGui::Button("Add to scene")) {
     InsertElement();
   }
@@ -29,7 +29,7 @@ void SceneEditorWidget::OnImGuiRender() {
       auto sceneElement = sceneNameAndElement->second;
 
       if (ImGui::Button("Vertex")) {
-
+        m_TextEditorWidget->SetCurrentSceneElement(sceneElement, ShaderType::VERTEX);
         m_TextEditorWidget->SetEditorText(
                 sceneElement->GetShaderSource(ShaderType::VERTEX),
                 ShaderType::VERTEX,
@@ -37,10 +37,18 @@ void SceneEditorWidget::OnImGuiRender() {
       }
       ImGui::SameLine();
       if (ImGui::Button("Fragment")) {
+        m_TextEditorWidget->SetCurrentSceneElement(sceneElement, ShaderType::FRAGMENT);
         m_TextEditorWidget->SetEditorText(
                 sceneElement->GetShaderSource(ShaderType::FRAGMENT),
                 ShaderType::FRAGMENT,
                 ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::FRAGMENT));
+      }
+      ImGui::SameLine();
+      if (ImGui::Button("Recompile")) {
+        (*m_Scene)[sceneNameAndElement->first] = new SceneElement(
+                sceneNameAndElement->first,
+                sceneElement->GetShaderSource(ShaderType::VERTEX),
+                sceneElement->GetShaderSource(ShaderType::FRAGMENT));
       }
       ImGui::SameLine();
       //Delete element from tree view

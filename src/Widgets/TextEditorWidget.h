@@ -6,6 +6,7 @@
 #include "Widget.h"
 #include "../Frameworks/Configurations.h"
 #include "../ShaderTypes.h"
+#include "../SceneElement.h"
 
 class TextEditorWidget : public Widget {
   private:
@@ -15,6 +16,11 @@ class TextEditorWidget : public Widget {
     TextEditor::Coordinates m_CursorPosition = m_Editor.GetCursorPosition();
     std::string m_FileToEditPath;
     std::string m_CurrentShaderSource;
+    SceneElement* m_CurrentSceneElement;
+public:
+    void SetCurrentSceneElement(SceneElement *currentSceneElement, ShaderType shaderType);
+
+private:
     ShaderType m_CurrentShaderType = ShaderType::NONE;
 
   public:

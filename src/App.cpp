@@ -11,7 +11,6 @@
 #include "Widgets/ConsoleWidget.h"
 #include "Widgets/TextEditorWidget.h"
 #include "Renderer.h"
-#include "SceneElement.h"
 #include "Widgets/SceneEditorWidget.h"
 #include "SceneLoader.h"
 
@@ -53,6 +52,8 @@ int main() {
     }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_ARB_separate_shader_objects);
+    glEnable(GL_DEPTH_TEST);
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();

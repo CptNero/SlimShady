@@ -16,8 +16,8 @@ class SceneElement {
     ~SceneElement();
 
     std::string GetShaderSourcePath(ShaderType shaderType);
-
     std::string GetShaderSource(ShaderType shaderType);
+    void SetShaderSource(const std::string& source, ShaderType shaderType);
 
     void Draw();
 
@@ -29,14 +29,15 @@ class SceneElement {
     std::unique_ptr<VertexBuffer> m_VertexBuffer;
     std::unique_ptr<Shader> m_Shader;
 
-    glm::mat4 m_Proj, m_View;
-    glm::vec3 m_TranslationA, m_TranslationB;
-
     std::string m_VertexShaderSourcePath;
     std::string m_FragmentShaderSourcePath;
 
     std::string m_VertexShaderSource;
     std::string m_FragmentShaderSource;
+
+    glm::mat4 m_Projection;
+    glm::mat4 m_View;
+    glm::mat4 m_Model;
 
     void InitializeSceneElement();
 };

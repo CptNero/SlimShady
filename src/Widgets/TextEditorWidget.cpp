@@ -1,12 +1,7 @@
 #include <imgui/imgui.h>
 
-#include <fstream>
-#include <filesystem>
-#include <iostream>
-
 #include "TextEditorWidget.h"
 #include "../VertexArray.h"
-#include "ConsoleWidget.h"
 #include "../Frameworks/ShaderFileManager.h"
 
 
@@ -33,6 +28,7 @@ void TextEditorWidget::OnImGuiRender() {
       if (ImGui::MenuItem("Save", "Ctrl-S"))
       {
         ShaderFileManager::UpdateShaderFile(m_FileToEditPath, m_Editor.GetText());
+        m_CurrentSceneElement->SetShaderSource(m_Editor.GetText(), m_CurrentShaderType);
         m_CurrentShaderSource = m_Editor.GetText();
       }
 
@@ -106,6 +102,11 @@ void TextEditorWidget::SetEditorText(const std::string& text, ShaderType shaderT
   m_FileToEditPath = filePath;
   m_CurrentShaderType = shaderType;
   m_Editor.SetText(text);
+}
+
+void TextEditorWidget::SetCurrentSceneElement(SceneElement *currentSceneElement, ShaderType shaderType) {
+  m_CurrentSceneElement = currentSceneElement;
+  m_CurrentShaderType = shaderType;
 }
 
 
