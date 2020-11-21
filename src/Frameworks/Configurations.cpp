@@ -18,6 +18,9 @@ void main()
 }
 )"};
 
+const float Configurations::m_ScreenWidth = 1920;
+const float Configurations::m_ScreenHeight = 1080;
+
 bool Configurations::GetIsDebugEnabled()
 {
   return m_IsDebugEnabled;
@@ -37,4 +40,12 @@ std::string Configurations::GetDefaultVertexShaderSource() {
 
 std::string Configurations::GetDefaultFragmentShaderSource() {
   return m_DefaultFragmentShaderSource;
+}
+
+float Configurations::GetScreenHeight() {
+  return m_ScreenHeight;
+}
+
+float Configurations::GetScreenWidth() {
+  return m_ScreenWidth;
 }

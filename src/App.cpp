@@ -13,9 +13,10 @@
 #include "Renderer.h"
 #include "Widgets/SceneEditorWidget.h"
 #include "SceneLoader.h"
+#include "Camera.h"
 
 int main() {
-  GLFWwindow *window;
+  GLFWwindow* window;
 
   if (!glfwInit())
     return -1;
@@ -33,6 +34,11 @@ int main() {
   }
 
   glfwMakeContextCurrent(window);
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
+  Camera::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+  glfwSetCursorPosCallback(window, Camera::MouseCallback);
+  glfwSetScrollCallback(window, Camera::ScrollCallback);
 
   glfwSwapInterval(1);
 
@@ -75,6 +81,8 @@ int main() {
     ConsoleWidget::LogMessage("Successfully initialized.");
 
     while (!glfwWindowShouldClose(window)) {
+      Camera::ProcessInput(window);
+
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
       renderer->Clear();
 
@@ -100,7 +108,6 @@ int main() {
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
       glfwSwapBuffers(window);
-
       glfwPollEvents();
     }
     delete renderer;

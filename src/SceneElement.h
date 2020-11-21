@@ -15,6 +15,7 @@ class SceneElement {
     SceneElement(const std::string& sceneName, const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
     ~SceneElement();
 
+    std::string GetSceneName();
     std::string GetShaderSourcePath(ShaderType shaderType);
     std::string GetShaderSource(ShaderType shaderType);
     void SetShaderSource(const std::string& source, ShaderType shaderType);
@@ -22,7 +23,7 @@ class SceneElement {
     void Draw();
 
   private:
-    std::string m_sceneName;
+    std::string m_SceneName;
 
     std::unique_ptr<VertexArray> m_VertexArrayObject;
     std::unique_ptr<IndexBuffer> m_IndexBuffer;

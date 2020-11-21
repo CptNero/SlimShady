@@ -1,14 +1,16 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <fstream>
+#include <iostream>
 #include "SceneElement.h"
 #include "Renderer.h"
 #include "Frameworks/Configurations.h"
 #include "Widgets/ConsoleWidget.h"
 #include "Frameworks/ShaderFileManager.h"
+#include "Camera.h"
 
 SceneElement::SceneElement(const std::string& sceneElementName) :
-        m_sceneName(sceneElementName),
+        m_SceneName(sceneElementName),
         m_Model(glm::mat4(1.0f)),
         m_Projection(glm::perspective(glm::radians(45.0f), 1920.0f / 1080.0f, 0.1f, 100.f)),
         m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
@@ -29,10 +31,10 @@ SceneElement::SceneElement(const std::string& sceneElementName) :
 SceneElement::SceneElement(const std::string& sceneName,
                            const std::string& vertexShaderSource,
                            const std::string& fragmentShaderSource) :
-          m_sceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
-          m_Model(glm::mat4(1.0f)),
-          m_Projection(glm::perspective(glm::radians(45.0f), 1920.0f / 1080.0f, 0.1f, 100.f)),
-          m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
+        m_SceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
+        m_Model(glm::mat4(1.0f)),
+        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::GetScreenWidth() / Configurations::GetScreenHeight(), 0.1f, 100.f)),
+        m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
 {
   InitializeSceneElement();
 }
@@ -43,7 +45,9 @@ SceneElement::~SceneElement() = default;
 void SceneElement::Draw() {
   Renderer renderer;
 
-  m_Model = glm::rotate(m_Model, glm::radians(-1.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+  Camera::UpdateCameraTime();
+  m_View = Camera::GetViewMatrix();
+  m_Projection = glm::perspective(glm::radians(Camera::Zoom), Configurations::GetScreenWidth() / Configurations::GetScreenHeight(), 0.1f, 100.f);
   glm::mat4 viewProjectionMatrix = m_Projection * m_View * m_Model;
   m_Shader->Bind();
   m_Shader->SetUniformMat4f("u_MVP", viewProjectionMatrix);
@@ -52,7 +56,7 @@ void SceneElement::Draw() {
 
 void SceneElement::InitializeSceneElement() {
   float positions[] = {
-          -0.5f, -0.5f, 1.0f,
+          -0.5f, -0.5f, 0.0f,
           0.5f, -0.5f, 0.0f,
           0.5f,  0.5f, 0.0f,
           -0.5f, 0.5f, 0.0f,
@@ -106,6 +110,11 @@ void SceneElement::InitializeSceneElement() {
   m_Shader->Bind();
 }
 
+std::string SceneElement::GetSceneName() {
+  return m_SceneName;
+}
+
+
 std::string SceneElement::GetShaderSourcePath(ShaderType shaderType) {
   switch(shaderType) {
     case ShaderType::VERTEX:
@@ -134,4 +143,3 @@ void SceneElement::SetShaderSource(const std::string& source, ShaderType shaderT
       break;
   }
 }
-

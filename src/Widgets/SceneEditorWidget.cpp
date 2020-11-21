@@ -1,4 +1,5 @@
 #include <imgui/imgui.h>
+#include <iostream>
 #include "SceneEditorWidget.h"
 #include "ConsoleWidget.h"
 #include "../Frameworks/ShaderFileManager.h"
@@ -45,6 +46,7 @@ void SceneEditorWidget::OnImGuiRender() {
       }
       ImGui::SameLine();
       if (ImGui::Button("Recompile")) {
+        std::cout << sceneElement->GetShaderSource(ShaderType::FRAGMENT);
         (*m_Scene)[sceneNameAndElement->first] = new SceneElement(
                 sceneNameAndElement->first,
                 sceneElement->GetShaderSource(ShaderType::VERTEX),
