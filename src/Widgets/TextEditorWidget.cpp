@@ -104,8 +104,12 @@ void TextEditorWidget::SetEditorText(const std::string& text, ShaderType shaderT
   m_Editor.SetText(text);
 }
 
-void TextEditorWidget::SetCurrentSceneElement(SceneElement *currentSceneElement, ShaderType shaderType) {
+void TextEditorWidget::SetCurrentSceneElement(SceneElement *currentSceneElement) {
   m_CurrentSceneElement = currentSceneElement;
+
+}
+
+void TextEditorWidget::SetCurrentShaderType(ShaderType shaderType) {
   m_CurrentShaderType = shaderType;
 }
 

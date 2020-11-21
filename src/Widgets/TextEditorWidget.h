@@ -17,11 +17,11 @@ class TextEditorWidget : public Widget {
     std::string m_FileToEditPath;
     std::string m_CurrentShaderSource;
     SceneElement* m_CurrentSceneElement;
+    ShaderType m_CurrentShaderType;
 public:
-    void SetCurrentSceneElement(SceneElement *currentSceneElement, ShaderType shaderType);
+    void SetCurrentSceneElement(SceneElement *currentSceneElement);
 
 private:
-    ShaderType m_CurrentShaderType = ShaderType::NONE;
 
   public:
     TextEditorWidget();
@@ -35,6 +35,8 @@ private:
     void OnRender() override;
     void OnImGuiRender() override;
     void RenderWidget() override;
+
+    void SetCurrentShaderType(ShaderType shaderType);
 };
 
 
