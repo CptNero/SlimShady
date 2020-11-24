@@ -27,9 +27,7 @@ void TextEditorWidget::OnImGuiRender() {
     {
       if (ImGui::MenuItem("Save", "Ctrl-S"))
       {
-        ShaderFileManager::UpdateShaderFile(m_FileToEditPath, m_Editor.GetText());
-        m_CurrentSceneElement->SetShaderSource(m_Editor.GetText(), m_CurrentShaderType);
-        m_CurrentShaderSource = m_Editor.GetText();
+        Save();
       }
 
       ImGui::EndMenu();
@@ -94,6 +92,12 @@ void TextEditorWidget::RenderWidget() {
   ImGui::End();
 }
 
+void TextEditorWidget::Save() {
+  ShaderFileManager::UpdateShaderFile(m_FileToEditPath, m_Editor.GetText());
+  m_CurrentSceneElement->SetShaderSource(m_Editor.GetText(), m_CurrentShaderType);
+  m_CurrentShaderSource = m_Editor.GetText();
+}
+
 std::string TextEditorWidget::GetEditorText() {
   return m_Editor.GetText();
 }
@@ -112,5 +116,4 @@ void TextEditorWidget::SetCurrentSceneElement(SceneElement *currentSceneElement)
 void TextEditorWidget::SetCurrentShaderType(ShaderType shaderType) {
   m_CurrentShaderType = shaderType;
 }
-
 

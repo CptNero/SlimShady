@@ -83,8 +83,6 @@ int main() {
     ConsoleWidget::LogMessage("Successfully initialized.");
 
     while (!glfwWindowShouldClose(window)) {
-      Camera::ProcessCameraInput(window);
-
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
       renderer->Clear();
 
@@ -97,12 +95,14 @@ int main() {
       textEditorWidget->RenderWidget();
       sceneEditorWidget->RenderWidget();
 
+      Camera::ProcessCameraInput(window);
+      InputHandler::ProcessHotkeyInput(window, textEditorWidget, sceneEditorWidget);
 
       glClear(GL_COLOR_BUFFER_BIT);
 
       if (!scene->empty()) {
-        for (auto const &sceneElement2 : *scene) {
-          sceneElement2.second->Draw();
+        for (auto const &sceneElement : *scene) {
+          sceneElement.second->Draw();
         }
       }
 

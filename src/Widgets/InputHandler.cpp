@@ -4,8 +4,20 @@
 #include "../Camera.h"
 
 namespace InputHandler {
-    void ProcessHotkeyInput(GLFWwindow) {
-
+    void ProcessHotkeyInput(
+            GLFWwindow* window,
+            TextEditorWidget* textEditor,
+            SceneEditorWidget* sceneEditor) {
+      if(ImGui::IsAnyWindowFocused()) {
+        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS &&
+            glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+          textEditor->Save();
+        }
+        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS &&
+            glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+          sceneEditor->Recompile();
+        }
+      }
     }
 
     void MouseCallback(GLFWwindow *window, double xpos, double ypos) {

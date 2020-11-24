@@ -12,6 +12,8 @@ class SceneEditorWidget : public Widget {
     char m_SceneElementNameInputBuffer[1024] = "";
     float m_ClearColor[4] = { 0.2f, 0.3f, 0.8f, 1.0f };
     std::unordered_map<std::string, SceneElement*>* m_Scene;
+    SceneElement* m_currentIteratedSceneElement;
+    std::string m_currentIteratedSceneElementName;
     TextEditorWidget* m_TextEditorWidget;
 
   public:
@@ -23,6 +25,7 @@ class SceneEditorWidget : public Widget {
     void OnImGuiRender() override;
     void RenderWidget() override;
 
+    void Recompile();
     void InsertElement();
 };
 

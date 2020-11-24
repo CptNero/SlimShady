@@ -27,32 +27,29 @@ void SceneEditorWidget::OnImGuiRender() {
   //Show scene tree view
   for (auto sceneNameAndElement = m_Scene->begin(); sceneNameAndElement != m_Scene->end(); sceneNameAndElement++) {
     if (ImGui::TreeNode(sceneNameAndElement->first.c_str())) {
-      auto sceneElement = sceneNameAndElement->second;
+      m_currentIteratedSceneElementName = sceneNameAndElement->first;
+      m_currentIteratedSceneElement = sceneNameAndElement->second;
 
       if (ImGui::Button("Vertex")) {
-        m_TextEditorWidget->SetCurrentSceneElement(sceneElement);
+        m_TextEditorWidget->SetCurrentSceneElement(m_currentIteratedSceneElement);
         m_TextEditorWidget->SetCurrentShaderType(ShaderType::VERTEX);
         m_TextEditorWidget->SetEditorText(
-                sceneElement->GetShaderSource(ShaderType::VERTEX),
+                m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
                 ShaderType::VERTEX,
                 ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::VERTEX));
       }
       ImGui::SameLine();
       if (ImGui::Button("Fragment")) {
-        m_TextEditorWidget->SetCurrentSceneElement(sceneElement);
+        m_TextEditorWidget->SetCurrentSceneElement(m_currentIteratedSceneElement);
         m_TextEditorWidget->SetCurrentShaderType(ShaderType::FRAGMENT);
         m_TextEditorWidget->SetEditorText(
-                sceneElement->GetShaderSource(ShaderType::FRAGMENT),
+                m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT),
                 ShaderType::FRAGMENT,
                 ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::FRAGMENT));
       }
       ImGui::SameLine();
       if (ImGui::Button("Recompile")) {
-        (*m_Scene)[sceneNameAndElement->first] = new SceneElement(
-                sceneNameAndElement->first,
-                sceneElement->GetShaderSource(ShaderType::VERTEX),
-                sceneElement->GetShaderSource(ShaderType::FRAGMENT));
-        m_TextEditorWidget->SetCurrentSceneElement((*m_Scene)[sceneNameAndElement->first]);
+        Recompile();
       }
       ImGui::SameLine();
       //Delete element from tree view
@@ -77,6 +74,14 @@ void SceneEditorWidget::RenderWidget() {
   ImGui::Begin("Scene Editor");
   OnImGuiRender();
   ImGui::End();
+}
+
+void SceneEditorWidget::Recompile() {
+  (*m_Scene)[m_currentIteratedSceneElementName] = new SceneElement(
+          m_currentIteratedSceneElementName,
+          m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
+          m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT));
+  m_TextEditorWidget->SetCurrentSceneElement((*m_Scene)[m_currentIteratedSceneElementName]);
 }
 
 void SceneEditorWidget::InsertElement() {
