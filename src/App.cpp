@@ -14,6 +14,7 @@
 #include "Widgets/SceneEditorWidget.h"
 #include "SceneLoader.h"
 #include "Camera.h"
+#include "Widgets/InputHandler.h"
 
 int main() {
   GLFWwindow* window;
@@ -37,8 +38,9 @@ int main() {
   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
   Camera::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
-  glfwSetCursorPosCallback(window, Camera::MouseCallback);
-  glfwSetScrollCallback(window, Camera::ScrollCallback);
+  glfwSetCursorPosCallback(window, InputHandler::MouseCallback);
+  glfwSetScrollCallback(window, InputHandler::ScrollCallback);
+  glfwSetMouseButtonCallback(window, InputHandler::MouseButtonCallback);
 
   glfwSwapInterval(1);
 
@@ -81,7 +83,7 @@ int main() {
     ConsoleWidget::LogMessage("Successfully initialized.");
 
     while (!glfwWindowShouldClose(window)) {
-      Camera::ProcessInput(window);
+      Camera::ProcessCameraInput(window);
 
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
       renderer->Clear();

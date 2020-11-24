@@ -52,11 +52,9 @@ namespace Camera {
 
     extern void ProcessMouseScroll(float yoffset);
 
-    extern void MouseCallback(GLFWwindow *window, double xpos, double ypos);
+    extern void ProcessKeyboard(Camera_Movement direction, float deltaTime);
 
-    extern void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
-
-    extern void ProcessInput(GLFWwindow *window);
+    extern void ProcessCameraInput(GLFWwindow *window);
 
     extern glm::mat4 GetViewMatrix();
 };

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <imgui/imgui.h>
 #include "Camera.h"
 #include "Frameworks/Configurations.h"
 
@@ -18,7 +19,6 @@ namespace Camera {
 
     float lastX;
     float lastY;
-
     float deltaTime;
     float lastFrame;
 
@@ -88,8 +88,8 @@ namespace Camera {
 
     void ProcessMouseScroll(float yoffset) {
       Camera::Zoom -= (float) yoffset;
-      if (Camera::Zoom < 1.0f)
-        Camera::Zoom = 1.0f;
+      if (Camera::Zoom< 1.0f)
+      Camera::Zoom = 1.0f;
       if (Camera::Zoom > 45.0f)
         Camera::Zoom = 45.0f;
     }
@@ -106,46 +106,24 @@ namespace Camera {
         Position += Right * velocity;
     }
 
-    void ProcessInput(GLFWwindow *window) {
-      if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    void ProcessCameraInput(GLFWwindow *window) {
+      if (!ImGui::IsAnyWindowFocused()) {
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+          glfwSetWindowShouldClose(window, true);
 
-      if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        ProcessKeyboard(FORWARD, deltaTime);
-      if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        ProcessKeyboard(BACKWARD, deltaTime);
-      if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        ProcessKeyboard(LEFT, deltaTime);
-      if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        ProcessKeyboard(RIGHT, deltaTime);
-    }
-
-    void MouseCallback(GLFWwindow *window, double xpos, double ypos) {
-      int middleMouseButtonState = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
-      if (middleMouseButtonState == GLFW_PRESS) {
-        if (firstMouse) {
-          lastX = xpos;
-          lastY = ypos;
-          firstMouse = false;
-        }
-
-        float xoffset = xpos - lastX;
-        float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-        lastX = xpos;
-        lastY = ypos;
-
-        Camera::ProcessMouseMovement(xoffset, yoffset);
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+          ProcessKeyboard(FORWARD, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+          ProcessKeyboard(BACKWARD, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+          ProcessKeyboard(LEFT, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+          ProcessKeyboard(RIGHT, deltaTime);
       }
-    }
-
-    void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
-    {
-      ProcessMouseScroll(yoffset);
     }
 
     glm::mat4 GetViewMatrix() {
       return glm::lookAt(Camera::Position, Camera::Position + Camera::Front, Camera::Up);
     }
-}
 
+}
