@@ -14,10 +14,9 @@ class SceneEditorWidget : public Widget {
     std::unordered_map<std::string, SceneElement*>* m_Scene;
     SceneElement* m_currentIteratedSceneElement;
     std::string m_currentIteratedSceneElementName;
-    TextEditorWidget* m_TextEditorWidget;
 
   public:
-    SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene, TextEditorWidget* textEditorWidget);
+    SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene);
     ~SceneEditorWidget();
 
     void OnUpdate(float deltaTime) override;

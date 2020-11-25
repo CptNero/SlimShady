@@ -1,12 +1,15 @@
 #ifndef SLIMSHADY_INPUTHANDLER_H
 #define SLIMSHADY_INPUTHANDLER_H
 
-#include "TextEditorWidget.h"
-#include "SceneEditorWidget.h"
+#include "../Widgets/TextEditorWidget.h"
+#include "../Widgets/SceneEditorWidget.h"
 #include <glfw3.h>
 
 namespace InputHandler {
-    extern void ProcessHotkeyInput(GLFWwindow* window, TextEditorWidget* textEditor, SceneEditorWidget* sceneEditor);
+    extern TextEditorWidget* textEditor;
+    extern SceneEditorWidget* sceneEditor;
+
+    extern void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
     extern void MouseCallback(GLFWwindow *window, double xpos, double ypos);
 

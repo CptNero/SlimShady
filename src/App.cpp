@@ -14,7 +14,8 @@
 #include "Widgets/SceneEditorWidget.h"
 #include "SceneLoader.h"
 #include "Camera.h"
-#include "Widgets/InputHandler.h"
+#include "Frameworks/InputHandler.h"
+#include "Widgets/WidgetBroker.h"
 
 int main() {
   GLFWwindow* window;
@@ -36,11 +37,13 @@ int main() {
 
   glfwMakeContextCurrent(window);
   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+  glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
   Camera::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
   glfwSetCursorPosCallback(window, InputHandler::MouseCallback);
   glfwSetScrollCallback(window, InputHandler::ScrollCallback);
   glfwSetMouseButtonCallback(window, InputHandler::MouseButtonCallback);
+  glfwSetKeyCallback(window, InputHandler::KeyCallback);
 
   glfwSwapInterval(1);
 
@@ -76,9 +79,9 @@ int main() {
 
     auto renderer = new Renderer();
 
-    auto consoleWidget = new ConsoleWidget;
-    auto textEditorWidget = new TextEditorWidget;
-    auto sceneEditorWidget = new SceneEditorWidget(scene, textEditorWidget);
+    Widget* consoleWidget = WidgetBroker::MakeWidget<ConsoleWidget>("Console");
+    Widget* textEditorWidget = WidgetBroker::MakeWidget<TextEditorWidget>("TextEditor");
+    Widget* sceneEditorWidget = WidgetBroker::MakeWidget<SceneEditorWidget>("SceneEditor", scene);
 
     ConsoleWidget::LogMessage("Successfully initialized.");
 
@@ -96,7 +99,6 @@ int main() {
       sceneEditorWidget->RenderWidget();
 
       Camera::ProcessCameraInput(window);
-      InputHandler::ProcessHotkeyInput(window, textEditorWidget, sceneEditorWidget);
 
       glClear(GL_COLOR_BUFFER_BIT);
 
@@ -113,10 +115,7 @@ int main() {
       glfwPollEvents();
     }
     delete renderer;
-    delete consoleWidget;
-    delete textEditorWidget;
     delete sceneLoader;
-    delete sceneEditorWidget;
     delete scene;
   }
 

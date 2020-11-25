@@ -1,7 +1,6 @@
 #include <imgui/imgui.h>
 
 #include "TextEditorWidget.h"
-#include "../VertexArray.h"
 #include "../Frameworks/ShaderFileManager.h"
 
 

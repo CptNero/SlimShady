@@ -2,21 +2,16 @@
 #include <imgui/imgui.h>
 #include "InputHandler.h"
 #include "../Camera.h"
+#include "../Widgets/WidgetBroker.h"
 
 namespace InputHandler {
-    void ProcessHotkeyInput(
-            GLFWwindow* window,
-            TextEditorWidget* textEditor,
-            SceneEditorWidget* sceneEditor) {
-      if(ImGui::IsAnyWindowFocused()) {
-        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS &&
-            glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-          textEditor->Save();
-        }
-        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS &&
-            glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
-          sceneEditor->Recompile();
-        }
+
+    void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+      if (key == GLFW_KEY_S && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
+        ((TextEditorWidget*) WidgetBroker::GetWidget("TextEditor"))->Save();
+      }
+      if (key == GLFW_KEY_R && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
+        ((SceneEditorWidget*) WidgetBroker::GetWidget("SceneEditor"))->Recompile();
       }
     }
 

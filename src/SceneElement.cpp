@@ -14,7 +14,6 @@ SceneElement::SceneElement(const std::string& sceneElementName) :
         m_Projection(glm::perspective(glm::radians(45.0f), 1920.0f / 1080.0f, 0.1f, 100.f)),
         m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
 {
-
   auto vertexShaderFile = ShaderFileManager::CreateShaderFile(sceneElementName, ShaderType::VERTEX);
   auto fragmentShaderFile = ShaderFileManager::CreateShaderFile(sceneElementName, ShaderType::FRAGMENT);
 
@@ -54,6 +53,7 @@ void SceneElement::Draw() {
 }
 
 void SceneElement::InitializeSceneElement() {
+
   float positions[] = {
           -0.5f, -0.5f, 0.0f,
           0.5f, -0.5f, 0.0f,

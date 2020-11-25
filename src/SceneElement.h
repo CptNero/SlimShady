@@ -36,6 +36,9 @@ class SceneElement {
     std::string m_VertexShaderSource;
     std::string m_FragmentShaderSource;
 
+    std::list<glm::vec3> m_Vertices;
+    std::vector<int> m_Indices;
+
     glm::mat4 m_Projection;
     glm::mat4 m_View;
     glm::mat4 m_Model;

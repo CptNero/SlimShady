@@ -3,10 +3,10 @@
 #include "SceneEditorWidget.h"
 #include "ConsoleWidget.h"
 #include "../Frameworks/ShaderFileManager.h"
+#include "WidgetBroker.h"
 
-SceneEditorWidget::SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene, TextEditorWidget* textEditorWidget) :
-        m_Scene(scene),
-        m_TextEditorWidget(textEditorWidget) {}
+SceneEditorWidget::SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene) :
+        m_Scene(scene) {}
 
 SceneEditorWidget::~SceneEditorWidget() = default;
 
@@ -29,20 +29,22 @@ void SceneEditorWidget::OnImGuiRender() {
     if (ImGui::TreeNode(sceneNameAndElement->first.c_str())) {
       m_currentIteratedSceneElementName = sceneNameAndElement->first;
       m_currentIteratedSceneElement = sceneNameAndElement->second;
+      TextEditorWidget* textEditorWidget = (TextEditorWidget*) WidgetBroker::GetWidget("TextEditor");
 
       if (ImGui::Button("Vertex")) {
-        m_TextEditorWidget->SetCurrentSceneElement(m_currentIteratedSceneElement);
-        m_TextEditorWidget->SetCurrentShaderType(ShaderType::VERTEX);
-        m_TextEditorWidget->SetEditorText(
+
+        textEditorWidget->SetCurrentSceneElement(m_currentIteratedSceneElement);
+        textEditorWidget->SetCurrentShaderType(ShaderType::VERTEX);
+        textEditorWidget->SetEditorText(
                 m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
                 ShaderType::VERTEX,
                 ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::VERTEX));
       }
       ImGui::SameLine();
       if (ImGui::Button("Fragment")) {
-        m_TextEditorWidget->SetCurrentSceneElement(m_currentIteratedSceneElement);
-        m_TextEditorWidget->SetCurrentShaderType(ShaderType::FRAGMENT);
-        m_TextEditorWidget->SetEditorText(
+        textEditorWidget->SetCurrentSceneElement(m_currentIteratedSceneElement);
+        textEditorWidget->SetCurrentShaderType(ShaderType::FRAGMENT);
+        textEditorWidget->SetEditorText(
                 m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT),
                 ShaderType::FRAGMENT,
                 ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::FRAGMENT));
@@ -62,6 +64,9 @@ void SceneEditorWidget::OnImGuiRender() {
           break;
         }
       }
+      if (ImGui::TreeNode("Vertices")) {
+
+      }
       ImGui::Separator();
       ImGui::TreePop();
     }
@@ -77,11 +82,13 @@ void SceneEditorWidget::RenderWidget() {
 }
 
 void SceneEditorWidget::Recompile() {
+  TextEditorWidget* textEditorWidget = (TextEditorWidget*) WidgetBroker::GetWidget("TextEditor");
+
   (*m_Scene)[m_currentIteratedSceneElementName] = new SceneElement(
           m_currentIteratedSceneElementName,
           m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
           m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT));
-  m_TextEditorWidget->SetCurrentSceneElement((*m_Scene)[m_currentIteratedSceneElementName]);
+  textEditorWidget->SetCurrentSceneElement((*m_Scene)[m_currentIteratedSceneElementName]);
 }
 
 void SceneEditorWidget::InsertElement() {
