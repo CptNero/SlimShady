@@ -1,4 +1,3 @@
-#include <iostream>
 #include <imgui/imgui.h>
 #include "InputHandler.h"
 #include "../Camera.h"

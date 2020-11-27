@@ -9,6 +9,13 @@
 class WidgetBroker {
 
 public:
+    WidgetBroker() = default;
+    ~WidgetBroker() {
+      for(auto widgetPointer = m_Widgets.begin(); widgetPointer != m_Widgets.end(); widgetPointer++) {
+        widgetPointer->second.release();
+      }
+    }
+
     template <typename WidgetType, typename... Arguments>
     static Widget* MakeWidget(std::string id, Arguments&&... ArgumentValues) {
       assert(m_Widgets.count(id) != 1);
@@ -22,5 +29,6 @@ public:
 private:
     inline static std::map<std::string, std::unique_ptr<Widget>> m_Widgets;
 };
+
 
 #endif //SLIMSHADY_WIDGETBROKER_H

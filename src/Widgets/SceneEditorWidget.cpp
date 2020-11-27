@@ -6,7 +6,8 @@
 #include "WidgetBroker.h"
 
 SceneEditorWidget::SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene) :
-        m_Scene(scene) {}
+        m_Scene(scene) {
+}
 
 SceneEditorWidget::~SceneEditorWidget() = default;
 
@@ -64,9 +65,36 @@ void SceneEditorWidget::OnImGuiRender() {
           break;
         }
       }
-      if (ImGui::TreeNode("Vertices")) {
 
-      }
+      CollectionEditor<glm::vec3>(std::move(m_Vertices), "Vertices", std::move(m_VertexInput), std::move(m_VertexEditIndex),
+        [&]() {
+          ImGui::PushItemWidth(150);
+          ImGui::InputFloat3("Vertices", glm::value_ptr(m_VertexInput), "%.2f");
+      },
+        [&]() {
+          std::for_each(m_Vertices.begin(), m_Vertices.end(), [&](std::pair<int, glm::vec3> entry)  {
+              ImGui::Text("Vertex#%d: %.2f, %.2f, %.2f", entry.first, entry.second.x, entry.second.y, entry.second.z);
+              if (entry.first == m_VertexEditIndex) {
+                ImGui::SameLine();
+                ImGui::Text("*");
+              }
+          });
+      });
+
+      CollectionEditor<int>(std::move(m_Indices), "Indices", std::move(m_IndexInput), std::move(m_IndexEditIndex), [&]() {
+        ImGui::SameLine();
+        ImGui::PushItemWidth(75);
+        ImGui::InputInt("Vertices", &m_IndexInput);
+      }, [&]() {
+          std::for_each(m_Indices.begin(), m_Indices.end(), [&](std::pair<int, int> entry)  {
+              ImGui::Text("Index#%d: %d", entry.first, entry.second);
+              if (entry.first == m_IndexEditIndex) {
+                ImGui::SameLine();
+                ImGui::Text("*");
+              }
+          });
+      });
+
       ImGui::Separator();
       ImGui::TreePop();
     }
