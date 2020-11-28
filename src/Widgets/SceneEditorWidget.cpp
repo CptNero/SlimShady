@@ -81,11 +81,13 @@ void SceneEditorWidget::OnImGuiRender() {
           });
       });
 
-      CollectionEditor<int>(std::move(m_Indices), "Indices", std::move(m_IndexInput), std::move(m_IndexEditIndex), [&]() {
+      CollectionEditor<int>(std::move(m_Indices), "Indices", std::move(m_IndexInput), std::move(m_IndexEditIndex),
+      [&]() {
         ImGui::SameLine();
         ImGui::PushItemWidth(75);
         ImGui::InputInt("Vertices", &m_IndexInput);
-      }, [&]() {
+      },
+      [&]() {
           std::for_each(m_Indices.begin(), m_Indices.end(), [&](std::pair<int, int> entry)  {
               ImGui::Text("Index#%d: %d", entry.first, entry.second);
               if (entry.first == m_IndexEditIndex) {
@@ -115,7 +117,9 @@ void SceneEditorWidget::Recompile() {
   (*m_Scene)[m_currentIteratedSceneElementName] = new SceneElement(
           m_currentIteratedSceneElementName,
           m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
-          m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT));
+          m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT),
+          m_Vertices,
+          m_Indices);
   textEditorWidget->SetCurrentSceneElement((*m_Scene)[m_currentIteratedSceneElementName]);
 }
 

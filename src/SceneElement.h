@@ -3,6 +3,7 @@
 
 
 #include <memory>
+#include <map>
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
@@ -11,8 +12,12 @@
 
 class SceneElement {
   public:
-    explicit SceneElement(const std::string& sceneElementName);
-    SceneElement(const std::string& sceneName, const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
+    SceneElement(const std::string& sceneName,
+                 const std::string& vertexShaderSource,
+                 const std::string& fragmentShaderSource,
+                 std::map<int, glm::vec3> vertices,
+                 std::map<int, int> indices);
+    SceneElement(const std::string& sceneElementName);
     ~SceneElement();
 
     std::string GetSceneName();
@@ -36,8 +41,8 @@ class SceneElement {
     std::string m_VertexShaderSource;
     std::string m_FragmentShaderSource;
 
-    std::list<glm::vec3> m_Vertices;
-    std::vector<int> m_Indices;
+    std::vector<float> m_Vertices;
+    std::vector<unsigned int> m_Indices;
 
     glm::mat4 m_Projection;
     glm::mat4 m_View;

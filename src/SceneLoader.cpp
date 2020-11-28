@@ -14,8 +14,9 @@ void SceneLoader::InitializeScene()
     std::string filePath = file.path().string();
     std::string fileName = ShaderFileManager::GetShaderFileNameFromPath(filePath);
 
-    (*m_Scene)[fileName] = new SceneElement(fileName,
-                                            ShaderFileManager::ReadShaderFile(ShaderFileManager::GetShaderFilePath(fileName, ShaderType::VERTEX)),
-                                            ShaderFileManager::ReadShaderFile(ShaderFileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)));
+    //TODO: Implement saving and loading for vertices and indices.
+//    (*m_Scene)[fileName] = new SceneElement(fileName,
+//                                            ShaderFileManager::ReadShaderFile(ShaderFileManager::GetShaderFilePath(fileName, ShaderType::VERTEX)),
+//                                            ShaderFileManager::ReadShaderFile(ShaderFileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)));
   }
 }

@@ -18,13 +18,13 @@ class SceneEditorWidget : public Widget {
     SceneElement* m_currentIteratedSceneElement;
     std::string m_currentIteratedSceneElementName;
 
-    std::map<int, int> m_Indices;
-    int m_IndexInput = 0;
-    uint32_t m_IndexEditIndex = 0;
-
     std::map<int, glm::vec3> m_Vertices;
     glm::vec3 m_VertexInput = glm::vec3(0.0f,0.0f,0.0f);
     uint32_t m_VertexEditIndex = 0;
+
+    std::map<int, int> m_Indices;
+    int m_IndexInput = 0;
+    uint32_t m_IndexEditIndex = 0;
 
   public:
     SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene);
