@@ -10,35 +10,35 @@ class VertexBufferLayout
 private:
     struct VertexBufferElement
     {
-        unsigned int type;
-        unsigned int count;
-        unsigned char normalized;
+        uint32_t type;
+        uint32_t count;
+        uint32_t normalized;
     };
     std::vector<VertexBufferElement> m_Elements;
-    unsigned int m_Stride;
+    uint32_t m_Stride;
 public:
     VertexBufferLayout()
             : m_Stride(0) {}
 
     template<typename T>
-    void Push(unsigned int count) {}
+    void Push(uint32_t count) {}
 
     template<>
-    void Push<float>(unsigned int count)
+    void Push<float>(uint32_t count)
     {
       m_Elements.push_back({ GL_FLOAT, count, GL_FALSE });
       m_Stride += GetSizeOfType(GL_FLOAT) * count;
     }
 
     template<>
-    void Push<unsigned int>(unsigned int count)
+    void Push<uint32_t>(uint32_t count)
     {
       m_Elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
       m_Stride += GetSizeOfType((GL_UNSIGNED_INT)) * count;
     }
 
     template<>
-    void Push<unsigned char>(unsigned int count)
+    void Push<unsigned char>(uint32_t count)
     {
       m_Elements.push_back({ GL_UNSIGNED_BYTE, count, GL_TRUE });
       m_Stride += GetSizeOfType(GL_UNSIGNED_BYTE) * count;
@@ -46,9 +46,9 @@ public:
 
     std::vector<VertexBufferElement> GetElements() const;
 
-    unsigned int GetStride() const;
+    uint32_t GetStride() const;
 
-    static unsigned int GetSizeOfType(unsigned int type)
+    static uint32_t GetSizeOfType(uint32_t type)
     {
       switch (type)
       {

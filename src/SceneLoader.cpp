@@ -2,7 +2,7 @@
 #include <filesystem>
 #include "SceneLoader.h"
 #include "Frameworks/Configurations.h"
-#include "Frameworks/ShaderFileManager.h"
+#include "Frameworks/FileManager.h"
 
 SceneLoader::SceneLoader(std::unordered_map<std::string, SceneElement*>* scene) : m_Scene(scene) {}
 
@@ -12,11 +12,13 @@ void SceneLoader::InitializeScene()
 {
   for (const auto& file : std::filesystem::directory_iterator(Configurations::GetVertexShaderFilesPath())) {
     std::string filePath = file.path().string();
-    std::string fileName = ShaderFileManager::GetShaderFileNameFromPath(filePath);
+    std::string fileName = FileManager::GetShaderFileNameFromPath(filePath);
 
-    //TODO: Implement saving and loading for vertices and indices.
-//    (*m_Scene)[fileName] = new SceneElement(fileName,
-//                                            ShaderFileManager::ReadShaderFile(ShaderFileManager::GetShaderFilePath(fileName, ShaderType::VERTEX)),
-//                                            ShaderFileManager::ReadShaderFile(ShaderFileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)));
+    (*m_Scene)[fileName] = new SceneElement(fileName,
+                                            FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::VERTEX)),
+                                            FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)),
+                                            FileManager::ConvertStringToVertexAttributeFile(
+                                                    FileManager::ReadFile(
+                                                            FileManager::GetVertexAttributeFilePath(fileName))));
   }
 }

@@ -1,0 +1,13 @@
+#ifndef SLIMSHADY_VERTEXATTRIBUTETYPE_H
+#define SLIMSHADY_VERTEXATTRIBUTETYPE_H
+
+enum class VertexAttributeType : uint32_t
+{
+    NONE = 0,
+    VERTEX = 1,
+    INDEX = 2,
+    COLOR = 3,
+    TEXTURE = 4
+};
+
+#endif //SLIMSHADY_VERTEXATTRIBUTETYPE_H

@@ -19,9 +19,9 @@ Shader::~Shader()
   glDeleteProgram(m_RendererID);
 }
 
-unsigned int Shader::CompileShader(unsigned int type, const std::string &source)
+uint32_t Shader::CompileShader(uint32_t type, const std::string &source)
 {
-  unsigned int id = glCreateShader(type);
+  uint32_t id = glCreateShader(type);
   const char *src = source.c_str();
   glShaderSource(id, 1, &src, nullptr);
   glCompileShader(id);
@@ -46,11 +46,11 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string &source)
   return id;
 }
 
-unsigned int Shader::CreateShader(const std::string &vertexShader, const std::string &fragmentShader)
+uint32_t Shader::CreateShader(const std::string &vertexShader, const std::string &fragmentShader)
 {
-  unsigned int program = glCreateProgram();
-  unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-  unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+  uint32_t program = glCreateProgram();
+  uint32_t vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
+  uint32_t fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
 
   glAttachShader(program, vs);
   glAttachShader(program, fs);
@@ -108,6 +108,10 @@ int Shader::GetUniformLocation(const std::string &name)
 void Shader::SetUniform1i(const std::string &name, int value)
 {
   glUniform1i(GetUniformLocation(name), value);
+}
+
+void Shader::SetUniform1f(const std::string &name, float value) {
+  glUniform1f(GetUniformLocation(name), value);
 }
 
 void Shader::SetUniformMat4f(const std::string &name, const glm::mat4 &matrix)

@@ -6,20 +6,22 @@
 #define SLIMSHADY_INDEXBUFFER_H
 
 
+#include <cstdint>
+
 class IndexBuffer
 {
 private:
-    unsigned int m_RendererID;
-    unsigned int m_Count;
-    unsigned int m_Size;
+    uint32_t m_RendererID;
+    uint32_t m_Count;
+    uint32_t m_Size;
 public:
-    IndexBuffer(const unsigned int* data, unsigned int count);
+    IndexBuffer(const uint32_t* data, uint32_t count);
     ~IndexBuffer();
 
     void Bind() const;
     void UnBind() const;
 
-    inline unsigned int GetCount() const {return m_Count;}
+    inline uint32_t GetCount() const {return m_Count;}
 };
 
 

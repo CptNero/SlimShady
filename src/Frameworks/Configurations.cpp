@@ -18,6 +18,15 @@ void main()
 }
 )"};
 
+const std::string Configurations::m_VertexAttributeFilePath = R"(src/Resources/VertexAttributes\)";
+
+const std::string Configurations::m_DefaultVertexAttributeData = R"(
+#vertex
+0.0 0.0 0.0
+#index
+0
+)";
+
 const float Configurations::m_ScreenWidth = 1920;
 const float Configurations::m_ScreenHeight = 1080;
 
@@ -40,6 +49,14 @@ std::string Configurations::GetDefaultVertexShaderSource() {
 
 std::string Configurations::GetDefaultFragmentShaderSource() {
   return m_DefaultFragmentShaderSource;
+}
+
+std::string Configurations::GetVertexAttributeFilePath() {
+  return m_VertexAttributeFilePath;
+}
+
+std::string Configurations::GetDefaultVertexAttributeData() {
+  return m_DefaultVertexAttributeData;
 }
 
 float Configurations::GetScreenHeight() {

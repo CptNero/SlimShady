@@ -5,7 +5,7 @@
 #include <ImGuiColorTextEdit/TextEditor.h>
 #include "Widget.h"
 #include "../Frameworks/Configurations.h"
-#include "../ShaderTypes.h"
+#include "../ShaderType.h"
 #include "../SceneElement.h"
 
 class TextEditorWidget : public Widget {

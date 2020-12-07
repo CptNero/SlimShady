@@ -2,7 +2,6 @@
 #include <iostream>
 #include "SceneEditorWidget.h"
 #include "ConsoleWidget.h"
-#include "../Frameworks/ShaderFileManager.h"
 #include "WidgetBroker.h"
 
 SceneEditorWidget::SceneEditorWidget(std::unordered_map<std::string, SceneElement*>* scene) :
@@ -39,7 +38,7 @@ void SceneEditorWidget::OnImGuiRender() {
         textEditorWidget->SetEditorText(
                 m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
                 ShaderType::VERTEX,
-                ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::VERTEX));
+                FileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::VERTEX));
       }
       ImGui::SameLine();
       if (ImGui::Button("Fragment")) {
@@ -48,16 +47,19 @@ void SceneEditorWidget::OnImGuiRender() {
         textEditorWidget->SetEditorText(
                 m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT),
                 ShaderType::FRAGMENT,
-                ShaderFileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::FRAGMENT));
+                FileManager::GetShaderFilePath(sceneNameAndElement->first, ShaderType::FRAGMENT));
       }
       ImGui::SameLine();
+      if (ImGui::Button("Save")) {
+        Save();
+      }
       if (ImGui::Button("Recompile")) {
         Recompile();
       }
       ImGui::SameLine();
       //Delete element from tree view
       if (ImGui::Button("Delete")) {
-        ShaderFileManager::DeleteVertexAndFragmentShaderFilesyName(sceneNameAndElement->first);
+        FileManager::DeleteVertexAndFragmentShaderFilesByName(sceneNameAndElement->first);
         sceneNameAndElement = m_Scene->erase(sceneNameAndElement);
 
         if (sceneNameAndElement == m_Scene->end()) {
@@ -66,36 +68,75 @@ void SceneEditorWidget::OnImGuiRender() {
         }
       }
 
-      CollectionEditor<glm::vec3>(std::move(m_Vertices), "Vertices", std::move(m_VertexInput), std::move(m_VertexEditIndex),
-        [&]() {
-          ImGui::PushItemWidth(150);
-          ImGui::InputFloat3("Vertices", glm::value_ptr(m_VertexInput), "%.2f");
-      },
-        [&]() {
-          std::for_each(m_Vertices.begin(), m_Vertices.end(), [&](std::pair<int, glm::vec3> entry)  {
-              ImGui::Text("Vertex#%d: %.2f, %.2f, %.2f", entry.first, entry.second.x, entry.second.y, entry.second.z);
-              if (entry.first == m_VertexEditIndex) {
-                ImGui::SameLine();
-                ImGui::Text("*");
-              }
-          });
-      });
-
-      CollectionEditor<int>(std::move(m_Indices), "Indices", std::move(m_IndexInput), std::move(m_IndexEditIndex),
-      [&]() {
+      if (ImGui::TreeNode("Vertices")) {
+        if (ImGui::Button("Add")) {
+          m_currentIteratedSceneElement->m_Vertices
+          .insert(m_currentIteratedSceneElement->m_Vertices.end(), {0.0f, 0.0f, 0.0f});
+        }
         ImGui::SameLine();
-        ImGui::PushItemWidth(75);
-        ImGui::InputInt("Vertices", &m_IndexInput);
-      },
-      [&]() {
-          std::for_each(m_Indices.begin(), m_Indices.end(), [&](std::pair<int, int> entry)  {
-              ImGui::Text("Index#%d: %d", entry.first, entry.second);
-              if (entry.first == m_IndexEditIndex) {
-                ImGui::SameLine();
-                ImGui::Text("*");
-              }
-          });
-      });
+        if (ImGui::Button("Delete")) {
+          m_currentIteratedSceneElement->m_Vertices.pop_back();
+          m_currentIteratedSceneElement->m_Vertices.pop_back();
+          m_currentIteratedSceneElement->m_Vertices.pop_back();
+        }
+
+        for(int i = 0; i < m_currentIteratedSceneElement->m_Vertices.size(); i+=3) {
+          std::stringstream label;
+          label << "Vertex #"  << i / 3 << std::endl;
+          ImGui::InputFloat3(label.str().c_str(), &m_currentIteratedSceneElement->m_Vertices[i]);
+        }
+
+        ImGui::TreePop();
+      }
+
+      if (ImGui::TreeNode("Indices")) {
+        if (ImGui::Button("Add")) {
+          m_currentIteratedSceneElement->m_Indices.emplace_back(0);
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Delete")) {
+          m_currentIteratedSceneElement->m_Indices.pop_back();
+        }
+
+        for (int i = 0; i < m_currentIteratedSceneElement->m_Indices.size(); i++) {
+          std::stringstream label;
+          label << "Index #"  << i << std::endl;
+          ImGui::InputInt(label.str().c_str(), (int*)&m_currentIteratedSceneElement->m_Indices[i]);
+
+        }
+        ImGui::TreePop();
+      }
+
+//      CollectionEditor<glm::vec3>(std::move(m_Vertices), "Vertices", std::move(m_VertexInput), std::move(m_VertexEditIndex),
+//        [&]() {
+//          ImGui::PushItemWidth(150);
+//          ImGui::InputFloat3("Vertices", glm::value_ptr(m_VertexInput), "%.2f");
+//      },
+//        [&]() {
+//          std::for_each(m_Vertices.begin(), m_Vertices.end(), [&](std::pair<int, glm::vec3> entry)  {
+//              ImGui::Text("Vertex#%d: %.2f, %.2f, %.2f", entry.first, entry.second.x, entry.second.y, entry.second.z);
+//              if (entry.first == m_VertexEditIndex) {
+//                ImGui::SameLine();
+//                ImGui::Text("*");
+//              }
+//          });
+//      });
+//
+//      CollectionEditor<int>(std::move(m_Indices), "Indices", std::move(m_IndexInput), std::move(m_IndexEditIndex),
+//      [&]() {
+//        ImGui::SameLine();
+//        ImGui::PushItemWidth(75);
+//        ImGui::InputInt("Vertices", &m_IndexInput);
+//      },
+//      [&]() {
+//          std::for_each(m_Indices.begin(), m_Indices.end(), [&](std::pair<int, int> entry)  {
+//              ImGui::Text("Index#%d: %d", entry.first, entry.second);
+//              if (entry.first == m_IndexEditIndex) {
+//                ImGui::SameLine();
+//                ImGui::Text("*");
+//              }
+//          });
+//      });
 
       ImGui::Separator();
       ImGui::TreePop();
@@ -118,9 +159,27 @@ void SceneEditorWidget::Recompile() {
           m_currentIteratedSceneElementName,
           m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
           m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT),
-          m_Vertices,
-          m_Indices);
+          m_currentIteratedSceneElement->m_Vertices,
+          m_currentIteratedSceneElement->m_Indices);
   textEditorWidget->SetCurrentSceneElement((*m_Scene)[m_currentIteratedSceneElementName]);
+}
+
+void SceneEditorWidget::Save() {
+  FileManager::VertexAttributeFile vertexAttributeFile;
+  std::vector<float> vertices = m_currentIteratedSceneElement->GetVertices();
+  std::vector<glm::vec3> vertexVector;
+
+  for(int i = 0; i < m_currentIteratedSceneElement->GetVertices().size(); i+=3) {
+    vertexVector.emplace_back(glm::vec3(vertices[i],vertices[i+1],vertices[i+2]));
+  }
+
+  vertexAttributeFile.Vertices = vertexVector;
+  vertexAttributeFile.Indices = m_currentIteratedSceneElement->GetIndices();
+
+  std::string vertexAttributeFileAsString = FileManager::ConvertVertexAttributeFileToString(vertexAttributeFile);
+  FileManager::UpdateFile(
+          FileManager::GetVertexAttributeFilePath(m_currentIteratedSceneElement->GetSceneName()),
+          vertexAttributeFileAsString);
 }
 
 void SceneEditorWidget::InsertElement() {

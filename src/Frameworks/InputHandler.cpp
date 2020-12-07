@@ -18,14 +18,14 @@ namespace InputHandler {
       int middleMouseButtonState = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
 
       if (middleMouseButtonState == GLFW_PRESS && !ImGui::IsAnyWindowHovered()) {
+        float xoffset = xpos - Camera::lastX;
+        float yoffset = Camera::lastY - ypos; // reversed since y-coordinates go from bottom to top
+
         if (Camera::firstMouse) {
           Camera::lastX = xpos;
           Camera::lastY = ypos;
           Camera::firstMouse = false;
         }
-
-        float xoffset = xpos - Camera::lastX;
-        float yoffset = Camera::lastY - ypos; // reversed since y-coordinates go from bottom to top
 
         Camera::lastX = xpos;
         Camera::lastY = ypos;

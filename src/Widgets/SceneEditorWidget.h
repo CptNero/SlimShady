@@ -36,6 +36,7 @@ class SceneEditorWidget : public Widget {
     void RenderWidget() override;
 
     void Recompile();
+    void Save();
     void InsertElement();
 
     template<typename CollectionType>

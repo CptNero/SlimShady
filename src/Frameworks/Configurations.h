@@ -12,6 +12,9 @@ class Configurations {
     static const std::string m_DefaultVertexShaderSource;
     static const std::string m_DefaultFragmentShaderSource;
 
+    static const std::string m_VertexAttributeFilePath;
+    static const std::string m_DefaultVertexAttributeData;
+
     static const float m_ScreenWidth;
     static const float m_ScreenHeight;
 
@@ -21,6 +24,10 @@ class Configurations {
     static std::string GetFragmentShaderFilesPath();
     static std::string GetDefaultVertexShaderSource();
     static std::string GetDefaultFragmentShaderSource();
+
+    static std::string GetVertexAttributeFilePath();
+    static std::string GetDefaultVertexAttributeData();
+
     static float GetScreenHeight();
     static float GetScreenWidth();
 };

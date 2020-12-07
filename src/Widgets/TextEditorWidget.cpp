@@ -1,7 +1,7 @@
 #include <imgui/imgui.h>
 
 #include "TextEditorWidget.h"
-#include "../Frameworks/ShaderFileManager.h"
+#include "../Frameworks/FileManager.h"
 
 
 TextEditorWidget::TextEditorWidget()
@@ -92,7 +92,7 @@ void TextEditorWidget::RenderWidget() {
 }
 
 void TextEditorWidget::Save() {
-  ShaderFileManager::UpdateShaderFile(m_FileToEditPath, m_Editor.GetText());
+  FileManager::UpdateFile(m_FileToEditPath, m_Editor.GetText());
   m_CurrentSceneElement->SetShaderSource(m_Editor.GetText(), m_CurrentShaderType);
   m_CurrentShaderSource = m_Editor.GetText();
 }

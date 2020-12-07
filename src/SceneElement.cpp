@@ -2,12 +2,31 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <fstream>
 #include <algorithm>
+#include <iostream>
 #include "SceneElement.h"
 #include "Renderer.h"
 #include "Frameworks/Configurations.h"
 #include "Widgets/ConsoleWidget.h"
-#include "Frameworks/ShaderFileManager.h"
 #include "Camera.h"
+
+SceneElement::SceneElement(const std::string &sceneName,
+                           const std::string &vertexShaderSource,
+                           const std::string &fragmentShaderSource,
+                           FileManager::VertexAttributeFile vertexAttributeFile) :
+        m_SceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
+        m_Model(glm::mat4(1.0f)),
+        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::GetScreenWidth() / Configurations::GetScreenHeight(), 0.1f, 100.f)),
+        m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
+{
+  std::for_each(vertexAttributeFile.Vertices.begin(), vertexAttributeFile.Vertices.end(), [&](glm::vec3 vertex) {
+      m_Vertices.emplace_back(vertex.x);
+      m_Vertices.emplace_back(vertex.y);
+      m_Vertices.emplace_back(vertex.z);
+  });
+
+  m_Indices = vertexAttributeFile.Indices;
+  InitializeSceneElement();
+}
 
 SceneElement::SceneElement(const std::string& sceneElementName) :
         m_SceneName(sceneElementName),
@@ -15,19 +34,26 @@ SceneElement::SceneElement(const std::string& sceneElementName) :
         m_Projection(glm::perspective(glm::radians(45.0f), 1920.0f / 1080.0f, 0.1f, 100.f)),
         m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
 {
-  auto vertexShaderFile = ShaderFileManager::CreateShaderFile(sceneElementName, ShaderType::VERTEX);
-  auto fragmentShaderFile = ShaderFileManager::CreateShaderFile(sceneElementName, ShaderType::FRAGMENT);
+  auto vertexShaderFile = FileManager::CreateShaderFile(sceneElementName, ShaderType::VERTEX);
+  auto fragmentShaderFile = FileManager::CreateShaderFile(sceneElementName, ShaderType::FRAGMENT);
+  auto vertexAttributeFile = FileManager::CreateVertexAttributeFile(sceneElementName);
 
   m_VertexShaderSource = vertexShaderFile.ShaderSource;
   m_VertexShaderSourcePath = vertexShaderFile.Path;
+  m_VertexAttributePath = vertexAttributeFile.Path;
 
   m_FragmentShaderSource = fragmentShaderFile.ShaderSource;
   m_FragmentShaderSourcePath = fragmentShaderFile.Path;
 
-  m_Vertices.emplace_back(0.0f);
-  m_Vertices.emplace_back(0.0f);
-  m_Vertices.emplace_back(0.0f);
-  m_Indices.emplace_back(0);
+  std::for_each(vertexAttributeFile.Vertices.begin(), vertexAttributeFile.Vertices.end(), [&](glm::vec3 vertex) {
+      m_Vertices.emplace_back(vertex.x);
+      m_Vertices.emplace_back(vertex.y);
+      m_Vertices.emplace_back(vertex.z);
+  });
+
+  std::for_each(vertexAttributeFile.Indices.begin(), vertexAttributeFile.Indices.end(), [&](uint32_t index) {
+      m_Indices.emplace_back(index);
+  });
 
   InitializeSceneElement();
 }
@@ -35,23 +61,15 @@ SceneElement::SceneElement(const std::string& sceneElementName) :
 SceneElement::SceneElement(const std::string& sceneName,
                            const std::string& vertexShaderSource,
                            const std::string& fragmentShaderSource,
-                           std::map<int, glm::vec3> vertices,
-                           std::map<int, int> indices) :
+                           std::vector<float> vertices,
+                           std::vector<uint32_t> indices) :
         m_SceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
         m_Model(glm::mat4(1.0f)),
         m_Projection(glm::perspective(glm::radians(500.0f), Configurations::GetScreenWidth() / Configurations::GetScreenHeight(), 0.1f, 100.f)),
-        m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
+        m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f))),
+        m_Vertices(vertices),
+        m_Indices(indices)
 {
-  std::for_each(vertices.begin(), vertices.end(), [&](std::pair<int, glm::vec3> vertex) {
-      m_Vertices.emplace_back(vertex.second.x);
-      m_Vertices.emplace_back(vertex.second.y);
-      m_Vertices.emplace_back(vertex.second.z);
-  });
-
-  std::for_each(indices.begin(), indices.end(), [&](std::pair<int, int> index) {
-      m_Indices.emplace_back(index.second);
-  });
-
   InitializeSceneElement();
 }
 
@@ -67,7 +85,9 @@ void SceneElement::Draw() {
   glm::mat4 viewProjectionMatrix = m_Projection * m_View * m_Model;
   m_Shader->Bind();
   m_Shader->SetUniformMat4f("u_MVP", viewProjectionMatrix);
-  m_Shader->SetUniform1i("u_Time", glfwGetTime());
+  m_Shader->SetUniform1f("u_Time", glfwGetTime());
+  m_Shader->SetUniform1i("u_Width", Configurations::GetScreenWidth());
+  m_Shader->SetUniform1i("u_Height", Configurations::GetScreenHeight());
   renderer.Draw(*m_VertexArrayObject, *m_IndexBuffer, *m_Shader);
 }
 
@@ -80,7 +100,7 @@ void SceneElement::InitializeSceneElement() {
           -0.5f, 0.5f, 0.0f,
   };
 
-  unsigned int indices[] = {
+  uint32_t indices[] = {
           0, 1, 2,
           2, 3, 0
   };
@@ -119,7 +139,7 @@ void SceneElement::InitializeSceneElement() {
     ConsoleWidget::LogMessage("Successfully added buffer to vertex array object.");
   }
 
-  m_IndexBuffer = std::make_unique<IndexBuffer>((unsigned int*)&m_Indices[0], m_Indices.size());
+  m_IndexBuffer = std::make_unique<IndexBuffer>((uint32_t*)&m_Indices[0], m_Indices.size());
 
   if (Configurations::GetIsDebugEnabled()) {
     ConsoleWidget::LogMessage("Successfully initialized index buffer");
@@ -160,4 +180,12 @@ void SceneElement::SetShaderSource(const std::string& source, ShaderType shaderT
       m_FragmentShaderSource = source;
       break;
   }
+}
+
+std::vector<float> SceneElement::GetVertices() {
+  return m_Vertices;
+}
+
+std::vector<uint32_t> SceneElement::GetIndices() {
+  return m_Indices;
 }

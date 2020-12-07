@@ -8,21 +8,37 @@
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
 #include "Shader.h"
-#include "ShaderTypes.h"
+#include "ShaderType.h"
+#include "Frameworks/FileManager.h"
 
 class SceneElement {
   public:
+    // Constructor used for loading from file
     SceneElement(const std::string& sceneName,
                  const std::string& vertexShaderSource,
                  const std::string& fragmentShaderSource,
-                 std::map<int, glm::vec3> vertices,
-                 std::map<int, int> indices);
+                 FileManager::VertexAttributeFile vertexAttributeFile);
+
+    // Constructor used for recompiling element
+    SceneElement(const std::string& sceneName,
+                 const std::string& vertexShaderSource,
+                 const std::string& fragmentShaderSource,
+                 std::vector<float> vertices,
+                 std::vector<uint32_t > indices);
+
+    // Constructor used for creating new element from scratch
     SceneElement(const std::string& sceneElementName);
     ~SceneElement();
 
     std::string GetSceneName();
     std::string GetShaderSourcePath(ShaderType shaderType);
     std::string GetShaderSource(ShaderType shaderType);
+    std::vector<float> GetVertices();
+    std::vector<uint32_t> GetIndices();
+
+    std::vector<float> m_Vertices;
+    std::vector<uint32_t> m_Indices;
+
     void SetShaderSource(const std::string& source, ShaderType shaderType);
 
     void Draw();
@@ -41,8 +57,7 @@ class SceneElement {
     std::string m_VertexShaderSource;
     std::string m_FragmentShaderSource;
 
-    std::vector<float> m_Vertices;
-    std::vector<unsigned int> m_Indices;
+    std::string m_VertexAttributePath;
 
     glm::mat4 m_Projection;
     glm::mat4 m_View;
