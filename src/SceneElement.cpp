@@ -2,7 +2,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <fstream>
 #include <algorithm>
-#include <iostream>
 #include "SceneElement.h"
 #include "Renderer.h"
 #include "Frameworks/Configurations.h"
@@ -15,7 +14,7 @@ SceneElement::SceneElement(const std::string &sceneName,
                            FileManager::VertexAttributeFile vertexAttributeFile) :
         m_SceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
         m_Model(glm::mat4(1.0f)),
-        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::GetScreenWidth() / Configurations::GetScreenHeight(), 0.1f, 100.f)),
+        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::ScreenWidth / Configurations::ScreenHeight, 0.1f, 100.f)),
         m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
 {
   std::for_each(vertexAttributeFile.Vertices.begin(), vertexAttributeFile.Vertices.end(), [&](glm::vec3 vertex) {
@@ -65,7 +64,7 @@ SceneElement::SceneElement(const std::string& sceneName,
                            std::vector<uint32_t> indices) :
         m_SceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
         m_Model(glm::mat4(1.0f)),
-        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::GetScreenWidth() / Configurations::GetScreenHeight(), 0.1f, 100.f)),
+        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::ScreenWidth / Configurations::ScreenHeight, 0.1f, 100.f)),
         m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f))),
         m_Vertices(vertices),
         m_Indices(indices)
@@ -81,13 +80,13 @@ void SceneElement::Draw() {
 
   Camera::UpdateCameraTime();
   m_View = Camera::GetViewMatrix();
-  m_Projection = glm::perspective(glm::radians(Camera::Zoom), Configurations::GetScreenWidth() / Configurations::GetScreenHeight(), 0.1f, 100.f);
+  m_Projection = glm::perspective(glm::radians(Camera::Zoom), Configurations::ScreenWidth / Configurations::ScreenHeight, 0.1f, 100.f);
   glm::mat4 viewProjectionMatrix = m_Projection * m_View * m_Model;
   m_Shader->Bind();
   m_Shader->SetUniformMat4f("u_MVP", viewProjectionMatrix);
   m_Shader->SetUniform1f("u_Time", glfwGetTime());
-  m_Shader->SetUniform1i("u_Width", Configurations::GetScreenWidth());
-  m_Shader->SetUniform1i("u_Height", Configurations::GetScreenHeight());
+  m_Shader->SetUniform1i("u_Width", Configurations::ScreenWidth);
+  m_Shader->SetUniform1i("u_Height", Configurations::ScreenHeight);
   renderer.Draw(*m_VertexArrayObject, *m_IndexBuffer, *m_Shader);
 }
 
@@ -110,38 +109,38 @@ void SceneElement::InitializeSceneElement() {
 
   m_Shader = std::make_unique<Shader>(m_VertexShaderSource, m_FragmentShaderSource);
 
-  if (Configurations::GetIsDebugEnabled()) {
+  if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully created shader.");
   }
 
   m_VertexArrayObject = std::make_unique<VertexArray>();
 
-  if (Configurations::GetIsDebugEnabled()) {
+  if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully created vertex array.");
   }
 
   m_VertexBuffer = std::make_unique<VertexBuffer>((float*)&m_Vertices[0], (m_Vertices.size() / 3) * 3 * sizeof(float));
 
-  if (Configurations::GetIsDebugEnabled()) {
+  if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully created vertex buffer.");
   }
 
   VertexBufferLayout layout;
   layout.Push<float>(3);
 
-  if (Configurations::GetIsDebugEnabled()) {
+  if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully initialized vertex layout");
   }
 
   m_VertexArrayObject->AddBuffer(*m_VertexBuffer, layout);
 
-  if (Configurations::GetIsDebugEnabled()) {
+  if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully added buffer to vertex array object.");
   }
 
   m_IndexBuffer = std::make_unique<IndexBuffer>((uint32_t*)&m_Indices[0], m_Indices.size());
 
-  if (Configurations::GetIsDebugEnabled()) {
+  if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully initialized index buffer");
   }
 

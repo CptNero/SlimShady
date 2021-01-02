@@ -10,7 +10,7 @@ SceneLoader::~SceneLoader() = default;
 
 void SceneLoader::InitializeScene()
 {
-  for (const auto& file : std::filesystem::directory_iterator(Configurations::GetVertexShaderFilesPath())) {
+  for (const auto& file : std::filesystem::directory_iterator(Configurations::VertexShaderFilesPath)) {
     std::string filePath = file.path().string();
     std::string fileName = FileManager::GetShaderFileNameFromPath(filePath);
 

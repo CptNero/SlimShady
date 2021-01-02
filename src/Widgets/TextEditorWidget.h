@@ -7,9 +7,12 @@
 #include "../Frameworks/Configurations.h"
 #include "../ShaderType.h"
 #include "../SceneElement.h"
+#include "../Frameworks/Context.h"
 
 class TextEditorWidget : public Widget {
   private:
+    Context& context;
+
     TextEditor m_Editor;
     TextEditor::LanguageDefinition m_Lang = TextEditor::LanguageDefinition::GLSL();
     TextEditor::ErrorMarkers m_Markers;
@@ -24,7 +27,7 @@ public:
 private:
 
   public:
-    TextEditorWidget();
+    TextEditorWidget(Context& context);
     ~TextEditorWidget();
 
     std::string GetEditorText();

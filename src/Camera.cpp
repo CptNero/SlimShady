@@ -31,8 +31,8 @@ namespace Camera {
       Camera::Yaw = YAW;
       Camera::Pitch = PITCH;
 
-      Camera::lastX = Configurations::GetScreenWidth() / 2.0f;
-      Camera::lastY = Configurations::GetScreenHeight() / 2.0f;
+      Camera::lastX = Configurations::ScreenWidth / 2.0f;
+      Camera::lastY = Configurations::ScreenHeight / 2.0f;
 
       Camera::MovementSpeed = 2.5f;
       Camera::MouseSensitivity = 0.1f;

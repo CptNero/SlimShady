@@ -15,7 +15,6 @@
 #include "SceneLoader.h"
 #include "Camera.h"
 #include "Frameworks/InputHandler.h"
-#include "Widgets/WidgetBroker.h"
 
 int main() {
   GLFWwindow* window;
@@ -55,7 +54,7 @@ int main() {
   {
     glEnable(GL_BLEND);
 
-    if (Configurations::GetIsDebugEnabled()) {
+    if (Configurations::IsDebugEnabled) {
       glEnable(GL_DEBUG_OUTPUT);
       glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
       glDisable(GL_DEBUG_SEVERITY_NOTIFICATION);
@@ -73,15 +72,20 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
+    auto widgetBroker = new WidgetBroker();
+
     auto scene = new std::unordered_map<std::string, SceneElement*>;
     auto sceneLoader = new SceneLoader(scene);
     sceneLoader->InitializeScene();
 
+    auto* context = new Context(*widgetBroker);
+    glfwSetWindowUserPointer(window, context);
+
     auto renderer = new Renderer();
 
-    Widget* consoleWidget = WidgetBroker::MakeWidget<ConsoleWidget>("Console");
-    Widget* textEditorWidget = WidgetBroker::MakeWidget<TextEditorWidget>("TextEditor");
-    Widget* sceneEditorWidget = WidgetBroker::MakeWidget<SceneEditorWidget>("SceneEditor", scene);
+    Widget* consoleWidget = widgetBroker->MakeWidget<ConsoleWidget>("Console", *context);
+    Widget* textEditorWidget = widgetBroker->MakeWidget<TextEditorWidget>("TextEditor", *context);
+    Widget* sceneEditorWidget = widgetBroker->MakeWidget<SceneEditorWidget>("SceneEditor", *context, scene);
 
     ConsoleWidget::LogMessage("Successfully initialized.");
 
@@ -117,6 +121,8 @@ int main() {
     delete renderer;
     delete sceneLoader;
     delete scene;
+    delete widgetBroker;
+    delete context;
   }
 
   ImGui_ImplOpenGL3_Shutdown();

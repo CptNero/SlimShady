@@ -35,7 +35,7 @@ uint32_t Shader::CompileShader(uint32_t type, const std::string &source)
     char *message = (char *) alloca(length * sizeof(char));
     glGetShaderInfoLog(id, length, &length, message);
 
-    if (Configurations::GetIsDebugEnabled()) {
+    if (Configurations::IsDebugEnabled) {
       ConsoleWidget::LogMessage(std::string("Failed to compile ") +
       (type == GL_VERTEX_SHADER ? "vertex " : "fragment ") + "shader" + "\n" + message);
     }
@@ -61,7 +61,7 @@ uint32_t Shader::CreateShader(const std::string &vertexShader, const std::string
   glGetProgramiv(program, GL_LINK_STATUS, &success);
 
   if(!success) {
-    if (Configurations::GetIsDebugEnabled()) {
+    if (Configurations::IsDebugEnabled) {
       ConsoleWidget::LogMessage(std::string("Failed to create shader: ") + infoLog);
     }
   }
@@ -96,7 +96,7 @@ int Shader::GetUniformLocation(const std::string &name)
 
   int location = glGetUniformLocation(m_RendererID, name.c_str());
   if (location == -1)
-    if (Configurations::GetIsDebugEnabled()) {
+    if (Configurations::IsDebugEnabled) {
       ConsoleWidget::LogMessage(std::string("Couldn't find uniform " + name));
     }
 

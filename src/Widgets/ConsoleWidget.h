@@ -3,14 +3,17 @@
 
 
 #include "Widget.h"
+#include "../Frameworks/Context.h"
 
 class ConsoleWidget : public Widget {
   private:
+    Context& context;
+
     static char* m_ConsoleLogBuffer;
     char m_ConsoleInputBuffer[1024] = "";
 
   public:
-    ConsoleWidget();
+    ConsoleWidget(Context& context);
     ~ConsoleWidget();
 
     void OnUpdate(float deltaTime) override;

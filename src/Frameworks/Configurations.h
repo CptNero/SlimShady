@@ -4,32 +4,37 @@
 
 #include <string>
 
-class Configurations {
-  private:
-    static bool m_IsDebugEnabled;
-    static const std::string m_VertexShaderFilesPath;
-    static const std::string m_FragmentShaderFilesPath;
-    static const std::string m_DefaultVertexShaderSource;
-    static const std::string m_DefaultFragmentShaderSource;
+namespace Configurations {
+    namespace {
+        bool IsDebugEnabled = true;
+        const std::string VertexShaderFilesPath = R"(src/Resources/VertexShaders\)";
+        const std::string FragmentShaderFilesPath = R"(src/Resources/FragmentShaders\)";
+        const std::string DefaultVertexShaderSource = R"(
+#version 330 core
 
-    static const std::string m_VertexAttributeFilePath;
-    static const std::string m_DefaultVertexAttributeData;
+void main()
+{
+}
+)";
+        const std::string DefaultFragmentShaderSource = R"(
+#version 330 core
 
-    static const float m_ScreenWidth;
-    static const float m_ScreenHeight;
+void main()
+{
+}
+)";
 
-  public:
-    static bool GetIsDebugEnabled();
-    static std::string GetVertexShaderFilesPath();
-    static std::string GetFragmentShaderFilesPath();
-    static std::string GetDefaultVertexShaderSource();
-    static std::string GetDefaultFragmentShaderSource();
+        const std::string VertexAttributeFilePath = R"(src/Resources/VertexAttributes\)";
+        const std::string DefaultVertexAttributeData = R"(
+#vertex
+0.0 0.0 0.0
+#index
+0
+)";
 
-    static std::string GetVertexAttributeFilePath();
-    static std::string GetDefaultVertexAttributeData();
-
-    static float GetScreenHeight();
-    static float GetScreenWidth();
+        float ScreenWidth = 1920.0f;
+        float ScreenHeight = 1080.0f;
+    }
 };
 
 #endif //SLIMSHADY_CONFIGURATIONS_H

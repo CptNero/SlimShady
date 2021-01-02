@@ -1,10 +1,9 @@
 #include <imgui/imgui.h>
 
 #include "TextEditorWidget.h"
-#include "../Frameworks/FileManager.h"
 
 
-TextEditorWidget::TextEditorWidget()
+TextEditorWidget::TextEditorWidget(Context& context) : context(context)
 {
   m_Editor.SetLanguageDefinition(m_Lang);
   m_Editor.SetErrorMarkers(m_Markers);

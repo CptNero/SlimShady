@@ -1,7 +1,6 @@
 #ifndef SLIMSHADY_WIDGET_H
 #define SLIMSHADY_WIDGET_H
 
-
 class Widget {
   public:
     Widget();

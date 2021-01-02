@@ -8,7 +8,7 @@
 
 char* ConsoleWidget::m_ConsoleLogBuffer = "";
 
-ConsoleWidget::ConsoleWidget() = default;
+ConsoleWidget::ConsoleWidget(Context& context) : context(context) {}
 
 ConsoleWidget::~ConsoleWidget()
 {
