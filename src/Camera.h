@@ -42,7 +42,7 @@ namespace Camera {
     extern float deltaTime;
     extern float lastFrame;
 
-    extern bool firstMouse;
+    extern bool isHeld;
 
     extern void UpdateCameraTime();
 

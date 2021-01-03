@@ -22,7 +22,7 @@ namespace Camera {
     float deltaTime;
     float lastFrame;
 
-    bool firstMouse;
+    bool isHeld;
 
     void Camera(glm::vec3 position, glm::vec3 up) {
       Camera::Position = position;
@@ -41,7 +41,7 @@ namespace Camera {
       Camera::deltaTime = 0.0f;
       Camera::lastFrame = 0.0f;
 
-      Camera::firstMouse = true;
+      Camera::isHeld = false;
 
       UpdateCameraVectors();
     }

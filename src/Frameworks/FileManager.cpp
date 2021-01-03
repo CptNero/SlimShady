@@ -5,8 +5,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "FileManager.h"
-#include "Configurations.h"
 #include "../Widgets/ConsoleWidget.h"
+#include "Configurations.h"
 
 FileManager::FileManager() = default;
 
@@ -14,9 +14,9 @@ FileManager::~FileManager() = default;
 
 std::string FileManager::GetShaderFilePath(const std::string &sceneElementName, ShaderType shaderType) {
   if (shaderType == ShaderType::VERTEX) {
-    return Configurations::GetVertexShaderFilesPath() + sceneElementName + "_Vertex.shader";
+    return Configurations::VertexShaderFilesPath + sceneElementName + "_Vertex.shader";
   } else if(shaderType == ShaderType::FRAGMENT) {
-    return Configurations::GetFragmentShaderFilesPath() + sceneElementName + "_Fragment.shader";
+    return Configurations::FragmentShaderFilesPath + sceneElementName + "_Fragment.shader";
   }
 }
 
@@ -32,11 +32,11 @@ FileManager::ShaderFile FileManager::CreateShaderFile(const std::string &sceneEl
 
   switch(shaderType){
     case ShaderType::VERTEX:
-      filePath = Configurations::GetVertexShaderFilesPath();
+      filePath = Configurations::VertexShaderFilesPath;
       filePath += sceneElementName + "_Vertex.shader";
       break;
     case ShaderType::FRAGMENT:
-      filePath = Configurations::GetFragmentShaderFilesPath();
+      filePath = Configurations::FragmentShaderFilesPath;
       filePath += sceneElementName + "_Fragment.shader";
       break;
   }
@@ -47,13 +47,13 @@ FileManager::ShaderFile FileManager::CreateShaderFile(const std::string &sceneEl
   switch(shaderType){
     case ShaderType::VERTEX:
       shaderFile.ShaderType = ShaderType::VERTEX;
-      shaderFile.ShaderSource = Configurations::GetDefaultVertexShaderSource();
+      shaderFile.ShaderSource = Configurations::DefaultVertexShaderSource;
 
       shaderFileStream << shaderFile.ShaderSource;
       break;
     case ShaderType::FRAGMENT:
       shaderFile.ShaderType = ShaderType::FRAGMENT;
-      shaderFile.ShaderSource = Configurations::GetDefaultFragmentShaderSource();
+      shaderFile.ShaderSource = Configurations::DefaultFragmentShaderSource;
 
       shaderFileStream << shaderFile.ShaderSource;
       break;
@@ -99,7 +99,7 @@ void FileManager::DeleteVertexAndFragmentShaderFilesByName(const std::string &sc
 }
 
 std::string FileManager::GetVertexAttributeFilePath(const std::string& sceneElementName) {
-  return Configurations::GetVertexAttributeFilePath() + sceneElementName + ".vrtxatrb";
+  return Configurations::VertexAttributeFilePath + sceneElementName + ".vrtxatrb";
 }
 
 std::string FileManager::GetVertexAttributeFileNameFromPath(const std::string &filePath) {
@@ -110,12 +110,12 @@ FileManager::VertexAttributeFile FileManager::CreateVertexAttributeFile(const st
   VertexAttributeFile vertexAttributeFile;
   std::string filePath;
 
-  filePath += Configurations::GetVertexAttributeFilePath() + sceneElementName + ".vrtxatrb";
+  filePath += Configurations::VertexAttributeFilePath + sceneElementName + ".vrtxatrb";
   vertexAttributeFile.Path = filePath;
 
   std::ofstream shaderFileStream(filePath);
 
-  shaderFileStream << Configurations::GetDefaultVertexAttributeData();
+  shaderFileStream << Configurations::DefaultVertexAttributeData;
 
   shaderFileStream.close();
 

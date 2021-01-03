@@ -6,9 +6,6 @@
 #include <glfw3.h>
 
 namespace InputHandler {
-    extern TextEditorWidget* textEditor;
-    extern SceneEditorWidget* sceneEditor;
-
     extern void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
     extern void MouseCallback(GLFWwindow *window, double xpos, double ypos);
