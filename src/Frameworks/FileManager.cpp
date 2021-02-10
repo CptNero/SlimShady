@@ -46,13 +46,13 @@ FileManager::ShaderFile FileManager::CreateShaderFile(const std::string &sceneEl
 
   switch(shaderType){
     case ShaderType::VERTEX:
-      shaderFile.ShaderType = ShaderType::VERTEX;
+      shaderFile.Type = ShaderType::VERTEX;
       shaderFile.ShaderSource = Configurations::DefaultVertexShaderSource;
 
       shaderFileStream << shaderFile.ShaderSource;
       break;
     case ShaderType::FRAGMENT:
-      shaderFile.ShaderType = ShaderType::FRAGMENT;
+      shaderFile.Type = ShaderType::FRAGMENT;
       shaderFile.ShaderSource = Configurations::DefaultFragmentShaderSource;
 
       shaderFileStream << shaderFile.ShaderSource;

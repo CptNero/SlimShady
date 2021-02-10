@@ -13,11 +13,10 @@
 
 class SceneEditorWidget : public Widget {
   private:
-    Context& context;
+    Context m_Context;
 
     char m_SceneElementNameInputBuffer[1024] = "";
     float m_ClearColor[4] = { 0.2f, 0.3f, 0.8f, 1.0f };
-    std::unordered_map<std::string, SceneElement*>* m_Scene;
     SceneElement* m_currentIteratedSceneElement;
     std::string m_currentIteratedSceneElementName;
 
@@ -26,7 +25,7 @@ class SceneEditorWidget : public Widget {
     std::map<int, int> m_Indices;
 
   public:
-    SceneEditorWidget(Context& context, std::unordered_map<std::string, SceneElement*>* scene);
+    SceneEditorWidget(Context context);
     ~SceneEditorWidget();
 
     void OnUpdate(float deltaTime) override;

@@ -43,19 +43,19 @@ NULL=nul
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Neresis\CLionProjects\SlimShady
+CMAKE_SOURCE_DIR = C:\Users\ravai\CLionProjects\SlimShady
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -74,7 +74,7 @@ edit_cache\fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	echo >nul && "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -84,9 +84,9 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Neresis\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ravai\CLionProjects\SlimShady\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -343,6 +343,33 @@ src\App.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\App.cpp.s
 .PHONY : src\App.cpp.s
 
+src\Camera.obj: src\Camera.cpp.obj
+
+.PHONY : src\Camera.obj
+
+# target to build an object file
+src\Camera.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Camera.cpp.obj
+.PHONY : src\Camera.cpp.obj
+
+src\Camera.i: src\Camera.cpp.i
+
+.PHONY : src\Camera.i
+
+# target to preprocess a source file
+src\Camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Camera.cpp.i
+.PHONY : src\Camera.cpp.i
+
+src\Camera.s: src\Camera.cpp.s
+
+.PHONY : src\Camera.s
+
+# target to generate assembly for a file
+src\Camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Camera.cpp.s
+.PHONY : src\Camera.cpp.s
+
 src\Frameworks\Clock.obj: src\Frameworks\Clock.cpp.obj
 
 .PHONY : src\Frameworks\Clock.obj
@@ -370,32 +397,32 @@ src\Frameworks\Clock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Clock.cpp.s
 .PHONY : src\Frameworks\Clock.cpp.s
 
-src\Frameworks\Configurations.obj: src\Frameworks\Configurations.cpp.obj
+src\Frameworks\Context.obj: src\Frameworks\Context.cpp.obj
 
-.PHONY : src\Frameworks\Configurations.obj
+.PHONY : src\Frameworks\Context.obj
 
 # target to build an object file
-src\Frameworks\Configurations.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.obj
-.PHONY : src\Frameworks\Configurations.cpp.obj
+src\Frameworks\Context.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Context.cpp.obj
+.PHONY : src\Frameworks\Context.cpp.obj
 
-src\Frameworks\Configurations.i: src\Frameworks\Configurations.cpp.i
+src\Frameworks\Context.i: src\Frameworks\Context.cpp.i
 
-.PHONY : src\Frameworks\Configurations.i
+.PHONY : src\Frameworks\Context.i
 
 # target to preprocess a source file
-src\Frameworks\Configurations.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.i
-.PHONY : src\Frameworks\Configurations.cpp.i
+src\Frameworks\Context.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Context.cpp.i
+.PHONY : src\Frameworks\Context.cpp.i
 
-src\Frameworks\Configurations.s: src\Frameworks\Configurations.cpp.s
+src\Frameworks\Context.s: src\Frameworks\Context.cpp.s
 
-.PHONY : src\Frameworks\Configurations.s
+.PHONY : src\Frameworks\Context.s
 
 # target to generate assembly for a file
-src\Frameworks\Configurations.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Configurations.cpp.s
-.PHONY : src\Frameworks\Configurations.cpp.s
+src\Frameworks\Context.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\Context.cpp.s
+.PHONY : src\Frameworks\Context.cpp.s
 
 src\Frameworks\ErrorHandler.obj: src\Frameworks\ErrorHandler.cpp.obj
 
@@ -424,32 +451,59 @@ src\Frameworks\ErrorHandler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ErrorHandler.cpp.s
 .PHONY : src\Frameworks\ErrorHandler.cpp.s
 
-src\Frameworks\ShaderFileManager.obj: src\Frameworks\ShaderFileManager.cpp.obj
+src\Frameworks\FileManager.obj: src\Frameworks\FileManager.cpp.obj
 
-.PHONY : src\Frameworks\ShaderFileManager.obj
+.PHONY : src\Frameworks\FileManager.obj
 
 # target to build an object file
-src\Frameworks\ShaderFileManager.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.obj
-.PHONY : src\Frameworks\ShaderFileManager.cpp.obj
+src\Frameworks\FileManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\FileManager.cpp.obj
+.PHONY : src\Frameworks\FileManager.cpp.obj
 
-src\Frameworks\ShaderFileManager.i: src\Frameworks\ShaderFileManager.cpp.i
+src\Frameworks\FileManager.i: src\Frameworks\FileManager.cpp.i
 
-.PHONY : src\Frameworks\ShaderFileManager.i
+.PHONY : src\Frameworks\FileManager.i
 
 # target to preprocess a source file
-src\Frameworks\ShaderFileManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.i
-.PHONY : src\Frameworks\ShaderFileManager.cpp.i
+src\Frameworks\FileManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\FileManager.cpp.i
+.PHONY : src\Frameworks\FileManager.cpp.i
 
-src\Frameworks\ShaderFileManager.s: src\Frameworks\ShaderFileManager.cpp.s
+src\Frameworks\FileManager.s: src\Frameworks\FileManager.cpp.s
 
-.PHONY : src\Frameworks\ShaderFileManager.s
+.PHONY : src\Frameworks\FileManager.s
 
 # target to generate assembly for a file
-src\Frameworks\ShaderFileManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\ShaderFileManager.cpp.s
-.PHONY : src\Frameworks\ShaderFileManager.cpp.s
+src\Frameworks\FileManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\FileManager.cpp.s
+.PHONY : src\Frameworks\FileManager.cpp.s
+
+src\Frameworks\InputHandler.obj: src\Frameworks\InputHandler.cpp.obj
+
+.PHONY : src\Frameworks\InputHandler.obj
+
+# target to build an object file
+src\Frameworks\InputHandler.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\InputHandler.cpp.obj
+.PHONY : src\Frameworks\InputHandler.cpp.obj
+
+src\Frameworks\InputHandler.i: src\Frameworks\InputHandler.cpp.i
+
+.PHONY : src\Frameworks\InputHandler.i
+
+# target to preprocess a source file
+src\Frameworks\InputHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\InputHandler.cpp.i
+.PHONY : src\Frameworks\InputHandler.cpp.i
+
+src\Frameworks\InputHandler.s: src\Frameworks\InputHandler.cpp.s
+
+.PHONY : src\Frameworks\InputHandler.s
+
+# target to generate assembly for a file
+src\Frameworks\InputHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SlimShady.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\SlimShady.dir\src\Frameworks\InputHandler.cpp.s
+.PHONY : src\Frameworks\InputHandler.cpp.s
 
 src\IndexBuffer.obj: src\IndexBuffer.cpp.obj
 
@@ -808,18 +862,24 @@ help:
 	@echo ... src/App.obj
 	@echo ... src/App.i
 	@echo ... src/App.s
+	@echo ... src/Camera.obj
+	@echo ... src/Camera.i
+	@echo ... src/Camera.s
 	@echo ... src/Frameworks/Clock.obj
 	@echo ... src/Frameworks/Clock.i
 	@echo ... src/Frameworks/Clock.s
-	@echo ... src/Frameworks/Configurations.obj
-	@echo ... src/Frameworks/Configurations.i
-	@echo ... src/Frameworks/Configurations.s
+	@echo ... src/Frameworks/Context.obj
+	@echo ... src/Frameworks/Context.i
+	@echo ... src/Frameworks/Context.s
 	@echo ... src/Frameworks/ErrorHandler.obj
 	@echo ... src/Frameworks/ErrorHandler.i
 	@echo ... src/Frameworks/ErrorHandler.s
-	@echo ... src/Frameworks/ShaderFileManager.obj
-	@echo ... src/Frameworks/ShaderFileManager.i
-	@echo ... src/Frameworks/ShaderFileManager.s
+	@echo ... src/Frameworks/FileManager.obj
+	@echo ... src/Frameworks/FileManager.i
+	@echo ... src/Frameworks/FileManager.s
+	@echo ... src/Frameworks/InputHandler.obj
+	@echo ... src/Frameworks/InputHandler.i
+	@echo ... src/Frameworks/InputHandler.s
 	@echo ... src/IndexBuffer.obj
 	@echo ... src/IndexBuffer.i
 	@echo ... src/IndexBuffer.s

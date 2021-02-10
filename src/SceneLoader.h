@@ -3,13 +3,14 @@
 
 
 #include "SceneElement.h"
+#include "Frameworks/Context.h"
 
 class SceneLoader {
   private:
-    std::unordered_map<std::string, SceneElement*>* m_Scene;
+    Context m_Context;
 
   public:
-    explicit SceneLoader(std::unordered_map<std::string, SceneElement*>* scene);
+    explicit SceneLoader(Context context);
     ~SceneLoader();
 
     void InitializeScene();

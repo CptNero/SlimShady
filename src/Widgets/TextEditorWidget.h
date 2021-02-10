@@ -22,7 +22,7 @@ class TextEditorWidget : public Widget {
     SceneElement* m_CurrentSceneElement;
     ShaderType m_CurrentShaderType;
 public:
-    void SetCurrentSceneElement(SceneElement *currentSceneElement);
+    void SetCurrentSceneElement(SceneElement* currentSceneElement);
 
 private:
 

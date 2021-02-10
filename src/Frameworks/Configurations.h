@@ -7,8 +7,8 @@
 namespace Configurations {
     namespace {
         bool IsDebugEnabled = true;
-        const std::string VertexShaderFilesPath = R"(src/Resources/VertexShaders\)";
-        const std::string FragmentShaderFilesPath = R"(src/Resources/FragmentShaders\)";
+        const std::string VertexShaderFilesPath = R"(Resources/VertexShaders\)";
+        const std::string FragmentShaderFilesPath = R"(Resources/FragmentShaders\)";
         const std::string DefaultVertexShaderSource = R"(
 #version 330 core
 
@@ -24,7 +24,7 @@ void main()
 }
 )";
 
-        const std::string VertexAttributeFilePath = R"(src/Resources/VertexAttributes\)";
+        const std::string VertexAttributeFilePath = R"(Resources/VertexAttributes\)";
         const std::string DefaultVertexAttributeData = R"(
 #vertex
 0.0 0.0 0.0

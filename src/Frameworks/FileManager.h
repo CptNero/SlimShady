@@ -17,7 +17,7 @@ public:
         std::string Name;
         std::string ShaderSource;
         std::string Path;
-        ShaderType ShaderType;
+        ShaderType Type;
     };
     struct VertexAttributeFile {
         std::string Path;

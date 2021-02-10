@@ -4,7 +4,7 @@
 #include "Frameworks/Configurations.h"
 #include "Frameworks/FileManager.h"
 
-SceneLoader::SceneLoader(std::unordered_map<std::string, SceneElement*>* scene) : m_Scene(scene) {}
+SceneLoader::SceneLoader(Context context) : m_Context(context) {}
 
 SceneLoader::~SceneLoader() = default;
 
@@ -14,11 +14,12 @@ void SceneLoader::InitializeScene()
     std::string filePath = file.path().string();
     std::string fileName = FileManager::GetShaderFileNameFromPath(filePath);
 
-    (*m_Scene)[fileName] = new SceneElement(fileName,
-                                            FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::VERTEX)),
-                                            FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)),
-                                            FileManager::ConvertStringToVertexAttributeFile(
-                                                    FileManager::ReadFile(
-                                                            FileManager::GetVertexAttributeFilePath(fileName))));
+    m_Context.scene[fileName] = new SceneElement(fileName,
+                                        FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::VERTEX)),
+                                        FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)),
+                                        FileManager::ConvertStringToVertexAttributeFile(
+                                                FileManager::ReadFile(
+                                                        FileManager::GetVertexAttributeFilePath(fileName))));
+
   }
 }

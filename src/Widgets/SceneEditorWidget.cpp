@@ -4,8 +4,8 @@
 #include "ConsoleWidget.h"
 #include "WidgetBroker.h"
 
-SceneEditorWidget::SceneEditorWidget(Context& context, std::unordered_map<std::string, SceneElement*>* scene) :
-        m_Scene(scene), context(context) {
+SceneEditorWidget::SceneEditorWidget(Context context) :
+        m_Context(context) {
 }
 
 SceneEditorWidget::~SceneEditorWidget() = default;
@@ -25,11 +25,11 @@ void SceneEditorWidget::OnImGuiRender() {
     InsertElement();
   }
   //Show scene tree view
-  for (auto sceneNameAndElement = m_Scene->begin(); sceneNameAndElement != m_Scene->end(); sceneNameAndElement++) {
+  for (auto sceneNameAndElement = m_Context.scene.begin(); sceneNameAndElement != m_Context.scene.end(); sceneNameAndElement++) {
     if (ImGui::TreeNode(sceneNameAndElement->first.c_str())) {
       m_currentIteratedSceneElementName = sceneNameAndElement->first;
       m_currentIteratedSceneElement = sceneNameAndElement->second;
-      TextEditorWidget* textEditorWidget = (TextEditorWidget*) context.widgetBroker.GetWidget("TextEditor");
+      TextEditorWidget* textEditorWidget = (TextEditorWidget*) m_Context.widgetBroker.GetWidget("TextEditor");
 
       if (ImGui::Button("Vertex")) {
 
@@ -60,9 +60,9 @@ void SceneEditorWidget::OnImGuiRender() {
       //Delete element from tree view
       if (ImGui::Button("Delete")) {
         FileManager::DeleteVertexAndFragmentShaderFilesByName(sceneNameAndElement->first);
-        sceneNameAndElement = m_Scene->erase(sceneNameAndElement);
+        sceneNameAndElement = m_Context.scene.erase(sceneNameAndElement);
 
-        if (sceneNameAndElement == m_Scene->end()) {
+        if (sceneNameAndElement == m_Context.scene.end()) {
           ImGui::TreePop();
           break;
         }
@@ -122,15 +122,15 @@ void SceneEditorWidget::RenderWidget() {
 }
 
 void SceneEditorWidget::Recompile() {
-  TextEditorWidget* textEditorWidget = (TextEditorWidget*) context.widgetBroker.GetWidget("TextEditor");
+  TextEditorWidget* textEditorWidget = (TextEditorWidget*) m_Context.widgetBroker.GetWidget("TextEditor");
 
-  (*m_Scene)[m_currentIteratedSceneElementName] = new SceneElement(
+  m_Context.scene[m_currentIteratedSceneElementName] = new SceneElement(
           m_currentIteratedSceneElementName,
           m_currentIteratedSceneElement->GetShaderSource(ShaderType::VERTEX),
           m_currentIteratedSceneElement->GetShaderSource(ShaderType::FRAGMENT),
           m_currentIteratedSceneElement->m_Vertices,
           m_currentIteratedSceneElement->m_Indices);
-  textEditorWidget->SetCurrentSceneElement((*m_Scene)[m_currentIteratedSceneElementName]);
+  textEditorWidget->SetCurrentSceneElement(m_Context.scene[m_currentIteratedSceneElementName]);
 }
 
 void SceneEditorWidget::Save() {
@@ -157,5 +157,5 @@ void SceneEditorWidget::InsertElement() {
     return;
   }
 
-  m_Scene->insert(std::make_pair(m_SceneElementNameInputBuffer, new SceneElement(m_SceneElementNameInputBuffer)));
+  m_Context.scene.insert(std::make_pair(m_SceneElementNameInputBuffer, new SceneElement(m_SceneElementNameInputBuffer)));
 }

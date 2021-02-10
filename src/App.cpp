@@ -57,7 +57,6 @@ int main() {
     if (Configurations::IsDebugEnabled) {
       glEnable(GL_DEBUG_OUTPUT);
       glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-      glDisable(GL_DEBUG_SEVERITY_NOTIFICATION);
       glDebugMessageCallback(ErrorHandler::MessageCallback, nullptr);
     }
 
@@ -72,42 +71,45 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
-    auto widgetBroker = new WidgetBroker();
+    WidgetBroker widgetBroker;
 
-    auto scene = new std::unordered_map<std::string, SceneElement*>;
-    auto sceneLoader = new SceneLoader(scene);
-    sceneLoader->InitializeScene();
+    std::unordered_map<std::string, SceneElement*> scene;
 
-    auto* context = new Context(*widgetBroker);
-    glfwSetWindowUserPointer(window, context);
+    Context context(widgetBroker, scene);
+    glfwSetWindowUserPointer(window, &context);
 
-    auto renderer = new Renderer();
+    SceneLoader sceneLoader(context);
+    sceneLoader.InitializeScene();
 
-    Widget* consoleWidget = widgetBroker->MakeWidget<ConsoleWidget>("Console", *context);
-    Widget* textEditorWidget = widgetBroker->MakeWidget<TextEditorWidget>("TextEditor", *context);
-    Widget* sceneEditorWidget = widgetBroker->MakeWidget<SceneEditorWidget>("SceneEditor", *context, scene);
+    Renderer renderer;
+
+    std::list<Widget*> widgetCollection;
+
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<ConsoleWidget>("Console", context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<TextEditorWidget>("TextEditor", context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>("SceneEditor", context));
 
     ConsoleWidget::LogMessage("Successfully initialized.");
 
     while (!glfwWindowShouldClose(window)) {
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-      renderer->Clear();
+      renderer.Clear();
 
       ImGui_ImplOpenGL3_NewFrame();
       ImGui_ImplGlfw_NewFrame();
       ImGui::NewFrame();
 
       //Initialize widgets
-      consoleWidget->RenderWidget();
-      textEditorWidget->RenderWidget();
-      sceneEditorWidget->RenderWidget();
+      for (auto const &widget : widgetCollection) {
+        widget->RenderWidget();
+      }
 
       Camera::ProcessCameraInput(window);
 
       glClear(GL_COLOR_BUFFER_BIT);
 
-      if (!scene->empty()) {
-        for (auto const &sceneElement : *scene) {
+      if (!scene.empty()) {
+        for (auto const &sceneElement : scene) {
           sceneElement.second->Draw();
         }
       }
@@ -118,11 +120,6 @@ int main() {
       glfwSwapBuffers(window);
       glfwPollEvents();
     }
-    delete renderer;
-    delete sceneLoader;
-    delete scene;
-    delete widgetBroker;
-    delete context;
   }
 
   ImGui_ImplOpenGL3_Shutdown();

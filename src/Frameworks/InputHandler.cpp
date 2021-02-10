@@ -5,7 +5,7 @@
 namespace InputHandler {
 
     void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-      auto* context = static_cast<Context*>(glfwGetWindowUserPointer(window));
+      auto context = static_cast<Context*>(glfwGetWindowUserPointer(window));
       if (key == GLFW_KEY_S && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
         ((TextEditorWidget*) context->widgetBroker.GetWidget("TextEditor"))->Save();
       }
