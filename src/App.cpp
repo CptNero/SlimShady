@@ -15,6 +15,7 @@
 #include "SceneLoader.h"
 #include "Camera.h"
 #include "Frameworks/InputHandler.h"
+#include "Widgets/FileBrowserWidget.h"
 
 int main() {
   GLFWwindow* window;
@@ -60,6 +61,7 @@ int main() {
       glDebugMessageCallback(ErrorHandler::MessageCallback, nullptr);
     }
 
+    glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_ARB_separate_shader_objects);
     glEnable(GL_DEPTH_TEST);
@@ -73,7 +75,7 @@ int main() {
 
     WidgetBroker widgetBroker;
 
-    std::unordered_map<std::string, SceneElement*> scene;
+    std::list<SceneElement*> scene;
 
     Context context(widgetBroker, scene);
     glfwSetWindowUserPointer(window, &context);
@@ -81,12 +83,13 @@ int main() {
     SceneLoader sceneLoader(context);
     sceneLoader.InitializeScene();
 
-    Renderer renderer;
+    Renderer renderer(context);
 
     std::list<Widget*> widgetCollection;
 
     widgetCollection.emplace_back(widgetBroker.MakeWidget<ConsoleWidget>("Console", context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<TextEditorWidget>("TextEditor", context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<FileBrowserWidget>("FileBrowser", context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>("SceneEditor", context));
 
     ConsoleWidget::LogMessage("Successfully initialized.");
@@ -108,11 +111,7 @@ int main() {
 
       glClear(GL_COLOR_BUFFER_BIT);
 
-      if (!scene.empty()) {
-        for (auto const &sceneElement : scene) {
-          sceneElement.second->Draw();
-        }
-      }
+      renderer.Draw(scene);
 
       ImGui::Render();
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

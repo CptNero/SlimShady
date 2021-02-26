@@ -4,12 +4,14 @@
 
 #include <memory>
 #include <map>
+#include <list>
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
 #include "Shader.h"
 #include "ShaderType.h"
 #include "Frameworks/FileManager.h"
+#include "Texture.h"
 
 class SceneElement {
   public:
@@ -17,17 +19,19 @@ class SceneElement {
     SceneElement(const std::string& sceneName,
                  const std::string& vertexShaderSource,
                  const std::string& fragmentShaderSource,
-                 FileManager::VertexAttributeFile vertexAttributeFile);
+                 const FileManager::VertexAttributeFile& vertexAttributeFile);
 
     // Constructor used for recompiling element
     SceneElement(const std::string& sceneName,
                  const std::string& vertexShaderSource,
                  const std::string& fragmentShaderSource,
                  std::vector<float> vertices,
-                 std::vector<uint32_t > indices);
+                 std::vector<uint32_t > indices,
+                 std::list<std::string> texturePaths);
 
     // Constructor used for creating new element from scratch
     SceneElement(const std::string& sceneElementName);
+    SceneElement();
     ~SceneElement();
 
     std::string GetSceneName();
@@ -38,18 +42,18 @@ class SceneElement {
 
     std::vector<float> m_Vertices;
     std::vector<uint32_t> m_Indices;
+    std::list<std::string> m_TexturePaths;
 
     void SetShaderSource(const std::string& source, ShaderType shaderType);
 
-    void Draw();
-
-  private:
+  //private:
     std::string m_SceneName;
 
     std::unique_ptr<VertexArray> m_VertexArrayObject;
     std::unique_ptr<IndexBuffer> m_IndexBuffer;
     std::unique_ptr<VertexBuffer> m_VertexBuffer;
     std::unique_ptr<Shader> m_Shader;
+    std::unique_ptr<Texture> m_Texture;
 
     std::string m_VertexShaderSourcePath;
     std::string m_FragmentShaderSourcePath;
@@ -58,10 +62,6 @@ class SceneElement {
     std::string m_FragmentShaderSource;
 
     std::string m_VertexAttributePath;
-
-    glm::mat4 m_Projection;
-    glm::mat4 m_View;
-    glm::mat4 m_Model;
 
     void InitializeSceneElement();
 };

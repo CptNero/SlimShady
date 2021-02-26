@@ -5,15 +5,23 @@
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Frameworks/Context.h"
 
 class Renderer {
 private:
+    Context m_Context;
+
+    glm::mat4 m_Projection;
+    glm::mat4 m_View;
+    glm::mat4 m_Model;
+
 public:
-    Renderer();
+    explicit Renderer(Context context);
     ~Renderer();
 
     void Clear() const;
-    void Draw(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader);
+    void Draw(std::list<SceneElement*>& scene);
+    void UpdateUniforms(SceneElement& sceneElement);
 };
 
 

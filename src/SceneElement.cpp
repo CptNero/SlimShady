@@ -1,37 +1,16 @@
 #include <glm/ext/matrix_transform.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <fstream>
-#include <algorithm>
 #include "SceneElement.h"
 #include "Renderer.h"
 #include "Frameworks/Configurations.h"
 #include "Widgets/ConsoleWidget.h"
 #include "Camera.h"
 
-SceneElement::SceneElement(const std::string &sceneName,
-                           const std::string &vertexShaderSource,
-                           const std::string &fragmentShaderSource,
-                           FileManager::VertexAttributeFile vertexAttributeFile) :
-        m_SceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
-        m_Model(glm::mat4(1.0f)),
-        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::ScreenWidth / Configurations::ScreenHeight, 0.1f, 100.f)),
-        m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
-{
-  std::for_each(vertexAttributeFile.Vertices.begin(), vertexAttributeFile.Vertices.end(), [&](glm::vec3 vertex) {
-      m_Vertices.emplace_back(vertex.x);
-      m_Vertices.emplace_back(vertex.y);
-      m_Vertices.emplace_back(vertex.z);
-  });
-
-  m_Indices = vertexAttributeFile.Indices;
-  InitializeSceneElement();
+SceneElement::SceneElement() {
+  m_SceneName = "Default";
 }
 
-SceneElement::SceneElement(const std::string& sceneElementName) :
-        m_SceneName(sceneElementName),
-        m_Model(glm::mat4(1.0f)),
-        m_Projection(glm::perspective(glm::radians(45.0f), 1920.0f / 1080.0f, 0.1f, 100.f)),
-        m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f)))
+SceneElement::SceneElement(const std::string& sceneElementName) : m_SceneName(sceneElementName)
 {
   auto vertexShaderFile = FileManager::CreateShaderFile(sceneElementName, ShaderType::VERTEX);
   auto fragmentShaderFile = FileManager::CreateShaderFile(sceneElementName, ShaderType::FRAGMENT);
@@ -44,16 +23,23 @@ SceneElement::SceneElement(const std::string& sceneElementName) :
   m_FragmentShaderSource = fragmentShaderFile.ShaderSource;
   m_FragmentShaderSourcePath = fragmentShaderFile.Path;
 
-  std::for_each(vertexAttributeFile.Vertices.begin(), vertexAttributeFile.Vertices.end(), [&](glm::vec3 vertex) {
-      m_Vertices.emplace_back(vertex.x);
-      m_Vertices.emplace_back(vertex.y);
-      m_Vertices.emplace_back(vertex.z);
-  });
+  m_Vertices = vertexAttributeFile.Vertices;
+  m_Indices = vertexAttributeFile.Indices;
 
-  std::for_each(vertexAttributeFile.Indices.begin(), vertexAttributeFile.Indices.end(), [&](uint32_t index) {
-      m_Indices.emplace_back(index);
-  });
+  InitializeSceneElement();
+}
 
+SceneElement::SceneElement(const std::string &sceneName,
+                           const std::string &vertexShaderSource,
+                           const std::string &fragmentShaderSource,
+                           const FileManager::VertexAttributeFile& vertexAttributeFile) :
+        m_SceneName(sceneName),
+        m_VertexShaderSource(vertexShaderSource),
+        m_FragmentShaderSource(fragmentShaderSource),
+        m_Vertices(vertexAttributeFile.Vertices),
+        m_Indices(vertexAttributeFile.Indices),
+        m_TexturePaths(vertexAttributeFile.texturePaths)
+{
   InitializeSceneElement();
 }
 
@@ -61,49 +47,21 @@ SceneElement::SceneElement(const std::string& sceneName,
                            const std::string& vertexShaderSource,
                            const std::string& fragmentShaderSource,
                            std::vector<float> vertices,
-                           std::vector<uint32_t> indices) :
-        m_SceneName(sceneName), m_VertexShaderSource(vertexShaderSource), m_FragmentShaderSource(fragmentShaderSource),
-        m_Model(glm::mat4(1.0f)),
-        m_Projection(glm::perspective(glm::radians(500.0f), Configurations::ScreenWidth / Configurations::ScreenHeight, 0.1f, 100.f)),
-        m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -3.0f))),
+                           std::vector<uint32_t> indices,
+                           std::list<std::string> texturePaths) :
+        m_SceneName(sceneName),
+        m_VertexShaderSource(vertexShaderSource),
+        m_FragmentShaderSource(fragmentShaderSource),
         m_Vertices(vertices),
-        m_Indices(indices)
+        m_Indices(indices),
+        m_TexturePaths(texturePaths)
 {
   InitializeSceneElement();
 }
 
-
 SceneElement::~SceneElement() = default;
 
-void SceneElement::Draw() {
-  Renderer renderer;
-
-  Camera::UpdateCameraTime();
-  m_View = Camera::GetViewMatrix();
-  m_Projection = glm::perspective(glm::radians(Camera::Zoom), Configurations::ScreenWidth / Configurations::ScreenHeight, 0.1f, 100.f);
-  glm::mat4 viewProjectionMatrix = m_Projection * m_View * m_Model;
-  m_Shader->Bind();
-  m_Shader->SetUniformMat4f("u_MVP", viewProjectionMatrix);
-  m_Shader->SetUniform1f("u_Time", glfwGetTime());
-  m_Shader->SetUniform1i("u_Width", Configurations::ScreenWidth);
-  m_Shader->SetUniform1i("u_Height", Configurations::ScreenHeight);
-  renderer.Draw(*m_VertexArrayObject, *m_IndexBuffer, *m_Shader);
-}
-
 void SceneElement::InitializeSceneElement() {
-
-  float positions[] = {
-          -0.5f, -0.5f, 0.0f,
-          0.5f, -0.5f, 0.0f,
-          0.5f,  0.5f, 0.0f,
-          -0.5f, 0.5f, 0.0f,
-  };
-
-  uint32_t indices[] = {
-          0, 1, 2,
-          2, 3, 0
-  };
-
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -119,14 +77,20 @@ void SceneElement::InitializeSceneElement() {
     ConsoleWidget::LogMessage("Successfully created vertex array.");
   }
 
-  m_VertexBuffer = std::make_unique<VertexBuffer>((float*)&m_Vertices[0], (m_Vertices.size() / 3) * 3 * sizeof(float));
+  //number of rows * length of rows
+  m_VertexBuffer = std::make_unique<VertexBuffer>((float*)&m_Vertices[0], (m_Vertices.size() / 8) * 8 * sizeof(float));
 
   if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully created vertex buffer.");
   }
 
   VertexBufferLayout layout;
+  //Vertex coordinates
   layout.Push<float>(3);
+  //Color coordinates
+  layout.Push<float>(3);
+  //Texture coordinates
+  layout.Push<float>(2);
 
   if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully initialized vertex layout");
@@ -144,7 +108,7 @@ void SceneElement::InitializeSceneElement() {
     ConsoleWidget::LogMessage("Successfully initialized index buffer");
   }
 
-  m_Shader->Bind();
+  m_Texture = std::make_unique<Texture>(m_TexturePaths);
 }
 
 std::string SceneElement::GetSceneName() {

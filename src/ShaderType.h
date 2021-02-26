@@ -8,4 +8,6 @@ enum class ShaderType : uint32_t
     FRAGMENT = 2
 };
 
+inline std::string ShaderTypes[] = {"None", "Vertex", "Fragment"};
+
 #endif //SLIMSHADY_SHADERTYPE_H

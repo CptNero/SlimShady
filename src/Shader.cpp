@@ -71,6 +71,27 @@ uint32_t Shader::CreateShader(const std::string &vertexShader, const std::string
   glDeleteShader(vs);
   glDeleteShader(fs);
 
+  // At this point we can query the valid/usabe uniforms it will not change
+  // By pre-loading and directy returning the position below cpu usage was reduced from ~60% to ~30% on a laptop
+  GLint count = 0;
+  glGetProgramiv(program, GL_ACTIVE_UNIFORMS, &count);
+  printf("Active Uniforms: %d\n", count);
+
+  for (int i = 0; i < count; i++)
+  {
+    GLint size; // size of the variable
+    GLenum type; // type of the variable (float, vec3 or mat4, etc)
+
+    const GLsizei bufSize = 16; // maximum name length
+    GLchar name[bufSize]; // variable name in GLSL
+    GLsizei length; // name length
+
+    glGetActiveUniform(program, (GLuint)i, bufSize, &length, &size, &type, name);
+
+    m_UniformLocationCache[std::string(name)] = glGetUniformLocation(program, name);
+    printf("Uniform #%d Type: %u Name: %s loc: %d\n", i, type, name, m_UniformLocationCache[name] );
+  }
+
   return program;
 }
 
@@ -91,6 +112,15 @@ void Shader::SetUniform4f(const std::string &name, float v0, float v1, float v2,
 
 int Shader::GetUniformLocation(const std::string &name)
 {
+  std::map<std::string, int>::const_iterator it = m_UniformLocationCache.find(name);
+  if (it == m_UniformLocationCache.end()) {
+    return -1;
+  }
+
+  return it->second;
+
+/* // Always checking and reading the uniform name is a big perf hit.
+   // find and [] does the same thing (lookup) and thus there will be two lookup in the unordered_map, big perf hit.
   if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
     return m_UniformLocationCache[name];
 

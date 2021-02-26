@@ -14,12 +14,12 @@ void SceneLoader::InitializeScene()
     std::string filePath = file.path().string();
     std::string fileName = FileManager::GetShaderFileNameFromPath(filePath);
 
-    m_Context.scene[fileName] = new SceneElement(fileName,
+    m_Context.scene.emplace_back(new SceneElement(fileName,
                                         FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::VERTEX)),
                                         FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)),
                                         FileManager::ConvertStringToVertexAttributeFile(
                                                 FileManager::ReadFile(
-                                                        FileManager::GetVertexAttributeFilePath(fileName))));
+                                                        FileManager::GetVertexAttributeFilePath(fileName)))));
 
   }
 }
