@@ -1,12 +1,21 @@
 #include <imgui/imgui.h>
+#include <iostream>
 
 #include "TextEditorWidget.h"
+#include "FileBrowserWidget.h"
 
 
-TextEditorWidget::TextEditorWidget(Context& context) : context(context)
+TextEditorWidget::TextEditorWidget(Context context) : m_Context(context)
 {
+  m_SourceFileWasChanged = false;
   m_Editor.SetLanguageDefinition(m_Lang);
   m_Editor.SetErrorMarkers(m_Markers);
+  if (!context.scene.empty()) {
+    m_CurrentSceneElement = *context.scene.begin();
+  } else {
+    m_CurrentSceneElement = new SceneElement();
+  }
+  m_CurrentShaderType = ShaderType::NONE;
 }
 
 TextEditorWidget::~TextEditorWidget() = default;
@@ -19,10 +28,22 @@ void TextEditorWidget::OnRender() {
 }
 
 void TextEditorWidget::OnImGuiRender() {
+  FileBrowserWidget* fileBrowser = dynamic_cast<FileBrowserWidget*>((m_Context.widgetBroker.GetWidget("FileBrowser")));
+
   if (ImGui::BeginMenuBar())
   {
     if (ImGui::BeginMenu("File"))
     {
+      if (ImGui::MenuItem("Open Vertex Shaders", "Ctrl-O")) {
+        fileBrowser->OpenFileBrowser(FileBrowserWidget::FileBrowserAccess::VertexShader);
+        m_SourceFileWasChanged = true;
+      }
+
+      if (ImGui::MenuItem("Open Fragment Shaders", "Ctrl-O")) {
+        fileBrowser->OpenFileBrowser(FileBrowserWidget::FileBrowserAccess::FragmentShader);
+        m_SourceFileWasChanged = true;
+      }
+
       if (ImGui::MenuItem("Save", "Ctrl-S"))
       {
         Save();
@@ -77,7 +98,28 @@ void TextEditorWidget::OnImGuiRender() {
   ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", m_CursorPosition.mLine + 1, m_CursorPosition.mColumn + 1, m_Editor.GetTotalLines(),
               m_Editor.IsOverwrite() ? "Ovr" : "Ins",
               m_Editor.CanUndo() ? "*" : " ",
-              m_Editor.GetLanguageDefinition().mName.c_str(), m_FileToEditPath.c_str());
+              m_Editor.GetLanguageDefinition().mName.c_str(), (ShaderTypes[static_cast<int>(m_CurrentShaderType)]).c_str());
+  ImGui::Text("%s", m_FileToEditPath.c_str());
+
+  if (m_SourceFileWasChanged) {
+    std::string filePath = fileBrowser->QueryFileBrowser(fileBrowser->m_LastOpenedBy);
+    std::string sceneElementName = FileManager::GetShaderFileNameFromPath(filePath);
+    ShaderType shaderType = FileManager::GetShaderTypeFromPath(filePath);
+
+    auto elementQuery = std::find_if(m_Context.scene.begin(), m_Context.scene.end(), [&](SceneElement* element) {
+        return (element->GetSceneName() == sceneElementName);
+    });
+
+    if (!(elementQuery == m_Context.scene.end())) {
+      SceneElement* sceneElement = *elementQuery;
+
+      SetCurrentSceneElement(sceneElement);
+      SetCurrentShaderType(shaderType);
+      SetEditorText(sceneElement->GetShaderSource(shaderType), shaderType, filePath);
+
+      m_SourceFileWasChanged = false;
+    }
+  }
 
   m_Editor.Render("TextEditor");
 }
@@ -93,7 +135,6 @@ void TextEditorWidget::RenderWidget() {
 void TextEditorWidget::Save() {
   FileManager::UpdateFile(m_FileToEditPath, m_Editor.GetText());
   m_CurrentSceneElement->SetShaderSource(m_Editor.GetText(), m_CurrentShaderType);
-  m_CurrentShaderSource = m_Editor.GetText();
 }
 
 std::string TextEditorWidget::GetEditorText() {

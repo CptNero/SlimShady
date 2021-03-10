@@ -1,9 +1,3 @@
-#include <fstream>
-#include <filesystem>
-#include <iostream>
-#include <sstream>
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include "FileManager.h"
 #include "../Widgets/ConsoleWidget.h"
 #include "Configurations.h"
@@ -21,7 +15,19 @@ std::string FileManager::GetShaderFilePath(const std::string &sceneElementName, 
 }
 
 std::string FileManager::GetShaderFileNameFromPath(const std::string &filePath) {
-  return filePath.substr(filePath.find('\\') + 1, filePath.find_last_of('_') - filePath.find('\\') - 1);
+  return filePath.substr(filePath.find_last_of('\\') + 1, filePath.find_last_of('_') - filePath.find_last_of('\\') - 1);
+}
+
+ShaderType FileManager::GetShaderTypeFromPath(const std::string& filePath) {
+  if (filePath.find("Vertex") != std::string::npos) {
+    return ShaderType::VERTEX;
+  }
+  else if (filePath.find("Fragment") != std::string::npos) {
+    return ShaderType::FRAGMENT;
+  }
+  else {
+    return ShaderType::NONE;
+  }
 }
 
 FileManager::ShaderFile FileManager::CreateShaderFile(const std::string &sceneElementName, ShaderType shaderType)
@@ -119,7 +125,7 @@ FileManager::VertexAttributeFile FileManager::CreateVertexAttributeFile(const st
 
   shaderFileStream.close();
 
-  vertexAttributeFile.Vertices.emplace_back(glm::vec3(0.0f, 0.0f, 0.0f));
+  vertexAttributeFile.Vertices.insert(vertexAttributeFile.Vertices.end(), {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
   vertexAttributeFile.Indices.emplace_back(0);
 
   return vertexAttributeFile;
@@ -139,18 +145,20 @@ FileManager::VertexAttributeFile FileManager::ConvertStringToVertexAttributeFile
       type = VertexAttributeType::INDEX;
       continue;
     }
+    else if (line.find("#texture") != std::string::npos) {
+      type = VertexAttributeType::TEXTURE;
+      continue;
+    }
 
     switch (type) {
       case VertexAttributeType::VERTEX: {
         std::stringstream vertexStringStream(line);
         std::string vertexLine;
-        std::vector<float> vertexVector;
 
         while (std::getline(vertexStringStream, vertexLine, ' ')) {
-          vertexVector.emplace_back(std::stof(vertexLine));
+          vertexAttributeFile.Vertices.emplace_back(std::stof(vertexLine));
         }
 
-        vertexAttributeFile.Vertices.emplace_back(glm::make_vec3(&vertexVector[0]));
         break;
       }
 
@@ -162,6 +170,11 @@ FileManager::VertexAttributeFile FileManager::ConvertStringToVertexAttributeFile
         }
         break;
       }
+
+      case VertexAttributeType::TEXTURE: {
+        vertexAttributeFile.texturePaths.emplace_back(line);
+        break;
+      }
     }
   }
 
@@ -171,9 +184,16 @@ FileManager::VertexAttributeFile FileManager::ConvertStringToVertexAttributeFile
 std::string FileManager::ConvertVertexAttributeFileToString(FileManager::VertexAttributeFile vertexAttributeFile) {
   std::stringstream vertexAttributeFileStringStream;
   vertexAttributeFileStringStream << "#vertex" << std::endl;
+  uint32_t counter = 0;
 
-  std::for_each(vertexAttributeFile.Vertices.begin(), vertexAttributeFile.Vertices.end(), [&](glm::vec3 vertex) {
-    vertexAttributeFileStringStream << vertex.x << " " << vertex.y << " " << vertex.z << std::endl;
+  std::for_each(vertexAttributeFile.Vertices.begin(), vertexAttributeFile.Vertices.end(), [&](float vertex) {
+    vertexAttributeFileStringStream << vertex << " ";
+    counter++;
+
+    if(counter == 8) {
+      counter = 0;
+      vertexAttributeFileStringStream << std::endl;
+    }
   });
   vertexAttributeFileStringStream << "#index" << std::endl;
 
@@ -183,6 +203,12 @@ std::string FileManager::ConvertVertexAttributeFileToString(FileManager::VertexA
   // Remove the last separator before terminating the line;
   vertexAttributeFileStringStream.seekp(-1, std::ios_base::end);
   vertexAttributeFileStringStream << std::endl;
+
+  vertexAttributeFileStringStream << "#textures" << std::endl;
+
+  std::for_each(vertexAttributeFile.texturePaths.begin(), vertexAttributeFile.texturePaths.end(), [&](const std::string& texturePath) {
+    vertexAttributeFileStringStream << texturePath << std::endl;
+  });
 
   return vertexAttributeFileStringStream.str();
 }

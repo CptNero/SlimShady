@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Frameworks/Configurations.h"
 #include "Widgets/SceneEditorWidget.h"
+#include "Widgets/TaskWidget.h"
 
 Renderer::Renderer(Context context) :
   m_Context(context),
@@ -28,6 +29,7 @@ void Renderer::Draw(std::list<SceneElement*>& scene) {
     sceneElement->m_Texture->Bind();
 
     glDrawElements(GL_TRIANGLES, sceneElement->m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+    ((TaskWidget*) m_Context.widgetBroker.GetWidget("TaskWidget"))->RenderIntoTexture(sceneElement->m_IndexBuffer->GetCount());
   }
 }
 

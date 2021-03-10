@@ -16,6 +16,7 @@
 #include "Camera.h"
 #include "Frameworks/InputHandler.h"
 #include "Widgets/FileBrowserWidget.h"
+#include "Widgets/TaskWidget.h"
 
 int main() {
   GLFWwindow* window;
@@ -28,6 +29,7 @@ int main() {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
+  // TODO: maybe start by default in a smaller window? some laptops have 1366x768 resolution
   window = glfwCreateWindow(1920, 1080, "SlimShady", NULL, NULL);
   if (!window)
   {
@@ -63,15 +65,16 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_ARB_separate_shader_objects);
-    glEnable(GL_DEPTH_TEST);
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
+    // TODO: the GL_NUM_SHADING_LANGUAGE_VERSIONS is invalid for the glGetString, it is a number.
+    //ImGui_ImplOpenGL3_Init((char *)glGetStringi(GL_SHADING_LANGUAGE_VERSION, 0)); //GL_NUM_SHADING_LANGUAGE_VERSIONS));
+    ImGui_ImplOpenGL3_Init("#version 410"); // WORKAROUND for now
+    //std::cout << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
     WidgetBroker widgetBroker;
 
@@ -91,9 +94,11 @@ int main() {
     widgetCollection.emplace_back(widgetBroker.MakeWidget<TextEditorWidget>("TextEditor", context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<FileBrowserWidget>("FileBrowser", context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>("SceneEditor", context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<TaskWidget>("TaskWidget", context));
 
     ConsoleWidget::LogMessage("Successfully initialized.");
 
+    glfwSwapInterval(1);    // we can have vsync saves CPU time
     while (!glfwWindowShouldClose(window)) {
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
       renderer.Clear();

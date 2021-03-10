@@ -4,4 +4,4 @@
 
 #include "Context.h"
 
-Context::Context(WidgetBroker& widgetBroker, std::unordered_map<std::string, SceneElement*>& scene) : widgetBroker(widgetBroker), scene(scene) {}
+Context::Context(WidgetBroker& widgetBroker, std::list<SceneElement*>& scene) : widgetBroker(widgetBroker), scene(scene) {}

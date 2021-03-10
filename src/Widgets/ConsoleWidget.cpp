@@ -67,7 +67,7 @@ void ConsoleWidget::LogInput(const std::string& logInput)
 //Append a line to the console log.
 void ConsoleWidget::LogMessage(const std::string& logMessage)
 {
-  std::string preparedString = std::string(m_ConsoleLogBuffer) + Clock::GetCurrentTimeAsString() + ": " + logMessage + "\n";
+  std::string preparedString = Clock::GetCurrentTimeAsString() + ": " + logMessage + "\n";
 
   m_ConsoleLogBuffer = new char[strlen(preparedString.c_str()) + 1];
 

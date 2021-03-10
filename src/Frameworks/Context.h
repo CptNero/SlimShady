@@ -7,10 +7,10 @@
 
 class Context {
 public:
-    Context(WidgetBroker& widgetBroker, std::unordered_map<std::string, SceneElement*>& scene);
+    Context(WidgetBroker& widgetBroker, std::list<SceneElement*>& scene);
 
     WidgetBroker& widgetBroker;
-    std::unordered_map<std::string, SceneElement*>& scene;
+    std::list<SceneElement*>& scene;
 };
 
 

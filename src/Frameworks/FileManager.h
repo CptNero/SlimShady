@@ -3,6 +3,12 @@
 
 
 #include <string>
+#include <fstream>
+#include <filesystem>
+#include <iostream>
+#include <sstream>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "../ShaderType.h"
 #include "../VertexAttributeType.h"
 
@@ -21,19 +27,22 @@ public:
     };
     struct VertexAttributeFile {
         std::string Path;
-        std::vector<glm::vec3> Vertices;
+        std::vector<float> Vertices;
         std::vector<uint32_t> Indices;
+        std::list<std::string> texturePaths;
     };
 
     static std::string ReadFile(const std::string &filePath);
 
     static void UpdateFile(const std::string &filePath, const std::string &fileContent);
 
-    static void DeleteFileByPath(const std::string &filePath);
+    static void DeleteFileByPath(const std::string& filePath);
 
     static std::string GetShaderFilePath(const std::string &sceneElementName, ShaderType shaderType);
 
     static std::string GetShaderFileNameFromPath(const std::string &filePath);
+
+    static ShaderType GetShaderTypeFromPath(const std::string& filePath);
 
     static ShaderFile CreateShaderFile(const std::string &sceneElementName, ShaderType shaderType);
 

@@ -9,7 +9,6 @@ Texture::Texture(std::list<std::string>& texturePaths)
         : m_RendererID(0), m_TexturePaths(texturePaths), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 {
   stbi_set_flip_vertically_on_load(1);
-
   int counter = 0;
   for(auto const& texturePath : m_TexturePaths) {
     m_LocalBuffer = stbi_load(texturePath.c_str(), &m_Width, &m_Height, &m_BPP, 4);
@@ -30,6 +29,7 @@ Texture::Texture(std::list<std::string>& texturePaths)
       stbi_image_free(m_LocalBuffer);
     counter++;
   }
+  stbi_set_flip_vertically_on_load(0);
 }
 
 Texture::~Texture()

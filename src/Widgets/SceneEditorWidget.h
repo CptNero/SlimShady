@@ -17,12 +17,7 @@ class SceneEditorWidget : public Widget {
 
     char m_SceneElementNameInputBuffer[1024] = "";
     float m_ClearColor[4] = { 0.2f, 0.3f, 0.8f, 1.0f };
-    SceneElement* m_currentIteratedSceneElement;
-    std::string m_currentIteratedSceneElementName;
-
-    std::map<int, glm::vec3> m_Vertices;
-
-    std::map<int, int> m_Indices;
+    SceneElement* m_currentSceneElement;
 
   public:
     SceneEditorWidget(Context context);

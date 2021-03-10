@@ -10,24 +10,23 @@
 #include "../Frameworks/Context.h"
 
 class TextEditorWidget : public Widget {
-  private:
-    Context& context;
+  public:
+    Context m_Context;
 
     TextEditor m_Editor;
     TextEditor::LanguageDefinition m_Lang = TextEditor::LanguageDefinition::GLSL();
     TextEditor::ErrorMarkers m_Markers;
     TextEditor::Coordinates m_CursorPosition = m_Editor.GetCursorPosition();
     std::string m_FileToEditPath;
-    std::string m_CurrentShaderSource;
     SceneElement* m_CurrentSceneElement;
     ShaderType m_CurrentShaderType;
-public:
     void SetCurrentSceneElement(SceneElement* currentSceneElement);
 
 private:
+    bool m_SourceFileWasChanged;
 
   public:
-    TextEditorWidget(Context& context);
+    TextEditorWidget(Context context);
     ~TextEditorWidget();
 
     std::string GetEditorText();
