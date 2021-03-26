@@ -6,17 +6,19 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 #include "Frameworks/Context.h"
+#include "UniformManager.h"
 
 class Renderer {
 private:
     Context m_Context;
+    UniformManager& m_UniformManager;
 
     glm::mat4 m_Projection;
     glm::mat4 m_View;
     glm::mat4 m_Model;
 
 public:
-    explicit Renderer(Context context);
+    Renderer(Context context, UniformManager& uniformManager);
     ~Renderer();
 
     void Clear() const;

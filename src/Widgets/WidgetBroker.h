@@ -20,8 +20,9 @@ public:
       return m_Widgets[id].get();
     }
 
-    Widget* GetWidget(std::string id) {
-      return m_Widgets[id].get();
+    template <typename WidgetType>
+    WidgetType* GetWidget(std::string id) {
+      return (WidgetType*)m_Widgets[id].get();
     }
 private:
     std::map<std::string, std::unique_ptr<Widget>> m_Widgets;

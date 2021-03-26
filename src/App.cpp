@@ -13,7 +13,6 @@
 #include "Renderer.h"
 #include "Widgets/SceneEditorWidget.h"
 #include "SceneLoader.h"
-#include "Camera.h"
 #include "Frameworks/InputHandler.h"
 #include "Widgets/FileBrowserWidget.h"
 #include "Widgets/TaskWidget.h"
@@ -86,14 +85,15 @@ int main() {
     SceneLoader sceneLoader(context);
     sceneLoader.InitializeScene();
 
-    Renderer renderer(context);
+    UniformManager uniformManager(context);
+    Renderer renderer(context, uniformManager);
 
     std::list<Widget*> widgetCollection;
 
     widgetCollection.emplace_back(widgetBroker.MakeWidget<ConsoleWidget>("Console", context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<TextEditorWidget>("TextEditor", context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<FileBrowserWidget>("FileBrowser", context));
-    widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>("SceneEditor", context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>("SceneEditor", context, uniformManager));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<TaskWidget>("TaskWidget", context));
 
     ConsoleWidget::LogMessage("Successfully initialized.");

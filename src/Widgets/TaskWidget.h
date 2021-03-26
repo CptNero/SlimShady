@@ -13,6 +13,8 @@ public:
     ~TaskWidget();
     void RenderIntoTexture(uint32_t indexBufferSize);
     void LoadTaskImage(const std::string& filePath);
+    void BindFrameBuffer();
+    void UnBindFrameBuffer();
 
 private:
     Context& m_Context;
@@ -23,7 +25,7 @@ private:
     int m_TaskImageWidth;
     int m_TaskImageHeight;
     bool m_Layout = true;
-    float m_ComparisonResult = 0.0f;
+    double m_ComparisonResult = 0.0f;
     char m_TaskNameInputBuffer[1024] = "";
 
     void OnUpdate(float deltaTime) override;
@@ -33,7 +35,7 @@ private:
 
     void InitializeFrameBuffer();
     std::vector<uint8_t> GetTextureData(GLuint texture);
-    void ExportImage(std::vector<uint8_t> textureData);
+    void ExportImage(std::vector<uint8_t> textureData, const std::string& name);
 };
 
 

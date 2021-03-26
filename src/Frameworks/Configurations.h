@@ -13,14 +13,29 @@ namespace Configurations {
         const std::string TaskFilesPath = R"(Resources/Tasks\)";
         const std::string DefaultTaskFilePath = R"(Resources/Tasks/default.png)";
         const std::string DefaultVertexShaderSource = R"(
-#version 330 core
+#version 410 core
+
+layout (location = 0) in vec4 position;
+layout (location = 1) in vec3 aColor;
+layout (location = 2) in vec2 aTexCoord;
+
+out vec3 ourColor;
+out vec2 TexCoord;
+
+uniform mat4 u_Model;
+uniform mat4 u_View;
+uniform mat4 u_Projection;
 
 void main()
 {
 }
 )";
         const std::string DefaultFragmentShaderSource = R"(
-#version 330 core
+#version 410 core
+
+uniform float u_Time;
+uniform int u_Width;
+uniform int u_Height;
 
 void main()
 {
@@ -33,6 +48,7 @@ void main()
 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
 #index
 0
+#textures
 )";
 
         float ScreenWidth = 1920.0f;

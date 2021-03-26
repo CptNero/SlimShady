@@ -24,6 +24,7 @@ public:
 
     void OpenFileBrowser(FileBrowserAccess type);
     std::string QueryFileBrowser(FileBrowserAccess type);
+    bool HasSelected(FileBrowserAccess type);
 
 private:
     Context m_Context;

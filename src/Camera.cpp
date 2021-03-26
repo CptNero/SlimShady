@@ -23,6 +23,7 @@ namespace Camera {
     float lastFrame;
 
     bool isHeld;
+    bool Is3DCameraEnabled;
 
     void Camera(glm::vec3 position, glm::vec3 up) {
       Camera::Position = position;
@@ -42,6 +43,7 @@ namespace Camera {
       Camera::lastFrame = 0.0f;
 
       Camera::isHeld = false;
+      Camera::Is3DCameraEnabled = false;
 
       UpdateCameraVectors();
     }
@@ -124,6 +126,16 @@ namespace Camera {
 
     glm::mat4 GetViewMatrix() {
       return glm::lookAt(Camera::Position, Camera::Position + Camera::Front, Camera::Up);
+    }
+
+    void ResetCameraPosition() {
+      Up = glm::vec3(0.0f, 1.0f, 0.0f);
+      Zoom = 45.0f;
+      Position = glm::vec3(0.0f, 0.0f, 3.0f);
+      Yaw = YAW;
+      Pitch = PITCH;
+      UpdateCameraTime();
+      UpdateCameraVectors();
     }
 
 }

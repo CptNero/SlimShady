@@ -27,15 +27,15 @@ void TaskWidget::OnImGuiRender() {
   if (ImGui::BeginMenuBar()) {
     if (ImGui::BeginMenu("Actions"))  {
       if (ImGui::MenuItem("Export task")) {
-        ExportImage(GetTextureData(m_RenderedTexture));
+        ExportImage(GetTextureData(m_RenderedTexture), m_TaskNameInputBuffer);
       }
 
       if (ImGui::MenuItem("Select task")) {
-        ((FileBrowserWidget*) m_Context.widgetBroker.GetWidget("FileBrowser"))->OpenFileBrowser(FileBrowserWidget::Task);
+        ((FileBrowserWidget*) m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser"))->OpenFileBrowser(FileBrowserWidget::Task);
       }
 
       if (ImGui::MenuItem("Change task image")) {
-        LoadTaskImage(((FileBrowserWidget*) m_Context.widgetBroker.GetWidget("FileBrowser"))->QueryFileBrowser(FileBrowserWidget::Task));
+        LoadTaskImage(((FileBrowserWidget*) m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser"))->QueryFileBrowser(FileBrowserWidget::Task));
       }
 
       if (ImGui::MenuItem("Change layout")) {
@@ -63,13 +63,13 @@ void TaskWidget::OnImGuiRender() {
     ImGui::Text("Your image:");
     ImGui::SameLine();
     ImGui::Image((ImTextureID)m_RenderedTexture, ImVec2(600, 400), ImVec2(0, 1), ImVec2(1, 0));
-    ImGui::Text("Comparison result: %f difference", m_ComparisonResult);
+    ImGui::Text("Comparison result: %f percent similarity", (m_ComparisonResult / 4.0) * 100.0);
   } else {
     ImGui::Text("Target image:");
     ImGui::Image((ImTextureID)m_TaskTexture, ImVec2(600, 400), ImVec2(0, 1), ImVec2(1, 0));
     ImGui::Text("Your image:");
     ImGui::Image((ImTextureID)m_RenderedTexture, ImVec2(600, 400), ImVec2(0, 1), ImVec2(1, 0));
-    ImGui::Text("Comparison result: %f difference", m_ComparisonResult);
+    ImGui::Text("Comparison result: %f percent similarity", (m_ComparisonResult / 4.0) * 100.0);
   }
 
 }
@@ -142,24 +142,18 @@ void TaskWidget::LoadTaskImage(const std::string &filePath) {
 }
 
 void TaskWidget::RenderIntoTexture(uint32_t indexBufferSize) {
-  glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
-  glEnable(GL_DEPTH_TEST);
-
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glDrawElements(GL_TRIANGLES, indexBufferSize, GL_UNSIGNED_INT, nullptr);
-
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
-  glDisable(GL_DEPTH_TEST);
 }
 
-void TaskWidget::ExportImage(std::vector<uint8_t> textureData) {
-  if (strlen(m_TaskNameInputBuffer) == 0) {
+void TaskWidget::ExportImage(std::vector<uint8_t> textureData, const std::string& name) {
+  if (name.empty()) {
     ConsoleWidget::LogMessage("Task name cannot be empty!");
     return;
   }
 
   std::stringstream filename;
-  filename << Configurations::TaskFilesPath << m_TaskNameInputBuffer << ".png";
+  filename << Configurations::TaskFilesPath << name << ".png";
 
   stbi_write_png(filename.str().c_str(),
                  Configurations::ScreenWidth,
@@ -167,4 +161,14 @@ void TaskWidget::ExportImage(std::vector<uint8_t> textureData) {
                  4,
                  &textureData[0],
                  4 * Configurations::ScreenWidth);
+}
+
+void TaskWidget::BindFrameBuffer() {
+  glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
+  glEnable(GL_DEPTH_TEST);
+}
+
+void TaskWidget::UnBindFrameBuffer() {
+  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  glDisable(GL_DEPTH_TEST);
 }

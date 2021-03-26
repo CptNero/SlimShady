@@ -10,12 +10,13 @@ TextEditorWidget::TextEditorWidget(Context context) : m_Context(context)
   m_SourceFileWasChanged = false;
   m_Editor.SetLanguageDefinition(m_Lang);
   m_Editor.SetErrorMarkers(m_Markers);
+
   if (!context.scene.empty()) {
-    m_CurrentSceneElement = *context.scene.begin();
+    SetDefaultSourceFile();
   } else {
     m_CurrentSceneElement = new SceneElement();
+    m_CurrentShaderType = ShaderType::NONE;
   }
-  m_CurrentShaderType = ShaderType::NONE;
 }
 
 TextEditorWidget::~TextEditorWidget() = default;
@@ -28,19 +29,19 @@ void TextEditorWidget::OnRender() {
 }
 
 void TextEditorWidget::OnImGuiRender() {
-  FileBrowserWidget* fileBrowser = dynamic_cast<FileBrowserWidget*>((m_Context.widgetBroker.GetWidget("FileBrowser")));
+  FileBrowserWidget* fileBrowser = m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser");
 
   if (ImGui::BeginMenuBar())
   {
     if (ImGui::BeginMenu("File"))
     {
       if (ImGui::MenuItem("Open Vertex Shaders", "Ctrl-O")) {
-        fileBrowser->OpenFileBrowser(FileBrowserWidget::FileBrowserAccess::VertexShader);
+        fileBrowser->OpenFileBrowser(FileBrowserWidget::VertexShader);
         m_SourceFileWasChanged = true;
       }
 
       if (ImGui::MenuItem("Open Fragment Shaders", "Ctrl-O")) {
-        fileBrowser->OpenFileBrowser(FileBrowserWidget::FileBrowserAccess::FragmentShader);
+        fileBrowser->OpenFileBrowser(FileBrowserWidget::FragmentShader);
         m_SourceFileWasChanged = true;
       }
 
@@ -101,24 +102,10 @@ void TextEditorWidget::OnImGuiRender() {
               m_Editor.GetLanguageDefinition().mName.c_str(), (ShaderTypes[static_cast<int>(m_CurrentShaderType)]).c_str());
   ImGui::Text("%s", m_FileToEditPath.c_str());
 
-  if (m_SourceFileWasChanged) {
-    std::string filePath = fileBrowser->QueryFileBrowser(fileBrowser->m_LastOpenedBy);
-    std::string sceneElementName = FileManager::GetShaderFileNameFromPath(filePath);
-    ShaderType shaderType = FileManager::GetShaderTypeFromPath(filePath);
-
-    auto elementQuery = std::find_if(m_Context.scene.begin(), m_Context.scene.end(), [&](SceneElement* element) {
-        return (element->GetSceneName() == sceneElementName);
-    });
-
-    if (!(elementQuery == m_Context.scene.end())) {
-      SceneElement* sceneElement = *elementQuery;
-
-      SetCurrentSceneElement(sceneElement);
-      SetCurrentShaderType(shaderType);
-      SetEditorText(sceneElement->GetShaderSource(shaderType), shaderType, filePath);
-
-      m_SourceFileWasChanged = false;
-    }
+  if (m_SourceFileWasChanged &&
+     (fileBrowser->HasSelected(FileBrowserWidget::VertexShader) ||
+      fileBrowser->HasSelected(FileBrowserWidget::FragmentShader))) {
+    ChangeSourceFile();
   }
 
   m_Editor.Render("TextEditor");
@@ -149,10 +136,42 @@ void TextEditorWidget::SetEditorText(const std::string& text, ShaderType shaderT
 
 void TextEditorWidget::SetCurrentSceneElement(SceneElement* currentSceneElement) {
   m_CurrentSceneElement = currentSceneElement;
-
 }
 
 void TextEditorWidget::SetCurrentShaderType(ShaderType shaderType) {
   m_CurrentShaderType = shaderType;
+}
+
+void TextEditorWidget::ChangeSourceFile() {
+  FileBrowserWidget* fileBrowser = m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser");
+
+  std::string filePath = fileBrowser->QueryFileBrowser(fileBrowser->m_LastOpenedBy);
+  std::string sceneElementName = FileManager::GetShaderFileNameFromPath(filePath);
+  ShaderType shaderType = FileManager::GetShaderTypeFromPath(filePath);
+
+  auto elementQuery = std::find_if(m_Context.scene.begin(), m_Context.scene.end(), [&](SceneElement* element) {
+      return (element->GetSceneName() == sceneElementName);
+  });
+
+  if (!(elementQuery == m_Context.scene.end())) {
+    SceneElement* sceneElement = *elementQuery;
+
+    SetCurrentSceneElement(sceneElement);
+    SetCurrentShaderType(shaderType);
+    SetEditorText(sceneElement->GetShaderSource(shaderType), shaderType, filePath);
+
+    m_SourceFileWasChanged = false;
+  }
+}
+
+void TextEditorWidget::SetDefaultSourceFile() {
+  SceneElement* sceneElement = *m_Context.scene.begin();
+  ShaderType shaderType = ShaderType::FRAGMENT;
+
+  SetCurrentSceneElement(sceneElement);
+  SetCurrentShaderType(shaderType);
+  SetEditorText(sceneElement->GetShaderSource(shaderType),
+                shaderType,
+                sceneElement->GetShaderSourcePath(shaderType));
 }
 

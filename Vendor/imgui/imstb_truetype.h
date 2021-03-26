@@ -587,8 +587,8 @@ typedef struct stbrp_rect stbrp_rect;
 #endif
 
 STBTT_DEF int  stbtt_PackBegin(stbtt_pack_context *spc, unsigned char *pixels, int width, int height, int stride_in_bytes, int padding, void *alloc_context);
-// Initializes a packing context stored in the passed-in stbtt_pack_context.
-// Future calls using this context will pack characters into the bitmap passed
+// Initializes a packing m_Context stored in the passed-in stbtt_pack_context.
+// Future calls using this m_Context will pack characters into the bitmap passed
 // in here: a 1-channel bitmap that is width * height. stride_in_bytes is
 // the distance from one row to the next (or 0 to mean they are packed tightly
 // together). "padding" is the amount of padding to leave between each
@@ -598,7 +598,7 @@ STBTT_DEF int  stbtt_PackBegin(stbtt_pack_context *spc, unsigned char *pixels, i
 // Returns 0 on failure, 1 on success.
 
 STBTT_DEF void stbtt_PackEnd  (stbtt_pack_context *spc);
-// Cleans up the packing context and frees all memory.
+// Cleans up the packing m_Context and frees all memory.
 
 #define STBTT_POINT_SIZE(x)   (-(x))
 
@@ -639,7 +639,7 @@ STBTT_DEF void stbtt_PackSetOversampling(stbtt_pack_context *spc, unsigned int h
 //
 // This function sets the amount of oversampling for all following calls to
 // stbtt_PackFontRange(s) or stbtt_PackFontRangesGatherRects for a given
-// pack context. The default (no oversampling) is achieved by h_oversample=1
+// pack m_Context. The default (no oversampling) is achieved by h_oversample=1
 // and v_oversample=1. The total number of pixels required is
 // h_oversample*v_oversample larger than the default; for example, 2x2
 // oversampling requires 4x the storage of 1x1. For best results, render
@@ -675,7 +675,7 @@ STBTT_DEF int  stbtt_PackFontRangesRenderIntoRects(stbtt_pack_context *spc, cons
 // (or it may not).
 
 // this is an opaque structure that you shouldn't mess with which holds
-// all the context needed from PackBegin to PackEnd.
+// all the m_Context needed from PackBegin to PackEnd.
 struct stbtt_pack_context {
    void *user_allocator_context;
    void *pack_info;
@@ -919,7 +919,7 @@ STBTT_DEF void stbtt_Rasterize(stbtt__bitmap *result,        // 1-channel bitmap
                                float shift_x, float shift_y, // translation applied to input vertices
                                int x_off, int y_off,         // another translation applied to input
                                int invert,                   // if non-zero, vertically flip shape
-                               void *userdata);              // context for to STBTT_MALLOC
+                               void *userdata);              // m_Context for to STBTT_MALLOC
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -4133,7 +4133,7 @@ STBTT_DEF int stbtt_PackFontRanges(stbtt_pack_context *spc, const unsigned char 
 {
    stbtt_fontinfo info;
    int i,j,n, return_value; // [DEAR IMGUI] removed = 1
-   //stbrp_context *context = (stbrp_context *) spc->pack_info;
+   //stbrp_context *m_Context = (stbrp_context *) spc->pack_info;
    stbrp_rect    *rects;
 
    // flag all characters as NOT packed

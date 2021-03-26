@@ -58,7 +58,13 @@ void FileBrowserWidget::OpenFileBrowser(FileBrowserAccess type) {
 }
 
 std::string FileBrowserWidget::QueryFileBrowser(FileBrowserAccess type) {
-  return m_PathCollection[type];
+  std::string path = m_PathCollection[type];
+
+  if (type == FileBrowserAccess::FragmentShader || type == FileBrowserAccess::VertexShader) {
+    m_PathCollection[type] = "";
+  }
+
+  return path;
 }
 
 void FileBrowserWidget::CheckForPath() {
@@ -66,4 +72,11 @@ void FileBrowserWidget::CheckForPath() {
     m_PathCollection[m_LastOpenedBy] = m_FileBrowser.GetSelected().string();
     m_FileBrowser.ClearSelected();
   }
+}
+
+bool FileBrowserWidget::HasSelected(FileBrowserWidget::FileBrowserAccess type) {
+  if (m_PathCollection[type].empty()) {
+    return false;
+  }
+  return true;
 }

@@ -32,6 +32,8 @@ private:
     std::string GetEditorText();
 
     void SetEditorText(const std::string& text, ShaderType shaderType, const std::string& filePath);
+    void ChangeSourceFile();
+    void SetDefaultSourceFile();
     void Save();
 
     void OnUpdate(float deltaTime) override;

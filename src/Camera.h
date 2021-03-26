@@ -43,6 +43,7 @@ namespace Camera {
     extern float lastFrame;
 
     extern bool isHeld;
+    extern bool Is3DCameraEnabled;
 
     extern void UpdateCameraTime();
 
@@ -57,6 +58,8 @@ namespace Camera {
     extern void ProcessCameraInput(GLFWwindow *window);
 
     extern glm::mat4 GetViewMatrix();
+
+    extern void ResetCameraPosition();
 };
 
 

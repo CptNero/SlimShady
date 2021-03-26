@@ -23,7 +23,7 @@ Index of this file:
 // [SECTION] Multi-select support
 // [SECTION] Docking support
 // [SECTION] Viewport support
-// [SECTION] ImGuiContext (main imgui context)
+// [SECTION] ImGuiContext (main imgui m_Context)
 // [SECTION] ImGuiWindowTempData, ImGuiWindow
 // [SECTION] Tab bar, Tab item support
 // [SECTION] Table support
@@ -92,7 +92,7 @@ struct ImDrawListSharedData;        // Data shared between all ImDrawList instan
 struct ImGuiColorMod;               // Stacked color modifier, backup of modified data so we can restore it
 struct ImGuiColumnData;             // Storage data for a single column
 struct ImGuiColumns;                // Storage data for a columns set
-struct ImGuiContext;                // Main Dear ImGui context
+struct ImGuiContext;                // Main Dear ImGui m_Context
 struct ImGuiDataTypeInfo;           // Type information associated to a ImGuiDataType enum
 struct ImGuiGroupData;              // Stacked storage data for BeginGroup()/EndGroup()
 struct ImGuiInputTextState;         // Internal state of the currently focused/edited text input box
@@ -133,7 +133,7 @@ typedef int ImGuiTooltipFlags;          // -> enum ImGuiTooltipFlags_       // F
 //-----------------------------------------------------------------------------
 
 #ifndef GImGui
-extern IMGUI_API ImGuiContext* GImGui;  // Current implicit context pointer
+extern IMGUI_API ImGuiContext* GImGui;  // Current implicit m_Context pointer
 #endif
 
 //-------------------------------------------------------------------------
@@ -220,7 +220,7 @@ namespace ImStb
 //-----------------------------------------------------------------------------
 // [SECTION] Generic helpers
 // Note that the ImXXX helpers functions are lower-level than ImGui functions.
-// ImGui functions or the ImGui context are never called/used from other ImXXX functions.
+// ImGui functions or the ImGui m_Context are never called/used from other ImXXX functions.
 //-----------------------------------------------------------------------------
 // - Helpers: Hashing
 // - Helpers: Sorting
@@ -1074,7 +1074,7 @@ struct ImGuiWindowSettings
     ImVec2ih    Pos;
     ImVec2ih    Size;
     bool        Collapsed;
-    bool        WantApply;      // Set when loaded from .ini data (to enable merging/loading .ini data into an already running context)
+    bool        WantApply;      // Set when loaded from .ini data (to enable merging/loading .ini data into an already running m_Context)
 
     ImGuiWindowSettings()       { ID = 0; Pos = Size = ImVec2ih(0, 0); Collapsed = WantApply = false; }
     char* GetName()             { return (char*)(this + 1); }
@@ -1096,7 +1096,7 @@ struct ImGuiSettingsHandler
 };
 
 //-----------------------------------------------------------------------------
-// [SECTION] ImGuiContext (main imgui context)
+// [SECTION] ImGuiContext (main imgui m_Context)
 //-----------------------------------------------------------------------------
 
 struct ImGuiContext
@@ -1588,7 +1588,7 @@ struct IMGUI_API ImGuiWindow
     signed char             ResizeBorderHeld;                   // Current border being held for resize (-1: none, otherwise 0-3)
     short                   BeginCount;                         // Number of Begin() during the current frame (generally 0 or 1, 1+ if appending via multiple Begin/End pairs)
     short                   BeginOrderWithinParent;             // Order within immediate parent window, if we are a child window. Otherwise 0.
-    short                   BeginOrderWithinContext;            // Order within entire imgui context. This is mostly used for debugging submission order related issues.
+    short                   BeginOrderWithinContext;            // Order within entire imgui m_Context. This is mostly used for debugging submission order related issues.
     ImGuiID                 PopupId;                            // ID in the popup stack when this window is used as a popup/menu (because we use generic Name/ID for recycling)
     ImS8                    AutoFitFramesX, AutoFitFramesY;
     ImS8                    AutoFitChildAxises;
@@ -1788,7 +1788,7 @@ namespace ImGui
 
     // Init
     IMGUI_API void          Initialize(ImGuiContext* context);
-    IMGUI_API void          Shutdown(ImGuiContext* context);    // Since 1.60 this is a _private_ function. You can call DestroyContext() to destroy the context created by CreateContext().
+    IMGUI_API void          Shutdown(ImGuiContext* context);    // Since 1.60 this is a _private_ function. You can call DestroyContext() to destroy the m_Context created by CreateContext().
 
     // NewFrame
     IMGUI_API void          UpdateHoveredWindowAndCaptureFlags();

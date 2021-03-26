@@ -5,8 +5,9 @@
 #include "../Camera.h"
 #include "FileBrowserWidget.h"
 
-SceneEditorWidget::SceneEditorWidget(Context context) :
-        m_Context(context) {
+SceneEditorWidget::SceneEditorWidget(Context context, UniformManager& uniformManager) :
+        m_Context(context),
+        m_UniformManager(uniformManager){
 }
 
 SceneEditorWidget::~SceneEditorWidget() = default;
@@ -19,7 +20,7 @@ void SceneEditorWidget::OnRender() {
 }
 
 void SceneEditorWidget::OnImGuiRender() {
-  FileBrowserWidget* fileBrowserWidget = (FileBrowserWidget*) m_Context.widgetBroker.GetWidget("FileBrowser");
+  FileBrowserWidget* fileBrowserWidget = m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser");
   ImGui::ColorEdit4("Clear color", m_ClearColor, 1);
 
   ImGui::InputText("Element name", m_SceneElementNameInputBuffer, IM_ARRAYSIZE(m_SceneElementNameInputBuffer));
@@ -124,6 +125,16 @@ void SceneEditorWidget::OnImGuiRender() {
         ImGui::TreePop();
       }
 
+      if (ImGui::TreeNode("Uniforms")) {
+        for(auto const& uniform : m_UniformManager.m_UniformLocationCache) {
+          if (uniform.first.find(m_currentSceneElement->GetSceneName()) != std::string::npos) {
+            ImGui::Text("Id: %d Name: %s", uniform.second, uniform.first.c_str());
+          }
+        }
+
+        ImGui::TreePop();
+      }
+
       ImGui::Separator();
       ImGui::TreePop();
     }
@@ -133,7 +144,7 @@ void SceneEditorWidget::OnImGuiRender() {
 
     ImGui::Text("Camera coords: %f %f %f", Camera::Position.x, Camera::Position.y, Camera::Position.z);
 
-    auto textEditorWidget = (TextEditorWidget*)m_Context.widgetBroker.GetWidget("TextEditor");
+    TextEditorWidget* textEditorWidget = m_Context.widgetBroker.GetWidget<TextEditorWidget>("TextEditor");
 
     ImGui::Text("CurrentSceneElement: %s", textEditorWidget->m_CurrentSceneElement->GetSceneName().c_str());
   }
@@ -148,7 +159,7 @@ void SceneEditorWidget::RenderWidget() {
 }
 
 void SceneEditorWidget::Recompile() {
-  TextEditorWidget* textEditorWidget = (TextEditorWidget*) m_Context.widgetBroker.GetWidget("TextEditor");
+  TextEditorWidget* textEditorWidget = m_Context.widgetBroker.GetWidget<TextEditorWidget>("TextEditor");
 
   std::replace(
           m_Context.scene.begin(),
@@ -161,6 +172,7 @@ void SceneEditorWidget::Recompile() {
                   m_currentSceneElement->m_Vertices,
                   m_currentSceneElement->m_Indices,
                   m_currentSceneElement->m_TexturePaths));
+  m_UniformManager.m_UniformLocationCache.clear();
   textEditorWidget->SetCurrentSceneElement(
           *std::find_if(m_Context.scene.begin(), m_Context.scene.end(), [&](SceneElement* element) {
       return (element->GetSceneName() == m_currentSceneElement->GetSceneName());
