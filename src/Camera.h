@@ -4,7 +4,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
-#include <glfw3.h>
+#include <GLFW/glfw3.h>
 
 enum Camera_Movement {
     FORWARD,

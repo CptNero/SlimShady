@@ -3,7 +3,7 @@
 
 #include "../Widgets/TextEditorWidget.h"
 #include "../Widgets/SceneEditorWidget.h"
-#include <glfw3.h>
+#include <GLFW/glfw3.h>
 
 namespace InputHandler {
     extern void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);

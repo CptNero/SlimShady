@@ -1,4 +1,4 @@
-#include <glew.h>
+#include <GL/glew.h>
 
 #include <fstream>
 
@@ -110,15 +110,14 @@ void Shader::SetUniform4f(const std::string &name, float v0, float v1, float v2,
   glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
 }
 
-int Shader::GetUniformLocation(const std::string &name)
-{
-  std::map<std::string, int>::const_iterator it = m_UniformLocationCache.find(name);
-  if (it == m_UniformLocationCache.end()) {
-    return -1;
-  }
-
-  return it->second;
-
+int Shader::GetUniformLocation(const std::string &name) {
+//    std::map<std::string, int>::const_iterator it = m_UniformLocationCache.find(name);
+//    if (it == m_UniformLocationCache.end()) {
+//        return -1;
+//    }
+//
+//    return it->second;
+}
 /* // Always checking and reading the uniform name is a big perf hit.
    // find and [] does the same thing (lookup) and thus there will be two lookup in the unordered_map, big perf hit.
   if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
@@ -134,6 +133,7 @@ int Shader::GetUniformLocation(const std::string &name)
 
   return location;
 }
+*/
 
 void Shader::SetUniform1i(const std::string &name, int value)
 {
@@ -148,6 +148,5 @@ void Shader::SetUniformMat4f(const std::string &name, const glm::mat4 &matrix)
 {
   glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]);
 }
-
 
 

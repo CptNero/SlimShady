@@ -49,7 +49,7 @@ void ConsoleWidget::RenderWidget()
 void ConsoleWidget::HandleInput(const std::string& logInput)
 {
   if(logInput == "clear") {
-    strcpy_s(m_ConsoleLogBuffer, strlen("") + 1,"");
+    //strcpy_s(m_ConsoleLogBuffer, strlen("") + 1,"");
   }
 }
 
@@ -60,8 +60,8 @@ void ConsoleWidget::LogInput(const std::string& logInput)
 
   m_ConsoleLogBuffer = new char[strlen(preparedString.c_str()) + 1];
 
-  strcpy_s(m_ConsoleLogBuffer, strlen(preparedString.c_str()) + 1 ,preparedString.c_str());
-  strcpy_s(m_ConsoleInputBuffer, "");
+  //strcpy_s(m_ConsoleLogBuffer, strlen(preparedString.c_str()) + 1 ,preparedString.c_str());
+  //strcpy_s(m_ConsoleInputBuffer, "");
 }
 
 //Append a line to the console log.
@@ -71,5 +71,5 @@ void ConsoleWidget::LogMessage(const std::string& logMessage)
 
   m_ConsoleLogBuffer = new char[strlen(preparedString.c_str()) + 1];
 
-  strcpy_s(m_ConsoleLogBuffer, strlen(preparedString.c_str()) + 1, preparedString.c_str());
+  //strcpy_s(m_ConsoleLogBuffer, strlen(preparedString.c_str()) + 1, preparedString.c_str());
 }

@@ -1,7 +1,7 @@
 #ifndef OPENGLTEMPLATE_ERRORHANDLER_H
 #define OPENGLTEMPLATE_ERRORHANDLER_H
 
-#include <glew.h>
+#include <GL/glew.h>
 
 class ErrorHandler {
   public:

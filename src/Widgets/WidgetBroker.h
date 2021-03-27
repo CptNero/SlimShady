@@ -5,8 +5,12 @@
 #include <map>
 #include <assert.h>
 #include "Widget.h"
+#include <memory>
 
 class WidgetBroker {
+
+private:
+    std::map<std::string, std::unique_ptr<Widget>> m_Widgets;
 
 public:
     WidgetBroker() = default;
@@ -23,8 +27,6 @@ public:
     Widget* GetWidget(std::string id) {
       return m_Widgets[id].get();
     }
-private:
-    std::map<std::string, std::unique_ptr<Widget>> m_Widgets;
 };
 
 

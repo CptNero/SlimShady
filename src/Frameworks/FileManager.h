@@ -7,6 +7,8 @@
 #include <filesystem>
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <list>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "../ShaderType.h"
