@@ -84,48 +84,8 @@ void Shader::UnBind() const
   glUseProgram(0);
 }
 
-void Shader::SetUniform4f(const std::string &name, float v0, float v1, float v2, float v3)
-{
-  glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
-}
-
-int Shader::GetUniformLocation(const std::string &name)
-{
-  std::map<std::string, int>::const_iterator it = m_UniformLocationCache.find(name);
-  if (it == m_UniformLocationCache.end()) {
-    return -1;
-  }
-
-  return it->second;
-
-/* // Always checking and reading the uniform name is a big perf hit.
-   // find and [] does the same thing (lookup) and thus there will be two lookup in the unordered_map, big perf hit.
-  if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
-    return m_UniformLocationCache[name];
-
-  int location = glGetUniformLocation(m_RendererID, name.c_str());
-  if (location == -1)
-    if (Configurations::IsDebugEnabled) {
-      ConsoleWidget::LogMessage(std::string("Couldn't find uniform " + name));
-    }
-
-  m_UniformLocationCache[name] = location;
-
-  return location;
-}
-
-void Shader::SetUniform1i(const std::string &name, int value)
-{
-  glUniform1i(GetUniformLocation(name), value);
-}
-
-void Shader::SetUniform1f(const std::string &name, float value) {
-  glUniform1f(GetUniformLocation(name), value);
-}
-
-void Shader::SetUniformMat4f(const std::string &name, const glm::mat4 &matrix)
-{
-  glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]);
+uint32_t Shader::GetRendererId() const {
+  return m_RendererID;
 }
 
 

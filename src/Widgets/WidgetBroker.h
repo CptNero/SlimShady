@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <memory>
 #include <assert.h>
 #include "Widget.h"
 

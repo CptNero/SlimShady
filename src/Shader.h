@@ -2,14 +2,13 @@
 #define SLIMSHADY_SHADER_H
 
 #include <string>
-#include <unordered_map>
+#include <map>
 #include <glm/glm.hpp>
 
 class Shader
 {
 private:
     uint32_t m_RendererID;
-    std::unordered_map<std::string, int> m_UniformLocationCache;
 
 public:
 

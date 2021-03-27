@@ -9,7 +9,7 @@ class ConsoleWidget : public Widget {
   private:
     Context& context;
 
-    static char* m_ConsoleLogBuffer;
+    static std::list<std::string> m_ConsoleLogBuffer;
     char m_ConsoleInputBuffer[1024] = "";
 
   public:
