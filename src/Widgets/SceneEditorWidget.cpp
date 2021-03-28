@@ -59,18 +59,20 @@ void SceneEditorWidget::OnImGuiRender() {
       }
 
       if (ImGui::TreeNode("Vertices")) {
+        std::vector<float>& vertices = m_currentSceneElement->GetVertices();
+
         if (ImGui::Button("Add")) {
-          m_currentSceneElement->m_Vertices
-          .insert(m_currentSceneElement->m_Vertices.end(), {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+          vertices
+          .insert(vertices.end(), {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
         }
         ImGui::SameLine();
         if (ImGui::Button("Delete")) {
-          if(m_currentSceneElement->m_Vertices.size() >= 8) {
-            m_currentSceneElement->m_Vertices.resize(m_currentSceneElement->m_Vertices.size() - 8);
+          if(m_currentSceneElement->GetVertices().size() >= 8) {
+            m_currentSceneElement->GetVertices().resize(vertices.size() - 8);
           }
         }
 
-        for(int i = 0; i < m_currentSceneElement->m_Vertices.size(); i+=8) {
+        for(int i = 0; i < vertices.size(); i+=8) {
           std::stringstream vertexCoordinatelabel;
           std::stringstream colorCoordinateLabel;
           std::stringstream textureCoordinateLabel;
@@ -79,11 +81,11 @@ void SceneEditorWidget::OnImGuiRender() {
           textureCoordinateLabel << "Texture #"  << i / 8 << std::endl;
 
           //First 3 values are the position coordinates
-          ImGui::InputFloat3(vertexCoordinatelabel.str().c_str(), &m_currentSceneElement->m_Vertices[i]);
+          ImGui::InputFloat3(vertexCoordinatelabel.str().c_str(), &vertices[i]);
           //3rd to 6th values are the color coordinates
-          ImGui::InputFloat3(colorCoordinateLabel.str().c_str(), &m_currentSceneElement->m_Vertices[i + 3]);
+          ImGui::InputFloat3(colorCoordinateLabel.str().c_str(), &vertices[i + 3]);
           //7th to 8th values are the texture coordinates
-          ImGui::InputFloat2(textureCoordinateLabel.str().c_str(), &m_currentSceneElement->m_Vertices[i + 6]);
+          ImGui::InputFloat2(textureCoordinateLabel.str().c_str(), &vertices[i + 6]);
           ImGui::Separator();
         }
 
@@ -91,42 +93,47 @@ void SceneEditorWidget::OnImGuiRender() {
       }
 
       if (ImGui::TreeNode("Indices")) {
+        std::vector<uint32_t>& indices = m_currentSceneElement->GetIndices();
+
         if (ImGui::Button("Add")) {
-          m_currentSceneElement->m_Indices.emplace_back(0);
+          indices.emplace_back(0);
         }
         ImGui::SameLine();
         if (ImGui::Button("Delete")) {
-          m_currentSceneElement->m_Indices.pop_back();
+          indices.pop_back();
         }
 
-        for (int i = 0; i < m_currentSceneElement->m_Indices.size(); i++) {
+        for (int i = 0; i < indices.size(); i++) {
           std::stringstream label;
           label << "Index #"  << i << std::endl;
-          ImGui::InputInt(label.str().c_str(), (int*)&m_currentSceneElement->m_Indices[i]);
+          ImGui::InputInt(label.str().c_str(), (int*)&indices[i]);
 
         }
         ImGui::TreePop();
       }
 
       if (ImGui::TreeNode("Textures")) {
+        std::list<std::string> texturePaths = m_currentSceneElement->GetTexturePaths();
 
         if (ImGui::Button("Add")) {
-            m_currentSceneElement->m_TexturePaths.emplace_back(fileBrowserWidget->QueryFileBrowser(FileBrowserWidget::Texture));
+          texturePaths.emplace_back(fileBrowserWidget->QueryFileBrowser(FileBrowserWidget::Texture));
         }
         ImGui::SameLine();
         if (ImGui::Button("Delete")) {
-          m_currentSceneElement->m_TexturePaths.pop_back();
+          texturePaths.pop_back();
         }
         int counter = 0;
-        for(auto const& texturePath : m_currentSceneElement->m_TexturePaths) {
-          ImGui::Text("Id: %d Name: %s", counter, FileManager::GetShaderFileNameFromPath(texturePath).c_str());
+        for(auto const& texturePath : texturePaths) {
+          ImGui::Text("Id: %d Name: %s", counter, FileManager::GetTextureFileNameFromPath(texturePath).c_str());
           counter ++;
         }
         ImGui::TreePop();
       }
 
       if (ImGui::TreeNode("Uniforms")) {
-        for(auto const& uniform : m_UniformManager.m_UniformLocationCache) {
+        std::map<std::string, int>& uniforms = m_UniformManager.GetUniformLocationCache();
+
+        for(auto const& uniform : uniforms) {
           if (uniform.first.find(m_currentSceneElement->GetSceneName()) != std::string::npos) {
             ImGui::Text("Id: %d Name: %s", uniform.second, uniform.first.c_str());
           }
@@ -146,7 +153,7 @@ void SceneEditorWidget::OnImGuiRender() {
 
     TextEditorWidget* textEditorWidget = m_Context.widgetBroker.GetWidget<TextEditorWidget>("TextEditor");
 
-    ImGui::Text("CurrentSceneElement: %s", textEditorWidget->m_CurrentSceneElement->GetSceneName().c_str());
+    ImGui::Text("CurrentSceneElement: %s", textEditorWidget->GetCurrentSceneElement()->GetSceneName().c_str());
   }
 }
 
@@ -169,10 +176,10 @@ void SceneEditorWidget::Recompile() {
                   m_currentSceneElement->GetSceneName(),
                   m_currentSceneElement->GetShaderSource(ShaderType::VERTEX),
                   m_currentSceneElement->GetShaderSource(ShaderType::FRAGMENT),
-                  m_currentSceneElement->m_Vertices,
-                  m_currentSceneElement->m_Indices,
-                  m_currentSceneElement->m_TexturePaths));
-  m_UniformManager.m_UniformLocationCache.clear();
+                  m_currentSceneElement->GetVertices(),
+                  m_currentSceneElement->GetIndices(),
+                  m_currentSceneElement->GetTexturePaths()));
+  m_UniformManager.GetUniformLocationCache().clear();
   textEditorWidget->SetCurrentSceneElement(
           *std::find_if(m_Context.scene.begin(), m_Context.scene.end(), [&](SceneElement* element) {
       return (element->GetSceneName() == m_currentSceneElement->GetSceneName());
@@ -185,7 +192,7 @@ void SceneEditorWidget::Save() {
 
   vertexAttributeFile.Vertices = vertices;
   vertexAttributeFile.Indices = m_currentSceneElement->GetIndices();
-  vertexAttributeFile.texturePaths = m_currentSceneElement->m_TexturePaths;
+  vertexAttributeFile.texturePaths = m_currentSceneElement->GetTexturePaths();
 
   std::string vertexAttributeFileAsString = FileManager::ConvertVertexAttributeFileToString(vertexAttributeFile);
   FileManager::UpdateFile(

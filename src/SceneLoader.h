@@ -6,14 +6,14 @@
 #include "Frameworks/Context.h"
 
 class SceneLoader {
-  private:
-    Context m_Context;
-
   public:
     explicit SceneLoader(Context context);
     ~SceneLoader();
 
     void InitializeScene();
+
+  private:
+    Context m_Context;
 };
 
 

@@ -50,10 +50,10 @@ void Texture::UnBind() const
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-std::string Texture::GetPath() {
-  return "";
-}
-
 std::string Texture::GetName() {
   return m_Name;
+}
+
+const std::vector<uint32_t> &Texture::GetTextureIds() const {
+    return m_TextureIds;
 }

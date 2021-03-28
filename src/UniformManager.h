@@ -8,10 +8,10 @@
 
 class UniformManager {
   public:
-    std::map<std::string, int> m_UniformLocationCache;
-
     UniformManager(Context context);
     ~UniformManager();
+
+    std::map<std::string, int> &GetUniformLocationCache();
 
     void SetUniform1i(uint32_t rendererId, const std::string& name, int value);
     void SetUniform1f(uint32_t rendererId, const std::string& name, float value);
@@ -20,9 +20,9 @@ class UniformManager {
 
   private:
     Context m_Context;
+    std::map<std::string, int> m_UniformLocationCache;
 
     int GetUniformLocation(const std::string& name, uint32_t rendererId);
-
 };
 
 

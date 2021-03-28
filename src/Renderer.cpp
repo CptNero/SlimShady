@@ -22,31 +22,31 @@ void Renderer::Draw(std::list<SceneElement*>& scene) {
   Camera::UpdateCameraTime();
   for (auto  const &sceneElement : scene) {
 
-    sceneElement->m_Shader->Bind();
-    sceneElement->m_VertexArrayObject->Bind();
-    sceneElement->m_IndexBuffer->Bind();
-    sceneElement->m_Texture->Bind();
+    sceneElement->GetShader()->Bind();
+    sceneElement->GetVertexArray()->Bind();
+    sceneElement->GetIndexBuffer()->Bind();
+    sceneElement->GetTexture()->Bind();
 
     UpdateUniforms(*sceneElement);
 
-    glDrawElements(GL_TRIANGLES, sceneElement->m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, sceneElement->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
   }
   m_Context.widgetBroker.GetWidget<TaskWidget>("TaskWidget")->BindFrameBuffer();
   for (auto const &sceneElement: scene) {
-    sceneElement->m_Shader->Bind();
-    sceneElement->m_VertexArrayObject->Bind();
-    sceneElement->m_IndexBuffer->Bind();
-    sceneElement->m_Texture->Bind();
+    sceneElement->GetShader()->Bind();
+    sceneElement->GetVertexArray()->Bind();
+    sceneElement->GetVertexBuffer()->Bind();
+    sceneElement->GetTexture()->Bind();
 
-    m_Context.widgetBroker.GetWidget<TaskWidget>("TaskWidget")->RenderIntoTexture(sceneElement->m_IndexBuffer->GetCount());
+    m_Context.widgetBroker.GetWidget<TaskWidget>("TaskWidget")->RenderIntoTexture(sceneElement->GetIndexBuffer()->GetCount());
   }
   m_Context.widgetBroker.GetWidget<TaskWidget>("TaskWidget")->UnBindFrameBuffer();
 }
 
 void Renderer::UpdateUniforms(SceneElement& sceneElement) {
   std::string name = sceneElement.GetSceneName();
-  uint32_t rendererId = sceneElement.m_Shader->GetRendererId();
+  uint32_t rendererId = sceneElement.GetShader()->GetRendererId();
 
   m_Projection = glm::perspective(glm::radians(Camera::Zoom), Configurations::ScreenWidth / Configurations::ScreenHeight, 0.1f, 100.f);
   m_View = Camera::GetViewMatrix();
@@ -60,10 +60,10 @@ void Renderer::UpdateUniforms(SceneElement& sceneElement) {
   m_UniformManager.SetUniform1i(rendererId, "u_" + name + "Height", Configurations::ScreenHeight);
 
   int counter = 0;
-  for(auto const& texturePath : sceneElement.m_TexturePaths) {
+  for(auto const& texturePath : sceneElement.GetTexturePaths()) {
     std::stringstream samplerName;
     samplerName << "u_" + name + "Texture" << counter;
-    if (!sceneElement.m_Texture->m_TextureIds.empty()) {
+    if (!sceneElement.GetTexture()->GetTextureIds().empty()) {
       m_UniformManager.SetUniform1i(rendererId, samplerName.str(), counter);
     }
     counter++;

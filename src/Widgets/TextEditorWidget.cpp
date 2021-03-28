@@ -175,3 +175,7 @@ void TextEditorWidget::SetDefaultSourceFile() {
                 sceneElement->GetShaderSourcePath(shaderType));
 }
 
+SceneElement *TextEditorWidget::GetCurrentSceneElement() const {
+    return m_CurrentSceneElement;
+}
+

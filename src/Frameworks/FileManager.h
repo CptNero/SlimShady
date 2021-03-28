@@ -44,6 +44,8 @@ public:
 
     static std::string GetShaderFileNameFromPath(const std::string &filePath);
 
+    static std::string GetTextureFileNameFromPath(const std::string& filePath);
+
     static ShaderType GetShaderTypeFromPath(const std::string& filePath);
 
     static ShaderFile CreateShaderFile(const std::string &sceneElementName, ShaderType shaderType);

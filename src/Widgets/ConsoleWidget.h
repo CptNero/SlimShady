@@ -6,13 +6,7 @@
 #include "../Frameworks/Context.h"
 
 class ConsoleWidget : public Widget {
-  private:
-    Context& context;
-
-    static std::list<std::string> m_ConsoleLogBuffer;
-    char m_ConsoleInputBuffer[1024] = "";
-
-  public:
+public:
     ConsoleWidget(Context& context);
     ~ConsoleWidget();
 
@@ -24,6 +18,12 @@ class ConsoleWidget : public Widget {
     void LogInput(const std::string& logInput);
     void static LogMessage(const std::string& logMessage);
     void HandleInput(const std::string& logInput);
+
+private:
+    Context& context;
+
+    static std::list<std::string> m_ConsoleLogBuffer;
+    char m_ConsoleInputBuffer[1024] = "";
 };
 
 

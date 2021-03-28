@@ -18,7 +18,6 @@ SceneElement::SceneElement(const std::string& sceneElementName) : m_SceneName(sc
 
   m_VertexShaderSource = vertexShaderFile.ShaderSource;
   m_VertexShaderSourcePath = vertexShaderFile.Path;
-  m_VertexAttributePath = vertexAttributeFile.Path;
 
   m_FragmentShaderSource = fragmentShaderFile.ShaderSource;
   m_FragmentShaderSourcePath = fragmentShaderFile.Path;
@@ -145,10 +144,34 @@ void SceneElement::SetShaderSource(const std::string& source, ShaderType shaderT
   }
 }
 
-std::vector<float> SceneElement::GetVertices() {
+std::vector<float>& SceneElement::GetVertices() {
   return m_Vertices;
 }
 
-std::vector<uint32_t> SceneElement::GetIndices() {
+std::vector<uint32_t>& SceneElement::GetIndices() {
   return m_Indices;
+}
+
+const std::unique_ptr<VertexArray> &SceneElement::GetVertexArray() const {
+    return m_VertexArrayObject;
+}
+
+const std::unique_ptr<IndexBuffer> &SceneElement::GetIndexBuffer() const {
+    return m_IndexBuffer;
+}
+
+const std::unique_ptr<VertexBuffer> &SceneElement::GetVertexBuffer() const {
+    return m_VertexBuffer;
+}
+
+const std::unique_ptr<Shader> &SceneElement::GetShader() const {
+    return m_Shader;
+}
+
+const std::unique_ptr<Texture> &SceneElement::GetTexture() const {
+    return m_Texture;
+}
+
+const std::list<std::string> &SceneElement::GetTexturePaths() const {
+    return m_TexturePaths;
 }

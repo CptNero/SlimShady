@@ -9,14 +9,6 @@
 #include "UniformManager.h"
 
 class Renderer {
-private:
-    Context m_Context;
-    UniformManager& m_UniformManager;
-
-    glm::mat4 m_Projection;
-    glm::mat4 m_View;
-    glm::mat4 m_Model;
-
 public:
     Renderer(Context context, UniformManager& uniformManager);
     ~Renderer();
@@ -24,6 +16,14 @@ public:
     void Clear() const;
     void Draw(std::list<SceneElement*>& scene);
     void UpdateUniforms(SceneElement& sceneElement);
+
+private:
+    Context m_Context;
+    UniformManager& m_UniformManager;
+
+    glm::mat4 m_Projection;
+    glm::mat4 m_View;
+    glm::mat4 m_Model;
 };
 
 

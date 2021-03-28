@@ -9,15 +9,13 @@
 class ImageComparator {
 
 public:
-    std::vector<uint8_t> m_TaskTextureData;
-    std::vector<uint8_t> m_RenderedTextureData;
-
     ImageComparator(std::vector<uint8_t> taskTextureData, std::vector<uint8_t> renderedTextureData);
     ~ImageComparator();
 
     double CompareImages();
     float CalculateChiSquareDistance(const std::vector<uint8_t>& taskTextureData, const std::vector<uint8_t>& renderedTextureData);
     double CalculateSSIM(const std::vector<uint8_t>& taskTextureData, const std::vector<uint8_t>& renderedTextureData);
+
 private:
 
     enum RGBAComponent {
@@ -60,11 +58,12 @@ private:
         }
     };
 
+    std::vector<uint8_t> m_TaskTextureData;
+    std::vector<uint8_t> m_RenderedTextureData;
+
     std::vector<uint8_t> ExtractColorChannel(const std::vector<uint8_t>& textureData, RGBAComponent component);
     double CalculateSSIMForColorChannel(const std::vector<uint8_t> &taskTextureColor, const std::vector<uint8_t> &renderedTextureColor);
     TextureHistogram CreateTextureHistogram(std::vector<uint8_t> textureData);
-
-
 };
 
 

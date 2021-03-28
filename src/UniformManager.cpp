@@ -44,3 +44,7 @@ void UniformManager::SetUniformMat4f(uint32_t rendererId, const std::string &nam
 {
   glUniformMatrix4fv(GetUniformLocation(name, rendererId), 1, GL_FALSE, &matrix[0][0]);
 }
+
+std::map<std::string, int> &UniformManager::GetUniformLocationCache() {
+    return m_UniformLocationCache;
+}

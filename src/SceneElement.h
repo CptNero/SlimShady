@@ -35,18 +35,22 @@ class SceneElement {
     ~SceneElement();
 
     std::string GetSceneName();
+
+    const std::unique_ptr<VertexArray> &GetVertexArray() const;
+    const std::unique_ptr<IndexBuffer> &GetIndexBuffer() const;
+    const std::unique_ptr<VertexBuffer> &GetVertexBuffer() const;
+    const std::unique_ptr<Shader> &GetShader() const;
+    const std::unique_ptr<Texture> &GetTexture() const;
+    const std::list<std::string> &GetTexturePaths() const;
+
     std::string GetShaderSourcePath(ShaderType shaderType);
     std::string GetShaderSource(ShaderType shaderType);
-    std::vector<float> GetVertices();
-    std::vector<uint32_t> GetIndices();
-
-    std::vector<float> m_Vertices;
-    std::vector<uint32_t> m_Indices;
-    std::list<std::string> m_TexturePaths;
+    std::vector<float>& GetVertices();
+    std::vector<uint32_t>& GetIndices();
 
     void SetShaderSource(const std::string& source, ShaderType shaderType);
 
-  //private:
+  private:
     std::string m_SceneName;
 
     std::unique_ptr<VertexArray> m_VertexArrayObject;
@@ -61,7 +65,9 @@ class SceneElement {
     std::string m_VertexShaderSource;
     std::string m_FragmentShaderSource;
 
-    std::string m_VertexAttributePath;
+    std::vector<float> m_Vertices;
+    std::vector<uint32_t> m_Indices;
+    std::list<std::string> m_TexturePaths;
 
     void InitializeSceneElement();
 };
