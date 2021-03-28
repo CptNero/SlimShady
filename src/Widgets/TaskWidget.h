@@ -3,7 +3,7 @@
 
 
 #include <string>
-#include <glew.h>
+#include <GL/glew.h>
 #include "Widget.h"
 #include "../Frameworks/Context.h"
 

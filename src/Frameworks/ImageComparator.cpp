@@ -1,5 +1,6 @@
 #include <utility>
 #include <iostream>
+#include <cmath>
 #include "ImageComparator.h"
 #include "MathUtility.h"
 

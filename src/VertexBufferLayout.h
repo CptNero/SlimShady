@@ -1,7 +1,7 @@
 #ifndef SLIMSHADY_VERTEXBUFFERLAYOUT_H
 #define SLIMSHADY_VERTEXBUFFERLAYOUT_H
 
-#include <glew.h>
+#include <GL/glew.h>
 
 #include <vector>
 

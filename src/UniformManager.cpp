@@ -2,7 +2,7 @@
 // Created by ravai on 11/03/2021.
 //
 
-#include <glew.h>
+#include <GL/glew.h>
 #include "UniformManager.h"
 
 UniformManager::UniformManager(Context context) : m_Context(context) {

@@ -1,8 +1,9 @@
-#include <glew.h>
+#include <GL/glew.h>
 #include "Renderer.h"
 #include "Frameworks/Configurations.h"
 #include "Widgets/SceneEditorWidget.h"
 #include "Widgets/TaskWidget.h"
+#include "UniformManager.h"
 
 Renderer::Renderer(Context context, UniformManager& uniformManager) :
   m_Context(context),

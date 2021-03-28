@@ -2,7 +2,7 @@
 #define SLIMSHADY_IMAGECOMPARATOR_H
 
 
-#include <glew.h>
+#include <GL/glew.h>
 #include <vector>
 #include <sstream>
 
