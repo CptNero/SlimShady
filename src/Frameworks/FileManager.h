@@ -52,8 +52,6 @@ public:
 
     static std::string GetVertexAttributeFilePath(const std::string &sceneElementName);
 
-    static std::string GetVertexAttributeFileNameFromPath(const std::string &filePath);
-
     static VertexAttributeFile CreateVertexAttributeFile(const std::string &sceneElementName);
 
     static VertexAttributeFile ConvertStringToVertexAttributeFile(const std::string &vertexAttributeData);

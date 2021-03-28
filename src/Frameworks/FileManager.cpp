@@ -1,3 +1,4 @@
+#include <regex>
 #include "FileManager.h"
 #include "../Widgets/ConsoleWidget.h"
 #include "Configurations.h"
@@ -15,7 +16,12 @@ std::string FileManager::GetShaderFilePath(const std::string &sceneElementName, 
 }
 
 std::string FileManager::GetShaderFileNameFromPath(const std::string &filePath) {
-  return filePath.substr(filePath.find_last_of('\\') + 1, filePath.find_last_of('_') - filePath.find_last_of('\\') - 1);
+  std::regex fileNameRegex(".*Shaders\\/(\\w+)_(Vertex|Fragment)*.");
+  std::smatch match;
+
+  std::regex_search(filePath.begin(), filePath.end(), match, fileNameRegex);
+
+  return match[1];
 }
 
 ShaderType FileManager::GetShaderTypeFromPath(const std::string& filePath) {
@@ -106,10 +112,6 @@ void FileManager::DeleteVertexAndFragmentShaderFilesByName(const std::string &sc
 
 std::string FileManager::GetVertexAttributeFilePath(const std::string& sceneElementName) {
   return Configurations::VertexAttributeFilePath + sceneElementName + ".vrtxatrb";
-}
-
-std::string FileManager::GetVertexAttributeFileNameFromPath(const std::string &filePath) {
-  return filePath.substr(filePath.find('\\') + 1, filePath.find_last_of('.') - filePath.find('\\') - 1);
 }
 
 FileManager::VertexAttributeFile FileManager::CreateVertexAttributeFile(const std::string& sceneElementName) {

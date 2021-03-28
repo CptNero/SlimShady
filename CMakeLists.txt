@@ -46,10 +46,10 @@ add_executable(SlimShady
         src/Frameworks/ImageComparator.cpp src/Frameworks/ImageComparator.h
         )
 
-ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}
-               POST_BUILD
-               COMMAND ${PROJECT_NAME}
-               WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}
+#               POST_BUILD
+#               COMMAND ${PROJECT_NAME}
+#               WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 find_package(glfw3)
 find_package(GLEW)
