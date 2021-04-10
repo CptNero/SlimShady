@@ -33,6 +33,15 @@ std::string FileManager::GetTextureFileNameFromPath(const std::string& filePath)
     return match[1];
 }
 
+std::string FileManager::GetTaskFileNameFromPath(const std::string& filePath) {
+    std::regex fileNameRegex(".*Tasks\\/(\\w+)\\.*.");
+    std::smatch match;
+
+    std::regex_search(filePath.begin(), filePath.end(), match, fileNameRegex);
+
+    return match[1];
+}
+
 ShaderType FileManager::GetShaderTypeFromPath(const std::string& filePath) {
     if (filePath.find("Vertex") != std::string::npos) {
         return ShaderType::VERTEX;
@@ -93,6 +102,10 @@ std::string FileManager::ReadFile(const std::string& filePath) {
         fileContent += line + "\n";
     }
 
+    if(!fileContent.empty()) {
+      fileContent.pop_back();
+    }
+
     return fileContent;
 }
 
@@ -120,8 +133,8 @@ std::string FileManager::GetVertexAttributeFilePath(const std::string& sceneElem
     return Configurations::VertexAttributeFilePath + sceneElementName + ".vrtxatrb";
 }
 
-FileManager::VertexAttributeFile FileManager::CreateVertexAttributeFile(const std::string& sceneElementName) {
-    VertexAttributeFile vertexAttributeFile;
+AttributeFile FileManager::CreateVertexAttributeFile(const std::string& sceneElementName) {
+    AttributeFile vertexAttributeFile;
     std::string filePath;
 
     filePath += Configurations::VertexAttributeFilePath + sceneElementName + ".vrtxatrb";
@@ -140,12 +153,14 @@ FileManager::VertexAttributeFile FileManager::CreateVertexAttributeFile(const st
     return vertexAttributeFile;
 }
 
-FileManager::VertexAttributeFile
-FileManager::ConvertStringToVertexAttributeFile(const std::string& vertexAttributeData) {
-    VertexAttributeFile vertexAttributeFile;
+AttributeFile
+FileManager::ConvertStringToVertexAttributeFile(const std::string& vertexAttributeData, const std::string& filePath) {
+    AttributeFile vertexAttributeFile;
     std::stringstream vertexAttributeFileStringStream(vertexAttributeData);
     std::string line;
     VertexAttributeType type = VertexAttributeType::NONE;
+
+    vertexAttributeFile.Path = filePath;
 
     while (std::getline(vertexAttributeFileStringStream, line, '\n')) {
         if (line.find("#vertex") != std::string::npos) {
@@ -190,7 +205,7 @@ FileManager::ConvertStringToVertexAttributeFile(const std::string& vertexAttribu
     return vertexAttributeFile;
 }
 
-std::string FileManager::ConvertVertexAttributeFileToString(FileManager::VertexAttributeFile vertexAttributeFile) {
+std::string FileManager::ConvertVertexAttributeFileToString(AttributeFile vertexAttributeFile) {
     std::stringstream vertexAttributeFileStringStream;
     vertexAttributeFileStringStream << "#vertex" << std::endl;
     uint32_t counter = 0;
@@ -221,4 +236,31 @@ std::string FileManager::ConvertVertexAttributeFileToString(FileManager::VertexA
                   });
 
     return vertexAttributeFileStringStream.str();
+}
+
+void FileManager::ExportTaskFile(
+        std::string name,
+        std::string vertexShaderSource,
+        std::string fragmentShaderSource,
+        AttributeFile file,
+        std::vector<uint8_t> taskImageData) {
+  std::stringstream taskFileString;
+  std::string attributes = ConvertVertexAttributeFileToString(file);
+
+  taskFileString << "#vertex" << "\n";
+  taskFileString << vertexShaderSource << "\n";
+  taskFileString << "#fragment" << "\n";
+  taskFileString << fragmentShaderSource << "\n";
+  taskFileString << "#attributes" << "\n";
+  taskFileString << attributes << "\n";
+  taskFileString << "#taskImageData" << "\n";
+  taskFileString << taskImageData.data() << "\n";
+
+  std::string filePath = Configurations::TaskFilesPath + name + ".tsk";
+
+  std::ofstream fileStream(filePath);
+
+  fileStream << taskFileString.str();
+
+  fileStream.close();
 }

@@ -14,7 +14,7 @@ public:
     ~Renderer();
 
     void Clear() const;
-    void Draw(std::list<SceneElement*>& scene);
+    void Draw(std::list<SceneElement*>& scene, std::list<SceneElement*> taskScene);
     void UpdateUniforms(SceneElement& sceneElement);
 
 private:

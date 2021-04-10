@@ -20,7 +20,7 @@ void SceneEditorWidget::OnRender() {
 }
 
 void SceneEditorWidget::OnImGuiRender() {
-  FileBrowserWidget* fileBrowserWidget = m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser");
+  FileBrowserWidget* fileBrowserWidget = m_Context.widgetBroker.GetWidget<FileBrowserWidget>(WidgetType::FILE_BROWSER);
   ImGui::ColorEdit4("Clear color", m_ClearColor, 1);
 
   ImGui::InputText("Element name", m_SceneElementNameInputBuffer, IM_ARRAYSIZE(m_SceneElementNameInputBuffer));
@@ -100,7 +100,9 @@ void SceneEditorWidget::OnImGuiRender() {
         }
         ImGui::SameLine();
         if (ImGui::Button("Delete")) {
-          indices.pop_back();
+          if (!indices.empty()) {
+            indices.pop_back();
+          }
         }
 
         for (int i = 0; i < indices.size(); i++) {
@@ -113,14 +115,16 @@ void SceneEditorWidget::OnImGuiRender() {
       }
 
       if (ImGui::TreeNode("Textures")) {
-        std::list<std::string> texturePaths = m_currentSceneElement->GetTexturePaths();
+        std::list<std::string>& texturePaths = m_currentSceneElement->GetTexturePaths();
 
         if (ImGui::Button("Add")) {
           texturePaths.emplace_back(fileBrowserWidget->QueryFileBrowser(FileBrowserWidget::Texture));
         }
         ImGui::SameLine();
         if (ImGui::Button("Delete")) {
-          texturePaths.pop_back();
+          if (!texturePaths.empty()) {
+            texturePaths.pop_back();
+          }
         }
         int counter = 0;
         for(auto const& texturePath : texturePaths) {
@@ -146,12 +150,19 @@ void SceneEditorWidget::OnImGuiRender() {
       ImGui::TreePop();
     }
   }
+  ImGui::Separator();
+  if (ImGui::TreeNode("Tasks")) {
+    for (auto const& element : m_Context.taskScene) {
+      ImGui::Text("%s", element->GetSceneName().c_str());
+    }
+    ImGui::TreePop();
+  }
   if( Configurations::IsDebugEnabled) {
     ImGui::Text("Debug:");
 
     ImGui::Text("Camera coords: %f %f %f", Camera::Position.x, Camera::Position.y, Camera::Position.z);
 
-    TextEditorWidget* textEditorWidget = m_Context.widgetBroker.GetWidget<TextEditorWidget>("TextEditor");
+    TextEditorWidget* textEditorWidget = m_Context.widgetBroker.GetWidget<TextEditorWidget>(WidgetType::TEXT_EDITOR);
 
     ImGui::Text("CurrentSceneElement: %s", textEditorWidget->GetCurrentSceneElement()->GetSceneName().c_str());
   }
@@ -166,7 +177,7 @@ void SceneEditorWidget::RenderWidget() {
 }
 
 void SceneEditorWidget::Recompile() {
-  TextEditorWidget* textEditorWidget = m_Context.widgetBroker.GetWidget<TextEditorWidget>("TextEditor");
+  TextEditorWidget* textEditorWidget = m_Context.widgetBroker.GetWidget<TextEditorWidget>(WidgetType::TEXT_EDITOR);
 
   std::replace(
           m_Context.scene.begin(),
@@ -187,7 +198,7 @@ void SceneEditorWidget::Recompile() {
 }
 
 void SceneEditorWidget::Save() {
-  FileManager::VertexAttributeFile vertexAttributeFile;
+  AttributeFile vertexAttributeFile;
   std::vector<float> vertices = m_currentSceneElement->GetVertices();
 
   vertexAttributeFile.Vertices = vertices;

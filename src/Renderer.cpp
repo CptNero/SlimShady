@@ -18,7 +18,9 @@ void Renderer::Clear() const {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::Draw(std::list<SceneElement*>& scene) {
+void Renderer::Draw(std::list<SceneElement*>& scene, std::list<SceneElement*> taskScene) {
+  //Render into main window
+  glClear(GL_COLOR_BUFFER_BIT);
   Camera::UpdateCameraTime();
   for (auto  const &sceneElement : scene) {
 
@@ -32,16 +34,36 @@ void Renderer::Draw(std::list<SceneElement*>& scene) {
     glDrawElements(GL_TRIANGLES, sceneElement->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
   }
-  m_Context.widgetBroker.GetWidget<TaskWidget>("TaskWidget")->BindFrameBuffer();
-  for (auto const &sceneElement: scene) {
+  //Render into rendered image texture
+  m_Context.widgetBroker.GetWidget<TaskWidget>(WidgetType::TASK)->GetRenderedFrameBuffer().Bind();
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  for (auto const &sceneElement : scene) {
     sceneElement->GetShader()->Bind();
     sceneElement->GetVertexArray()->Bind();
     sceneElement->GetVertexBuffer()->Bind();
     sceneElement->GetTexture()->Bind();
 
-    m_Context.widgetBroker.GetWidget<TaskWidget>("TaskWidget")->RenderIntoTexture(sceneElement->GetIndexBuffer()->GetCount());
+    UpdateUniforms(*sceneElement);
+
+    glDrawElements(GL_TRIANGLES, sceneElement->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
   }
-  m_Context.widgetBroker.GetWidget<TaskWidget>("TaskWidget")->UnBindFrameBuffer();
+  m_Context.widgetBroker.GetWidget<TaskWidget>(WidgetType::TASK)->GetRenderedFrameBuffer().UnBind();
+
+  //Render into task image texture
+  m_Context.widgetBroker.GetWidget<TaskWidget>(WidgetType::TASK)->GetTaskFrameBuffer().Bind();
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  for (auto const& sceneElement : taskScene) {
+    sceneElement->GetShader()->Bind();
+    sceneElement->GetVertexArray()->Bind();
+    sceneElement->GetVertexBuffer()->Bind();
+    sceneElement->GetTexture()->Bind();
+
+    UpdateUniforms(*sceneElement);
+
+    glDrawElements(GL_TRIANGLES, sceneElement->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+  }
+
+  m_Context.widgetBroker.GetWidget<TaskWidget>(WidgetType::TASK)->GetTaskFrameBuffer().UnBind();
 }
 
 void Renderer::UpdateUniforms(SceneElement& sceneElement) {

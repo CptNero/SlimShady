@@ -28,11 +28,36 @@ SceneElement::SceneElement(const std::string& sceneElementName) : m_SceneName(sc
   InitializeSceneElement();
 }
 
+SceneElement::SceneElement(const std::string& sceneElementName, AttributeFile attributeFile) : m_SceneName(sceneElementName) {
+  auto vertexShaderFile = FileManager::CreateShaderFile(sceneElementName, ShaderType::VERTEX);
+  auto fragmentShaderFile = FileManager::CreateShaderFile(sceneElementName, ShaderType::FRAGMENT);
+  auto vertexAttributeFile = FileManager::CreateVertexAttributeFile(sceneElementName);
+
+  std::string vertexAttributeFileAsString = FileManager::ConvertVertexAttributeFileToString(vertexAttributeFile);
+  FileManager::UpdateFile(
+          FileManager::GetVertexAttributeFilePath(sceneElementName),
+          vertexAttributeFileAsString);
+
+  m_VertexShaderSource = vertexShaderFile.ShaderSource;
+  m_VertexShaderSourcePath = vertexShaderFile.Path;
+
+  m_FragmentShaderSource = fragmentShaderFile.ShaderSource;
+  m_FragmentShaderSourcePath = fragmentShaderFile.Path;
+
+  m_Vertices = attributeFile.Vertices;
+  m_Indices = attributeFile.Indices;
+  m_TexturePaths = attributeFile.texturePaths;
+
+  InitializeSceneElement();
+}
+
+
 SceneElement::SceneElement(const std::string &sceneName,
                            const std::string &vertexShaderSource,
                            const std::string &fragmentShaderSource,
-                           const FileManager::VertexAttributeFile& vertexAttributeFile) :
+                           const AttributeFile& vertexAttributeFile) :
         m_SceneName(sceneName),
+        m_VertexShaderSourcePath(vertexAttributeFile.Path),
         m_VertexShaderSource(vertexShaderSource),
         m_FragmentShaderSource(fragmentShaderSource),
         m_Vertices(vertexAttributeFile.Vertices),
@@ -172,6 +197,6 @@ const std::unique_ptr<Texture> &SceneElement::GetTexture() const {
     return m_Texture;
 }
 
-const std::list<std::string> &SceneElement::GetTexturePaths() const {
+std::list<std::string>& SceneElement::GetTexturePaths() {
     return m_TexturePaths;
 }

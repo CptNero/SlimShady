@@ -11,12 +11,7 @@ TextEditorWidget::TextEditorWidget(Context context) : m_Context(context)
   m_Editor.SetLanguageDefinition(m_Lang);
   m_Editor.SetErrorMarkers(m_Markers);
 
-  if (!context.scene.empty()) {
-    SetDefaultSourceFile();
-  } else {
-    m_CurrentSceneElement = new SceneElement();
-    m_CurrentShaderType = ShaderType::NONE;
-  }
+  SetDefaultSourceFile();
 }
 
 TextEditorWidget::~TextEditorWidget() = default;
@@ -29,7 +24,7 @@ void TextEditorWidget::OnRender() {
 }
 
 void TextEditorWidget::OnImGuiRender() {
-  FileBrowserWidget* fileBrowser = m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser");
+  FileBrowserWidget* fileBrowser = m_Context.widgetBroker.GetWidget<FileBrowserWidget>(WidgetType::FILE_BROWSER);
 
   if (ImGui::BeginMenuBar())
   {
@@ -143,14 +138,14 @@ void TextEditorWidget::SetCurrentShaderType(ShaderType shaderType) {
 }
 
 void TextEditorWidget::ChangeSourceFile() {
-  FileBrowserWidget* fileBrowser = m_Context.widgetBroker.GetWidget<FileBrowserWidget>("FileBrowser");
+  FileBrowserWidget* fileBrowser = m_Context.widgetBroker.GetWidget<FileBrowserWidget>(WidgetType::FILE_BROWSER);
 
   std::string filePath = fileBrowser->QueryFileBrowser(fileBrowser->m_LastOpenedBy);
   std::string sceneElementName = FileManager::GetShaderFileNameFromPath(filePath);
   ShaderType shaderType = FileManager::GetShaderTypeFromPath(filePath);
 
   auto elementQuery = std::find_if(m_Context.scene.begin(), m_Context.scene.end(), [&](SceneElement* element) {
-      return (element->GetSceneName() == sceneElementName);
+      return ((element->GetSceneName()) == sceneElementName);
   });
 
   if (!(elementQuery == m_Context.scene.end())) {

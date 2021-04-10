@@ -9,12 +9,11 @@
 class ImageComparator {
 
 public:
-    ImageComparator(std::vector<uint8_t> taskTextureData, std::vector<uint8_t> renderedTextureData);
+    ImageComparator();
     ~ImageComparator();
 
-    double CompareImages();
-    float CalculateChiSquareDistance(const std::vector<uint8_t>& taskTextureData, const std::vector<uint8_t>& renderedTextureData);
-    double CalculateSSIM(const std::vector<uint8_t>& taskTextureData, const std::vector<uint8_t>& renderedTextureData);
+    double CalculateChiSquareDistance(std::vector<uint8_t>& taskTextureData, std::vector<uint8_t>& renderedTextureData);
+    double CalculateSSIM(std::vector<uint8_t>& taskTextureData, std::vector<uint8_t>& renderedTextureData);
 
 private:
 
@@ -26,10 +25,10 @@ private:
     };
 
     struct TextureHistogram {
-        int RedChannel[256] = {0};
-        int GreenChannel[256] = {0};
-        int BlueChannel[256] = {0};
-        int AlphaChannel[256] = {0};
+        double RedChannel[256] = {0};
+        double GreenChannel[256] = {0};
+        double BlueChannel[256] = {0};
+        double AlphaChannel[256] = {0};
 
         std::string toString() {
           std::stringstream redChannelStream;
@@ -42,7 +41,7 @@ private:
           blueChannelStream << "Blue: ";
           alphaChannelStream << "Alpha: ";
 
-          for (int i = 0; i < 256; i++) {
+          for (int i = 0; i < 255; i++) {
             redChannelStream << RedChannel[i] << " ";
             greenChannelStream << GreenChannel[i] << " ";
             blueChannelStream << BlueChannel[i] << " ";
@@ -58,12 +57,10 @@ private:
         }
     };
 
-    std::vector<uint8_t> m_TaskTextureData;
-    std::vector<uint8_t> m_RenderedTextureData;
-
     std::vector<uint8_t> ExtractColorChannel(const std::vector<uint8_t>& textureData, RGBAComponent component);
+    double CalculateChiSquareDistanceForColorValue(double taskColorValue, double renderedColorValue);
     double CalculateSSIMForColorChannel(const std::vector<uint8_t> &taskTextureColor, const std::vector<uint8_t> &renderedTextureColor);
-    TextureHistogram CreateTextureHistogram(std::vector<uint8_t> textureData);
+    TextureHistogram CreateTextureHistogram(std::vector<uint8_t>& textureData);
 };
 
 

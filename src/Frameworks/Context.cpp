@@ -4,4 +4,7 @@
 
 #include "Context.h"
 
-Context::Context(WidgetBroker& widgetBroker, std::list<SceneElement*>& scene) : widgetBroker(widgetBroker), scene(scene) {}
+Context::Context(WidgetBroker& widgetBroker, std::list<SceneElement*>& scene, std::list<SceneElement*>& taskScene) :
+  widgetBroker(widgetBroker),
+  scene(scene),
+  taskScene(taskScene) {}

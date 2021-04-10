@@ -13,6 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "../ShaderType.h"
 #include "../VertexAttributeType.h"
+#include "../AttributeFile.h"
 
 class FileManager {
 
@@ -27,12 +28,7 @@ public:
         std::string Path;
         ShaderType Type;
     };
-    struct VertexAttributeFile {
-        std::string Path;
-        std::vector<float> Vertices;
-        std::vector<uint32_t> Indices;
-        std::list<std::string> texturePaths;
-    };
+
 
     static std::string ReadFile(const std::string &filePath);
 
@@ -46,6 +42,8 @@ public:
 
     static std::string GetTextureFileNameFromPath(const std::string& filePath);
 
+    static std::string GetTaskFileNameFromPath(const std::string& filePath);
+
     static ShaderType GetShaderTypeFromPath(const std::string& filePath);
 
     static ShaderFile CreateShaderFile(const std::string &sceneElementName, ShaderType shaderType);
@@ -54,12 +52,17 @@ public:
 
     static std::string GetVertexAttributeFilePath(const std::string &sceneElementName);
 
-    static VertexAttributeFile CreateVertexAttributeFile(const std::string &sceneElementName);
+    static AttributeFile CreateVertexAttributeFile(const std::string &sceneElementName);
 
-    static VertexAttributeFile ConvertStringToVertexAttributeFile(const std::string &vertexAttributeData);
+    static AttributeFile ConvertStringToVertexAttributeFile(const std::string &vertexAttributeData, const std::string& filePath);
 
-    static std::string ConvertVertexAttributeFileToString(VertexAttributeFile vertexAttributeFile);
+    static std::string ConvertVertexAttributeFileToString(AttributeFile vertexAttributeFile);
 
+    static void ExportTaskFile(std::string name,
+                               std::string vertexShaderSource,
+                               std::string fragmentShaderSource,
+                               AttributeFile file,
+                               std::vector<uint8_t> taskImageData);
 };
 
 #endif //SLIMSHADY_FILEMANAGER_H

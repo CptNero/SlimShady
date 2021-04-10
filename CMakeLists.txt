@@ -44,7 +44,7 @@ add_executable(SlimShady
         src/Texture.cpp src/Texture.h
         src/Widgets/TaskWidget.cpp src/Widgets/TaskWidget.h
         src/Frameworks/ImageComparator.cpp src/Frameworks/ImageComparator.h
-        )
+        src/AttributeFile.h src/FrameBuffer.cpp src/FrameBuffer.h src/WidgetType.h)
 
 #ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}
 #               POST_BUILD

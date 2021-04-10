@@ -7,10 +7,12 @@
 
 class Context {
 public:
-    Context(WidgetBroker& widgetBroker, std::list<SceneElement*>& scene);
+    Context(WidgetBroker& widgetBroker, std::list<SceneElement*>& scene, std::list<SceneElement*>& taskScene);
 
     WidgetBroker& widgetBroker;
+
     std::list<SceneElement*>& scene;
+    std::list<SceneElement*>& taskScene;
 };
 
 

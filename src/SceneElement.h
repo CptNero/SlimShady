@@ -19,7 +19,7 @@ class SceneElement {
     SceneElement(const std::string& sceneName,
                  const std::string& vertexShaderSource,
                  const std::string& fragmentShaderSource,
-                 const FileManager::VertexAttributeFile& vertexAttributeFile);
+                 const AttributeFile& vertexAttributeFile);
 
     // Constructor used for recompiling element
     SceneElement(const std::string& sceneName,
@@ -31,6 +31,8 @@ class SceneElement {
 
     // Constructor used for creating new element from scratch
     SceneElement(const std::string& sceneElementName);
+    //Constructor used for adding an element to the normal scene through the task loader.
+    SceneElement(const std::string& sceneElementName, AttributeFile attributeFile);
     SceneElement();
     ~SceneElement();
 
@@ -41,7 +43,7 @@ class SceneElement {
     const std::unique_ptr<VertexBuffer> &GetVertexBuffer() const;
     const std::unique_ptr<Shader> &GetShader() const;
     const std::unique_ptr<Texture> &GetTexture() const;
-    const std::list<std::string> &GetTexturePaths() const;
+    std::list<std::string> &GetTexturePaths();
 
     std::string GetShaderSourcePath(ShaderType shaderType);
     std::string GetShaderSource(ShaderType shaderType);

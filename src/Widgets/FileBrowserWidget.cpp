@@ -33,12 +33,12 @@ void FileBrowserWidget::OpenFileBrowser(FileBrowserAccess type) {
   switch(type) {
     case FileBrowserAccess::VertexShader: {
       m_FileBrowser.SetPwd(std::filesystem::path(Configurations::VertexShaderFilesPath));
-      m_FileBrowser.SetTypeFilters({".shader"});
+      m_FileBrowser.SetTypeFilters({".shader", ""});
       break;
     }
     case FileBrowserAccess::FragmentShader: {
       m_FileBrowser.SetPwd(std::filesystem::path(Configurations::FragmentShaderFilesPath));
-      m_FileBrowser.SetTypeFilters({".shader"});
+      m_FileBrowser.SetTypeFilters({".shader", ""});
       break;
     }
     case FileBrowserAccess::Texture: {
@@ -48,7 +48,7 @@ void FileBrowserWidget::OpenFileBrowser(FileBrowserAccess type) {
     }
     case FileBrowserAccess::Task: {
       m_FileBrowser.SetPwd(std::filesystem::path(Configurations::TaskFilesPath));
-      m_FileBrowser.SetTypeFilters({".jpg", ".png", ".bmp"});
+      m_FileBrowser.SetTypeFilters({".json", ""});
       break;
     }
   }

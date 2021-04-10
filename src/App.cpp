@@ -78,8 +78,9 @@ int main() {
     WidgetBroker widgetBroker;
 
     std::list<SceneElement*> scene;
+    std::list<SceneElement*> taskScene;
 
-    Context context(widgetBroker, scene);
+    Context context(widgetBroker, scene, taskScene);
     glfwSetWindowUserPointer(window, &context);
 
     SceneLoader sceneLoader(context);
@@ -90,11 +91,11 @@ int main() {
 
     std::list<Widget*> widgetCollection;
 
-    widgetCollection.emplace_back(widgetBroker.MakeWidget<ConsoleWidget>("Console", context));
-    widgetCollection.emplace_back(widgetBroker.MakeWidget<TextEditorWidget>("TextEditor", context));
-    widgetCollection.emplace_back(widgetBroker.MakeWidget<FileBrowserWidget>("FileBrowser", context));
-    widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>("SceneEditor", context, uniformManager));
-    widgetCollection.emplace_back(widgetBroker.MakeWidget<TaskWidget>("TaskWidget", context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<ConsoleWidget>(WidgetType::CONSOLE, context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<TextEditorWidget>(WidgetType::TEXT_EDITOR, context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<FileBrowserWidget>(WidgetType::FILE_BROWSER, context));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>(WidgetType::SCENE_EDITOR, context, uniformManager));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<TaskWidget>(WidgetType::TASK, context));
 
     ConsoleWidget::LogMessage("Successfully initialized.");
 
@@ -114,9 +115,10 @@ int main() {
 
       Camera::ProcessCameraInput(window);
 
-      glClear(GL_COLOR_BUFFER_BIT);
 
-      renderer.Draw(scene);
+
+      renderer.Draw(scene, taskScene);
+      //renderer.Draw(taskScene);
 
       ImGui::Render();
       ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

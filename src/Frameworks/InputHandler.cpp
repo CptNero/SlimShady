@@ -8,10 +8,10 @@ namespace InputHandler {
     void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
       auto context = static_cast<Context*>(glfwGetWindowUserPointer(window));
       if (key == GLFW_KEY_S && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
-        context->widgetBroker.GetWidget<TextEditorWidget>("TextEditor")->Save();
+        context->widgetBroker.GetWidget<TextEditorWidget>(WidgetType::TEXT_EDITOR)->Save();
       }
       if (key == GLFW_KEY_R && action == GLFW_PRESS && mods == GLFW_MOD_CONTROL) {
-        context->widgetBroker.GetWidget<SceneEditorWidget>("SceneEditor")->Recompile();
+        context->widgetBroker.GetWidget<SceneEditorWidget>(WidgetType::TEXT_EDITOR)->Recompile();
       }
     }
 

@@ -6,6 +6,7 @@
 #include <memory>
 #include <assert.h>
 #include "Widget.h"
+#include "../WidgetType.h"
 
 class WidgetBroker {
 
@@ -14,19 +15,19 @@ public:
 
     ~WidgetBroker() = default;
 
-    template <typename WidgetType, typename... Arguments>
-    Widget* MakeWidget(std::string id, Arguments&&... ArgumentValues) {
+    template <typename WidgetT, typename... Arguments>
+    Widget* MakeWidget(WidgetType id, Arguments&&... ArgumentValues) {
       assert(m_Widgets.count(id) != 1);
-      m_Widgets[id] = std::make_unique<WidgetType>(std::forward<Arguments>(ArgumentValues)...);
+      m_Widgets[id] = std::make_unique<WidgetT>(std::forward<Arguments>(ArgumentValues)...);
       return m_Widgets[id].get();
     }
 
-    template <typename WidgetType>
-    WidgetType* GetWidget(std::string id) {
-      return (WidgetType*)m_Widgets[id].get();
+    template <typename WidgetT>
+    WidgetT* GetWidget(WidgetType id) {
+      return (WidgetT*)m_Widgets[id].get();
     }
 private:
-    std::map<std::string, std::unique_ptr<Widget>> m_Widgets;
+    std::map<WidgetType, std::unique_ptr<Widget>> m_Widgets;
 };
 
 

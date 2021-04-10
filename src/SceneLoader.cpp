@@ -19,7 +19,7 @@ void SceneLoader::InitializeScene()
                                         FileManager::ReadFile(FileManager::GetShaderFilePath(fileName, ShaderType::FRAGMENT)),
                                         FileManager::ConvertStringToVertexAttributeFile(
                                                 FileManager::ReadFile(
-                                                        FileManager::GetVertexAttributeFilePath(fileName)))));
+                                                        FileManager::GetVertexAttributeFilePath(fileName)), filePath)));
 
   }
 }

@@ -1,90 +1,54 @@
-#include <utility>
 #include <iostream>
 #include <cmath>
 #include "ImageComparator.h"
 #include "MathUtility.h"
 
-ImageComparator::ImageComparator(std::vector<uint8_t> taskTextureData, std::vector<uint8_t> renderedTextureData) :
-  m_TaskTextureData(std::move(taskTextureData)),
-  m_RenderedTextureData(std::move(renderedTextureData))
-{
+ImageComparator::ImageComparator() {
 }
 
 ImageComparator::~ImageComparator() {
 }
 
-
-double ImageComparator::CompareImages() {
-  return CalculateSSIM(m_TaskTextureData, m_RenderedTextureData);
-}
-
-ImageComparator::TextureHistogram ImageComparator::CreateTextureHistogram(std::vector<uint8_t> textureData) {
+ImageComparator::TextureHistogram ImageComparator::CreateTextureHistogram(std::vector<uint8_t>& textureData) {
   TextureHistogram textureHistogram;
-  const uint16_t rgbaComponentLength = 4;
-  uint16_t componentCounter = 0;
 
-  for (uint64_t i = 0; i < textureData.size(); i++) {
-    switch (componentCounter) {
-      case RGBAComponent::RED: {
+  for (uint64_t i = 0; i < textureData.size(); i+=4) {
         textureHistogram.RedChannel[textureData[i]]++;
-        break;
-      }
-      case RGBAComponent::GREEN: {
-        textureHistogram.GreenChannel[textureData[i]]++;
-        break;
-      }
-      case RGBAComponent::BLUE: {
-        textureHistogram.BlueChannel[textureData[i]]++;
-        break;
-      }
-      case RGBAComponent::ALPHA: {
-        textureHistogram.AlphaChannel[textureData[i]]++;
-        break;
-      }
-    }
-
-    (componentCounter == rgbaComponentLength) ? componentCounter = 0 : componentCounter++;
+        textureHistogram.GreenChannel[textureData[i+1]]++;
+        textureHistogram.BlueChannel[textureData[i+2]]++;
+        textureHistogram.AlphaChannel[textureData[i+3]]++;
   }
 
   return  textureHistogram;
 }
 
-float ImageComparator::CalculateChiSquareDistance(const std::vector<uint8_t>& taskTextureData, const std::vector<uint8_t>& renderedTextureData) {
+double ImageComparator::CalculateChiSquareDistance(std::vector<uint8_t>& taskTextureData, std::vector<uint8_t>& renderedTextureData) {
   TextureHistogram taskHistogram = CreateTextureHistogram(taskTextureData);
   TextureHistogram renderedHistogram = CreateTextureHistogram(renderedTextureData);
 
-  float redSum = 0.0f;
-  float greenSum = 0.0f;
-  float blueSum = 0.0f;
-  float alphaSum = 0.0f;
+  double sum = 0.0f;
 
-  for (int i = 0; i < 256; i++) {
-    if (taskHistogram.RedChannel[i] + renderedHistogram.RedChannel[i] != 0) {
-      redSum += ((float)(((taskHistogram.RedChannel[i] - renderedHistogram.RedChannel[i]) * (taskHistogram.RedChannel[i] - renderedHistogram.RedChannel[i])))
-                 / (float)(taskHistogram.RedChannel[i] + renderedHistogram.RedChannel[i]));
-    }
-
-    if (taskHistogram.GreenChannel[i] + renderedHistogram.GreenChannel[i] != 0) {
-      greenSum += ((float)(((taskHistogram.GreenChannel[i] - renderedHistogram.GreenChannel[i]) * (taskHistogram.GreenChannel[i] - renderedHistogram.GreenChannel[i])))
-                   / (float)(taskHistogram.GreenChannel[i] + renderedHistogram.GreenChannel[i]));
-    }
-
-    if (taskHistogram.BlueChannel[i] + renderedHistogram.BlueChannel[i] != 0) {
-      blueSum += ((float)(((taskHistogram.BlueChannel[i] - renderedHistogram.BlueChannel[i]) * (taskHistogram.BlueChannel[i] - renderedHistogram.BlueChannel[i])))
-                  / (float)(taskHistogram.BlueChannel[i] + renderedHistogram.BlueChannel[i]));
-    }
-
-    if (taskHistogram.AlphaChannel[i] + renderedHistogram.AlphaChannel[i] != 0) {
-      alphaSum += ((float)(((taskHistogram.AlphaChannel[i] - renderedHistogram.AlphaChannel[i]) * (taskHistogram.AlphaChannel[i] - renderedHistogram.AlphaChannel[i])))
-                   / (float)(taskHistogram.AlphaChannel[i] + renderedHistogram.AlphaChannel[i]));
-    }
+  for(int i = 0; i < 255; i++) {
+      sum += CalculateChiSquareDistanceForColorValue(taskHistogram.RedChannel[i], renderedHistogram.RedChannel[i]);
+      sum += CalculateChiSquareDistanceForColorValue(taskHistogram.GreenChannel[i], renderedHistogram.GreenChannel[i]);
+      sum += CalculateChiSquareDistanceForColorValue(taskHistogram.BlueChannel[i], renderedHistogram.BlueChannel[i]);
+      sum += CalculateChiSquareDistanceForColorValue(taskHistogram.AlphaChannel[i], renderedHistogram.AlphaChannel[i]);
   }
 
-  return redSum + greenSum + blueSum + alphaSum;
+  return sum;
 }
 
-double ImageComparator::CalculateSSIMForColorChannel(const std::vector<uint8_t> &taskTextureColor,
-                                     const std::vector<uint8_t> &renderedTextureColor) {
+double ImageComparator::CalculateChiSquareDistanceForColorValue(double taskColorValue, double renderedColorValue) {
+    if (taskColorValue != 0) {
+        return ((taskColorValue - renderedColorValue) * (taskColorValue - renderedColorValue)) / taskColorValue;
+    }
+
+    return 0.0;
+}
+
+double ImageComparator::CalculateSSIMForColorChannel(
+        const std::vector<uint8_t> &taskTextureColor,
+        const std::vector<uint8_t> &renderedTextureColor) {
 
   double taskMean = MathUtility::Mean<uint8_t, double>(taskTextureColor);
   double renderedMean = MathUtility::Mean<uint8_t, double>(renderedTextureColor);
@@ -145,7 +109,7 @@ std::vector<uint8_t> ImageComparator::ExtractColorChannel(const std::vector<uint
   return colorChannel;
 }
 
-double ImageComparator::CalculateSSIM(const std::vector<uint8_t>& taskTextureData, const std::vector<uint8_t>& renderedTextureData) {
+double ImageComparator::CalculateSSIM(std::vector<uint8_t>& taskTextureData, std::vector<uint8_t>& renderedTextureData) {
   std::vector<uint8_t> taskRedColorChannel = ExtractColorChannel(taskTextureData, RGBAComponent::RED);
   std::vector<uint8_t> taskGreenColorChannel = ExtractColorChannel(taskTextureData, RGBAComponent::GREEN);
   std::vector<uint8_t> taskBlueColorChannel = ExtractColorChannel(taskTextureData, RGBAComponent::BLUE);
@@ -156,11 +120,13 @@ double ImageComparator::CalculateSSIM(const std::vector<uint8_t>& taskTextureDat
   std::vector<uint8_t> renderedBlueColorChannel = ExtractColorChannel(renderedTextureData, RGBAComponent::BLUE);
   std::vector<uint8_t> renderedAlphaColorChannel = ExtractColorChannel(renderedTextureData, RGBAComponent::ALPHA);
 
-  double redSSIM = CalculateSSIMForColorChannel(taskRedColorChannel, renderedRedColorChannel);
-  double greenSSIM = CalculateSSIMForColorChannel(taskGreenColorChannel, renderedGreenColorChannel);
-  double blueSSIM = CalculateSSIMForColorChannel(taskBlueColorChannel, renderedBlueColorChannel);
-  double alphaSSIM = CalculateSSIMForColorChannel(taskAlphaColorChannel, renderedAlphaColorChannel);
+  double SSIM = 0.0;
+  SSIM += CalculateSSIMForColorChannel(taskRedColorChannel, renderedRedColorChannel);
+  SSIM += CalculateSSIMForColorChannel(taskGreenColorChannel, renderedGreenColorChannel);
+  SSIM += CalculateSSIMForColorChannel(taskBlueColorChannel, renderedBlueColorChannel);
+  SSIM += CalculateSSIMForColorChannel(taskAlphaColorChannel, renderedAlphaColorChannel);
 
-  return redSSIM + greenSSIM + blueSSIM + alphaSSIM;
+  return SSIM;
 }
+
 
