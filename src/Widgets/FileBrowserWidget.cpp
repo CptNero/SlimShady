@@ -69,7 +69,7 @@ std::string FileBrowserWidget::QueryFileBrowser(FileBrowserAccess type) {
 
 void FileBrowserWidget::CheckForPath() {
   if (m_FileBrowser.HasSelected()) {
-    m_PathCollection[m_LastOpenedBy] = m_FileBrowser.GetSelected().string();
+    m_PathCollection[m_LastOpenedBy] = std::filesystem::relative(m_FileBrowser.GetSelected()).string();
     m_FileBrowser.ClearSelected();
   }
 }
