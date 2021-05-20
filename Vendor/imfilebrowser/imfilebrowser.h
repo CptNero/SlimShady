@@ -689,8 +689,16 @@ inline void ImGui::FileBrowser::SetCurrentTypeFilterIndex(int index)
 inline std::string ImGui::FileBrowser::ToLower(const std::string &s)
 {
     std::string ret = s;
-    for(char &c : ret)
-        c = static_cast<char>(std::tolower(c, std::locale()));
+    for(char &c : ret) {
+       c = static_cast<char>(std::tolower(c, std::locale()));
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+      c = static_cast<char>(std::tolower(c, std::locale()));
+    #else
+      c = static_cast<char>(std::tolower(c));
+    #endif
+
+    }
+
     return ret;
 }
 
