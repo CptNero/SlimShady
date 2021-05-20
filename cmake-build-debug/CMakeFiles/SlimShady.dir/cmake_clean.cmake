@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/SlimShady.dir/Vendor/ImGuiColorTextEdit/TextEditor.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/imgui/imgui.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_draw.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_glfw.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_impl_opengl3.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_stdlib.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/imgui/imgui_widgets.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/stb_image/stb_image.cpp.o"
+  "CMakeFiles/SlimShady.dir/Vendor/stb_image/stb_image_write.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/App.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Camera.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/FrameBuffer.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Frameworks/Clock.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Frameworks/Context.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Frameworks/ErrorHandler.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Frameworks/FileManager.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Frameworks/ImageComparator.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Frameworks/InputHandler.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/IndexBuffer.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Renderer.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/SceneElement.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/SceneLoader.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Shader.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Texture.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/UniformManager.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/VertexArray.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/VertexBuffer.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/VertexBufferLayout.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Widgets/ConsoleWidget.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Widgets/FileBrowserWidget.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Widgets/SceneEditorWidget.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Widgets/TaskWidget.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Widgets/TextEditorWidget.cpp.o"
+  "CMakeFiles/SlimShady.dir/src/Widgets/Widget.cpp.o"
+  "SlimShady"
+  "SlimShady.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/SlimShady.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
