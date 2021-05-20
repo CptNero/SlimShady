@@ -95,7 +95,7 @@ void SceneElement::InitializeSceneElement() {
     ConsoleWidget::LogMessage("Successfully created shader.");
   }
 
-  m_VertexArrayObject = std::make_unique<VertexArray>();
+  m_VertexArray = std::make_unique<VertexArray>();
 
   if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully created vertex array.");
@@ -120,7 +120,7 @@ void SceneElement::InitializeSceneElement() {
     ConsoleWidget::LogMessage("Successfully initialized vertex layout");
   }
 
-  m_VertexArrayObject->AddBuffer(*m_VertexBuffer, layout);
+  m_VertexArray->AddBuffer(*m_VertexBuffer, layout);
 
   if (Configurations::IsDebugEnabled) {
     ConsoleWidget::LogMessage("Successfully added buffer to vertex array object.");
@@ -178,7 +178,7 @@ std::vector<uint32_t>& SceneElement::GetIndices() {
 }
 
 const std::unique_ptr<VertexArray> &SceneElement::GetVertexArray() const {
-    return m_VertexArrayObject;
+    return m_VertexArray;
 }
 
 const std::unique_ptr<IndexBuffer> &SceneElement::GetIndexBuffer() const {

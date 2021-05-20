@@ -79,8 +79,10 @@ void TaskWidget::OnImGuiRender() {
         ConsoleWidget::LogMessage(ssimStringStream.str());
         ConsoleWidget::LogMessage(csdStringStream.str());
 
-        if (m_SSIMComparisonResult > 70.0) {
+        if (m_SSIMComparisonResult > 70.0 || m_ChiSquareDistanceResult < 0.8) {
           ConsoleWidget::LogMessage("Successfully completed the task!");
+        } else {
+          ConsoleWidget::LogMessage("Images didn't match, to complete the task achieve SSSIM similarity of 70% or chi square distance value of less than 0.8");
         }
       }
       ImGui::EndMenu();
@@ -105,16 +107,16 @@ void TaskWidget::OnImGuiRender() {
   if (m_Layout) {
     ImGui::Text("Target image:");
     ImGui::SameLine();
-    ImGui::Image((ImTextureID)m_TaskFrameBuffer.GetTexture(), ImVec2(600, 400), ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::Image((ImTextureID)m_TaskFrameBuffer.GetTexture(), ImVec2(300, 200), ImVec2(0, 1), ImVec2(1, 0));
     ImGui::SameLine();
     ImGui::Text("Your image:");
     ImGui::SameLine();
-    ImGui::Image((ImTextureID)m_RenderedFrameBuffer.GetTexture(), ImVec2(600, 400), ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::Image((ImTextureID)m_RenderedFrameBuffer.GetTexture(), ImVec2(300, 200), ImVec2(0, 1), ImVec2(1, 0));
   } else {
     ImGui::Text("Target image:");
-    ImGui::Image((ImTextureID)m_TaskFrameBuffer.GetTexture(), ImVec2(600, 400), ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::Image((ImTextureID)m_TaskFrameBuffer.GetTexture(), ImVec2(300, 200), ImVec2(0, 1), ImVec2(1, 0));
     ImGui::Text("Your image:");
-    ImGui::Image((ImTextureID)m_RenderedFrameBuffer.GetTexture(), ImVec2(600, 400), ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::Image((ImTextureID)m_RenderedFrameBuffer.GetTexture(), ImVec2(300, 200), ImVec2(0, 1), ImVec2(1, 0));
   }
 
 }

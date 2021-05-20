@@ -11,7 +11,12 @@ TextEditorWidget::TextEditorWidget(Context context) : m_Context(context)
   m_Editor.SetLanguageDefinition(m_Lang);
   m_Editor.SetErrorMarkers(m_Markers);
 
-  SetDefaultSourceFile();
+  if (!context.scene.empty()) {
+    SetDefaultSourceFile();
+  } else {
+    m_CurrentSceneElement = new SceneElement();
+    m_CurrentShaderType = ShaderType::NONE;
+  }
 }
 
 TextEditorWidget::~TextEditorWidget() = default;
@@ -115,8 +120,13 @@ void TextEditorWidget::RenderWidget() {
 }
 
 void TextEditorWidget::Save() {
-  FileManager::UpdateFile(m_FileToEditPath, m_Editor.GetText());
-  m_CurrentSceneElement->SetShaderSource(m_Editor.GetText(), m_CurrentShaderType);
+  std::string editorText = m_Editor.GetText();
+
+  //Remove the new useless end line that the editor adds
+  editorText.pop_back();
+
+  FileManager::UpdateFile(m_FileToEditPath, editorText);
+  m_CurrentSceneElement->SetShaderSource(editorText, m_CurrentShaderType);
 }
 
 std::string TextEditorWidget::GetEditorText() {

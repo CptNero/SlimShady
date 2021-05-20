@@ -2,6 +2,8 @@
 #include <cmath>
 #include "ImageComparator.h"
 #include "MathUtility.h"
+#include "Configurations.h"
+#include "../Widgets/ConsoleWidget.h"
 
 ImageComparator::ImageComparator() {
 }
@@ -23,6 +25,12 @@ ImageComparator::TextureHistogram ImageComparator::CreateTextureHistogram(std::v
 }
 
 double ImageComparator::CalculateChiSquareDistance(std::vector<uint8_t>& taskTextureData, std::vector<uint8_t>& renderedTextureData) {
+  if (Configurations::IsDebugEnabled) {
+    if (taskTextureData.size() != renderedTextureData.size()) {
+      ConsoleWidget::LogMessage("Warning, images aren't of the same resolution");
+    }
+  }
+
   TextureHistogram taskHistogram = CreateTextureHistogram(taskTextureData);
   TextureHistogram renderedHistogram = CreateTextureHistogram(renderedTextureData);
 
@@ -49,7 +57,6 @@ double ImageComparator::CalculateChiSquareDistanceForColorValue(double taskColor
 double ImageComparator::CalculateSSIMForColorChannel(
         const std::vector<uint8_t> &taskTextureColor,
         const std::vector<uint8_t> &renderedTextureColor) {
-
   double taskMean = MathUtility::Mean<uint8_t, double>(taskTextureColor);
   double renderedMean = MathUtility::Mean<uint8_t, double>(renderedTextureColor);
 
@@ -110,6 +117,12 @@ std::vector<uint8_t> ImageComparator::ExtractColorChannel(const std::vector<uint
 }
 
 double ImageComparator::CalculateSSIM(std::vector<uint8_t>& taskTextureData, std::vector<uint8_t>& renderedTextureData) {
+  if (Configurations::IsDebugEnabled) {
+    if (taskTextureData.size() != renderedTextureData.size()) {
+      ConsoleWidget::LogMessage("Warning, images aren't of the same resolution");
+    }
+  }
+
   std::vector<uint8_t> taskRedColorChannel = ExtractColorChannel(taskTextureData, RGBAComponent::RED);
   std::vector<uint8_t> taskGreenColorChannel = ExtractColorChannel(taskTextureData, RGBAComponent::GREEN);
   std::vector<uint8_t> taskBlueColorChannel = ExtractColorChannel(taskTextureData, RGBAComponent::BLUE);

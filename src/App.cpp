@@ -29,7 +29,7 @@ int main() {
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
   // TODO: maybe start by default in a smaller window? some laptops have 1366x768 resolution
-  window = glfwCreateWindow(1920, 1080, "SlimShady", NULL, NULL);
+  window = glfwCreateWindow(1280, 1024, "SlimShady", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
@@ -86,15 +86,16 @@ int main() {
     SceneLoader sceneLoader(context);
     sceneLoader.InitializeScene();
 
-    UniformManager uniformManager(context);
-    Renderer renderer(context, uniformManager);
+    UniformManager renderedUniformManager(context);
+    UniformManager taskUniformManager(context);
+    Renderer renderer(context, renderedUniformManager, taskUniformManager);
 
     std::list<Widget*> widgetCollection;
 
     widgetCollection.emplace_back(widgetBroker.MakeWidget<ConsoleWidget>(WidgetType::CONSOLE, context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<TextEditorWidget>(WidgetType::TEXT_EDITOR, context));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<FileBrowserWidget>(WidgetType::FILE_BROWSER, context));
-    widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>(WidgetType::SCENE_EDITOR, context, uniformManager));
+    widgetCollection.emplace_back(widgetBroker.MakeWidget<SceneEditorWidget>(WidgetType::SCENE_EDITOR, context, renderedUniformManager));
     widgetCollection.emplace_back(widgetBroker.MakeWidget<TaskWidget>(WidgetType::TASK, context));
 
     ConsoleWidget::LogMessage("Successfully initialized.");

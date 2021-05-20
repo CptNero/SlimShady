@@ -10,16 +10,17 @@
 
 class Renderer {
 public:
-    Renderer(Context context, UniformManager& uniformManager);
+    Renderer(Context context, UniformManager& renderedUniformManager, UniformManager& taskUniformManager);
     ~Renderer();
 
     void Clear() const;
     void Draw(std::list<SceneElement*>& scene, std::list<SceneElement*> taskScene);
-    void UpdateUniforms(SceneElement& sceneElement);
+    void UpdateUniforms(SceneElement& sceneElement, UniformManager& uniformManager);
 
 private:
     Context m_Context;
-    UniformManager& m_UniformManager;
+    UniformManager& m_RenderedUniformManager;
+    UniformManager& m_TaskUniformManger;
 
     glm::mat4 m_Projection;
     glm::mat4 m_View;
