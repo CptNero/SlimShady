@@ -1,3 +1,0 @@
-C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug/CMakeFiles/SlimShady.dir
-C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/ravai/CLionProjects/SlimShady/cmake-build-debug/CMakeFiles/rebuild_cache.dir
