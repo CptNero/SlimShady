@@ -1,0 +1,30 @@
+%A \chapter* parancs nem ad a fejezetnek sorszámot
+\chapter*{Feladatkiírás}
+%A tartalomjegyzékben mégis szerepeltetni kell, mint szakasz(section) szerepeljen:
+\addcontentsline{toc}{section}{Feladatkiírás}
+
+\section*{OpenGL/ES Shader programozó játék}
+
+Az alkalmazás célja, hogy a segítse a kezdő OpenGL(ES) programozókat és
+különféle feladatok során gyakoroltassa a shader programok írását, konfigurálását.
+
+A programban megadott rajzolási feladatokat kell a felhasználónak megoldania.
+
+Az alkalmazás a felhasználó által megadott shader és uniform adatok alapján
+OpenGL (ES) felhasználásával rajzol ki egy képet. Ezt a képet az éppen aktuális
+feladat által megkövetelt eredmény képhez hasonlítja a program. Amennyiben
+a felhasználó által "készített" kép megegyezik a feladatban elvárttal, akkor jöhet
+a következő feladat.
+
+A felhasználói felület interaktívnak kell legyen, azaz ha pl.: a shader kód
+módosul, akkor az az által kirajzolandó képnek meg kell jelennie
+(akár automatikusan akár egy gomb lenyomásával) anélkül, hogy magát az alkalmazást
+újrafordítanánk.
+
+A felhasználó számára biztosítani kell a következő lehetőségeket. A háttér szín megadását, (clear color), a vertex és fragment shaderek módosíthatóságát, vertex input attribútumok, megadását, tetszőleges uniformok hozzáadását (név, típus, érték), tetszőleges samplerek/képek megadását (név, típus, képfájl).
+
+Adjunk lehetőséget a "sandbox" módra is. Lehetőség szerint a feladatok listájának bővíthetőnek
+kell lennie. Az alkalmazás újrafordítása nélkül lehessen további feladatokat hozzáadni.
+
+A megvalósításnak modern OpenGL (ES)-ben kell történnie, célszerűen Windows és Linux platformon
+is működnie kell és nem lehet Web-es megvalósítású (nem WebGL).

@@ -1,0 +1,59 @@
+%a plain oldalstílust kell átdefiniálni, hogy ott ne legyen fejléc:
+\fancypagestyle{plain}{%
+%ez mindent töröl:
+\fancyhf{}
+% a láblécbe jobboldalra kerüljön az oldalszám:
+\fancyfoot[R]{\thepage}
+%elválasztó vonal sem kell:
+\renewcommand{\headrulewidth}{0pt}
+}
+
+%A TÖBBI OLDAL FEJ ÉS LÁBLÉCE:
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{OpenGL Shader programozó játék kezdő shader fejlesztőknek}
+\fancyfoot[R]{\thepage}
+
+\thispagestyle{empty}
+
+\begin{center}
+%\vspace*{0.5cm}
+{\Large\bf Szegedi Tudományegyetem}
+
+\vspace{0.5cm}
+
+{\Large\bf Informatikai Intézet}
+
+\vspace*{3.0cm}
+
+
+{\LARGE\bf OpenGL Shader programozó játék kezdő shader fejlesztőknek}
+
+
+\vspace*{3.0cm}
+
+{\Large Szakdolgozat}
+
+\vspace*{2cm}
+
+{\large
+\begin{tabular}{c@{\hspace{4cm}}c}
+\emph{Készítette:}     &\emph{Külső témavezetõ:}\\
+\bf{Rávai Adrián}  &\bf{Gál Péter}\\
+Programtervező informatikus BSc &PhD hallgató\\
+hallgató
+\bf{ }   &\emph{Belső konzulens:}
+\bf{ }            &&\bf{Dr. Kiss Ákos}
+            &&Egyetemi Adjunktus
+\end{tabular}
+}
+
+\vspace*{1.0cm}
+
+{\Large
+Szeged
+\\
+\vspace{2mm}
+2021
+}
+\end{center}

@@ -1,0 +1,79 @@
+\section{Widgetek}
+
+A widgetek, másnéven window objectek, olyan objektumok amik a felhasználói felületet reprezentálják. A widgetek felelősek az adatok megjelenítéséért, a felhasználói interakció kezeléséért.
+
+\subsection{Widget interface}
+A widgeteket egy interface-ként valósítottam meg. C++-ban az interface egy olyan osztály, ami csak virtual függvényekből áll.
+
+\begin{minted}
+[bgcolor=lbcolor,showspaces=false,breaksymbolleft=,breaklines=true]
+{cpp}
+class Widget {
+  public:
+    virtual void OnUpdate(float deltaTime) {};
+    virtual void OnRender() {};
+    virtual void OnImGuiRender() {};
+    virtual void RenderWidget() {};
+};
+\end{minted}
+
+Az alkalmazásban minden widget ezt az interfacet implementálja. Ez segít abban, hogy a widgeteket generikusan tudjuk majd pélányosítani upcastolás segítségével. Az \mintinline{cpp}{OnUpdate()} függvényben történik a változók képkockánkénti frissítése, az \mintinline{cpp}{OnRender()}-ben pedig az OpenGL render hívások, majd az \mintinline{cpp}{OnImGuiRender()}-ben az ImGui render hívások, ez a függvény mindig egy ImGui ablak context-ba van ágyazva.
+
+\newpage
+
+\begin{minted}
+[bgcolor=lbcolor,showspaces=false,breaksymbolleft=,breaklines=true]
+{cpp}
+void TaskWidget::RenderWidget() {
+  OnUpdate(0.0f);
+  OnRender();
+  ImGui::Begin("windowName");
+  OnImGuiRender();
+  ImGui::End();
+}
+\end{minted}
+
+\subsection{Widget broker}
+
+A widgetek példányosításáért egy \mintinline{cpp}{WidgetBroker} osztály felel. Az osztály \mintinline{cpp}{MakeWidget()} metódusa template paraméterként várja, hogy milyen típusú Widgetet készítsen, függvény paraméterként pedig egy \mintinline{cpp}{WidgetType} enum értéket kap, ami a widget azonosítója lesz, ezután pedig a példányosítani kívánt widget konstruktorának a paramétereit adhajtuk át. Végül eltároljuk egy map-ben a widgetet és visszatérünk egy pointerral ami egy unique smart pointer-ra mutat ami maga a widget.
+
+\begin{minted}
+[bgcolor=lbcolor,showspaces=false,breaksymbolleft=,breaklines=true]
+{cpp}
+template <typename WidgetT, typename... Arguments>
+Widget* MakeWidget(WidgetType id, Arguments&&... ArgumentValues) {
+  assert(m_Widgets.count(id) != 1);
+  m_Widgets[id] = std::make_unique<WidgetT>(
+    std::forward<Arguments>(ArgumentValues)...);
+  return m_Widgets[id].get();
+}
+\end{minted}
+
+Az alkalmazás különböző pontjain tudnunk kell az egyes widgetek-et manipulálni, például ha valamilyen funkcionalist egy gyorsbillentyűhöz akarunk kötni akkor a GLFW bevitel kezelő callback függvényeiben meg kell tudnunk hívni egy widget publikus metódusát. Ezt a \mintinline{cpp}{GetWidget()} függvénnyel tehetjük meg, ami azonosító alapján megkeresi a map-ben a használni kívánt widget-et és visszaad egy arra mutató pointert, amit upcastolunk a generikusként megkapott widget típusra.
+
+\begin{minted}
+[bgcolor=lbcolor,showspaces=false,breaksymbolleft=,breaklines=true]
+{cpp}
+template <typename WidgetT>
+WidgetT* GetWidget(WidgetType id) {
+      return (WidgetT*)m_Widgets[id].get();
+}
+\end{minted}
+
+Példa a használatára.
+
+\begin{minted}
+[bgcolor=lbcolor,showspaces=false,breaksymbolleft=,breaklines=true]
+{cpp}
+context->widgetBroker
+  .GetWidget<TextEditorWidget>("TextEditor")->Save();
+\end{minted}
+
+Az alkalmazásban szereplő widgetek:
+\begin{itemize}
+    \item Text editor widget: shader forrásfájlok szerkesztése
+    \item Scene editor widget: scene elementek létrehozása, törlése, clear color beállítása és a scene element adatainak beállítása
+    \item Console widget: oda-vissza kommunikáció az alkalmazás és a felhasználó között
+    \item File browser widget: fájl böngésző amin keresztül fájlok elérési útjait tudjuk megadni
+    \item Task widget: cél és a rajzolt kép közlése a felhasználóval, szintén ezen a widgeten keresztül tudunk feladatot beállítani és a képeket összehasonlítani.
+\end{itemize}

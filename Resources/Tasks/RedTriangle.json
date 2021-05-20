@@ -1,0 +1,52 @@
+{
+    "value0": {
+        "value0": "Resources/VertexShaders/RedTriangle_Vertex.shader",
+        "value1": "#version 410 core\n\nlayout (location = 0) in vec4 position;\nlayout (location = 1) in vec3 aColor;\nlayout (location = 2) in vec2 aTexCoord;\n\nout vec3 OurColor;\nout vec2 TexCoord;\n\nuniform mat4 u_RedTriangleModel;\nuniform mat4 u_RedTriangleView;\nuniform mat4 u_RedTriangleProjection;\n\nvoid main()\n{\n\tgl_Position = u_RedTriangleProjection * u_RedTriangleView \n\t* u_RedTriangleModel * position;\n\tOurColor = aColor;\n\tTexCoord = aTexCoord;\n}\n\n",
+        "value2": "#version 410 core\n\nuniform float u_RedTriangleTime;\nuniform int u_RedTriangleWidth;\nuniform int u_RedTriangleHeight;\n\nuniform sampler2D u_RedTriangleTexture0;\n\nin vec2 TexCoord;\nin vec3 OurColor;\n\nvoid main()\n{\n\tgl_FragColor = texture(u_RedTriangleTexture0, TexCoord);\n}\n\n\n\n\n\n",
+        "value3": [
+            0.5,
+            0.5,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.5,
+            -0.5,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            -0.5,
+            -0.5,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            -0.5,
+            0.5,
+            0.0,
+            1.0,
+            0.5,
+            0.0,
+            0.0,
+            1.0
+        ],
+        "value4": [
+            0,
+            1,
+            2,
+            2,
+            3,
+            0
+        ],
+        "value5": [
+            "Resources/Textures/elesis_fumo.png"
+        ]
+    }
+}

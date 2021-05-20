@@ -1,0 +1,30 @@
+\chapter*{Tartalmi összefoglaló}
+\addcontentsline{toc}{section}{Tartalmi összefoglaló}
+
+A téma megnevezése, OpenGL Shader programozó játék, kezdő shader fejlesztőknek.
+
+A feladat egy olyan desktop alkalmazás elkészítése, mely egy felületet biztosít shader programok forráskódjának a szerkesztéséhez, vertex, index, uniform, textúra adatok beviteléhez. Majd az adatok által generált képet összehasonlítani egy kitűzött cél képpel.
+
+OpenGL, GLFW, GLEW könyvtárak felhasználása úgy, hogy az alkalmazás Windows és Linux rendszereken is működjön. Kép összehasonlítása SSIM és Chi square distance algoritmusok implementálásával.
+
+Az alkalmazás fejlesztése C++ nyelven történt. Build rendszer gyanánt CMAKE-t, multiplatform ablak és bevitel kezelésre a GLFW könyvtárat, multiplatform extension betöltésre a GLEW könyvtárat, grafikus API-ként pedig az OpenGL-t használtam. Felhasználó felületet a DearImGui könyvtárral valósítottam meg, a képek beolvasását, exportálását pedig az stbi\_image könyvtár segítségével. A felhasználói felülethez felhasználtam egyéb, már előre megvalósított, nyílt forráskódú widget-eket.
+
+Az alkalmazás forráskódja bárki számára elérhető GitHub-on, így bárkihez eljuthat, akit érdekel a téma. A feladatkiírás által elvárt fő funkciókat sikeresen implementáltam és megfelelően működnek. 
+
+Kulcsszavak: Shader programozás, Kép összehasonlítás, OpenGL
+
+\chapter*{Bevezetés}
+\addcontentsline{toc}{section}{Bevezetés}
+A téma azért tetszett meg, mert mindig is érdekelt a GPU programozás és videójátékok révén a 3D grafika is. Szintúgy a C++ nyelv áll hozzám a legközelebb az összes közül. Célom egy olyan alkalmazás elkészítése volt mely biztosít mindent a felhasználó számára úgy, hogy a felhasználónak a shader kód írásán kívül más feladata ne legyen.
+
+Mindenki aki shader programozásba akar fogni, belebotlik abba a problémába, hogy mennyi mindent kell megvalósítani és bekonfigurálnia mielőtt a programozáshoz kezdhetne. Olyan problémákba mint könyvtárak beszerzése, fordítása, build rendszerek konfigurálása. OpenGL-en belül vertex, index, uniform, textúra adatok bevitele, shader programok fordítása, feltöltése, OpenGL API hívások debugolása. Ezek az előkészületek akár napokba is telhetnek a felhasználó képzettségétől függően. 
+
+Az alkalmazás aktuális állapotát lehetséges egy .tsk kiterjesztésű fájlba exportálni. Ez a fájl importálható és ez képezi a feladat alapállapotát. Innentől a felhasználó számára biztosítva van egy kép, amit meg kell valósítania. A vertex és index adatokból az alkalmazás egy poligont rajzol. Ez a poligon festővászonként szolgál a felhasználó számára. A vertex shaderben ennek a poligonnak a tulajdonságait programozhatja a felhasználó, a fragmens shaderben pedig a raszterációs folyamatot, azaz hogy a poligon pixelei milyen színt vegyenek fel.
+
+A rajzolt és a cél kép összehasonlításához több kép összehasonlító algoritmust is használok, hogy minnél pontosabb eredményt kapjak. Ezek az algoritmusok statisztikai módszereket alkalmaznak, nem pedig gépi tanulást a mai trendekkel ellentétben.
+
+Az alkalmazás szintén használható képfeldolgozó algoritmusok gyors implementálására és vizualizálására.
+
+Mintául a GLSL Sandbox nevű webalkalmazást vettem és annak az alapfunkcióit bővítettem ki. Ezek a plusz funkciók a programozható vertex shader, vertex, index, uniform, textúra adatok beolvasása, módosítása, generált kép exportálása. Szintén képes több objektum rajzolásásra így például color blendinget is fel lehet használni.
+
+A kész program lightweight, a kész bináris fájl kevesebb mint 10MB helyet foglal és átlagos használat esetén 200MB memóriánál többre nincs szüksége. Minden Windows vagy Linux rendszeren működnie kell ahol biztosítva van egy integrált vagy dedikált GPU ami támogatja az OpenGL-t.

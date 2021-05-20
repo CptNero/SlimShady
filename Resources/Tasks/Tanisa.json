@@ -1,0 +1,52 @@
+{
+    "value0": {
+        "value0": "Resources/VertexShaders/Tanisa_Vertex.shader",
+        "value1": "\n#version 410 core\n\nlayout (location = 0) in vec4 position;\nlayout (location = 1) in vec3 aColor;\nlayout (location = 2) in vec2 aTexCoord;\n\nout vec3 OurColor;\nout vec2 TexCoord;\n\nuniform mat4 u_TanisaModel;\nuniform mat4 u_TanisaView;\nuniform mat4 u_TanisaProjection;\n\nvoid main()\n{\n\tgl_Position = u_TanisaProjection * u_TanisaView * u_TanisaModel * position;\n\tgl_Position += 1;\n\tOurColor = aColor;\n\tTexCoord = aTexCoord;\n}",
+        "value2": "#version 410 core\n\nuniform float u_TanisaTime;\nuniform int u_TanisaWidth;\nuniform int u_TanisaHeight;\n\nuniform sampler2D u_TanisaTexture0;\n\nin vec2 TexCoord;\nin vec3 OurColor;\n\nvoid main()\n{\n\tgl_FragColor = texture(u_TanisaTexture0, TexCoord) * vec4(OurColor, 1.0);\n}",
+        "value3": [
+            0.5,
+            0.5,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.5,
+            -0.5,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            -0.5,
+            -0.5,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            -0.5,
+            0.5,
+            0.0,
+            1.0,
+            0.5,
+            0.0,
+            0.0,
+            1.0
+        ],
+        "value4": [
+            0,
+            1,
+            2,
+            2,
+            3,
+            0
+        ],
+        "value5": [
+            "/home/neresis/Projects/SlimShady/Resources/Textures/2transparent.png"
+        ]
+    }
+}

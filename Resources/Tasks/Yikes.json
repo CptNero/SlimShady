@@ -1,0 +1,53 @@
+{
+    "value0": {
+        "value0": "",
+        "value1": "#version 330 core\nlayout (location = 0) in vec4 position;\nlayout (location = 1) in vec3 aColor;\nlayout (location = 2) in vec2 aTexCoord;\n\nout vec3 ourColor;\nout vec2 TexCoord;\n\nuniform mat4 u_YikesModel;\nuniform mat4 u_YikesView;\nuniform mat4 u_YikesProjection;\n\nvoid main()\n{\n\tgl_Position = u_YikesProjection * u_YikesView * u_YikesModel * position;\n\tourColor = aColor;\n\tTexCoord = aTexCoord;\n}",
+        "value2": "#version 410 core\n\n#ifdef GL_ES\nprecision highp float;\n#endif\n\n#extension GL_OES_standard_derivatives : enable\n\nuniform float u_YikesTime;\nuniform int u_YikesWidth;\nuniform int u_YikesHeight;\n\nuniform sampler2D u_YikesTexture0;\n\nin vec2 TexCoord;\n\nconst int ITERATIONS = 200;\n\nvec3 square(vec3 z) {\n    return vec3(\n                z.x*z.x + z.y*z.y - z.z*z.z,\n                2.0 * z.x * z.y,\n                2.0 * z.x * z.z\n               );\n}\n\nvoid main() {\n    vec2 pos = (gl_FragCoord.xy/u_YikesWidth)-vec2(0.750,0.25);\n    pos *= 4.0;\n    \n    vec3 c = vec3(pos.x, (sin(1.0)+1.0)* 1, pos.y);\n    vec3 z = c;\n    int escapetime = 0;\n    \n    for (int i = 0; i < ITERATIONS; i++) {\n        z = square(z) + c;\n        if (abs(z.x) > 10.) {\n            escapetime = i;\n            break;\n        }\n    }\n\n    vec4 color = vec4(1.0-exp(-float(escapetime) / 5.0));\n    \n    //if (length(pos-vec2(0.25,0)) < c.y || length(pos-vec2(-2,0)) < c.y) color += vec3(1,-1,-1);\n    \n    gl_FragColor = texture(u_YikesTexture0, TexCoord) * color;\n}",
+        "value3": [
+            0.5,
+            0.5,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.5,
+            -0.5,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            -0.5,
+            -0.5,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            -0.5,
+            0.5,
+            0.0,
+            1.0,
+            0.5,
+            0.0,
+            0.0,
+            1.0
+        ],
+        "value4": [
+            0,
+            1,
+            2,
+            2,
+            3,
+            0
+        ],
+        "value5": [
+            "/home/neresis/Projects/SlimShady/Resources/Textures/elesis_fumo.png",
+            "/home/neresis/Projects/SlimShady/Resources/Textures/2transparent.png"
+        ]
+    }
+}
