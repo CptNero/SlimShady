@@ -1,3 +1,0 @@
-/home/neresis/Projects/Personal/SlimShady/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/neresis/Projects/Personal/SlimShady/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/neresis/Projects/Personal/SlimShady/cmake-build-debug/CMakeFiles/SlimShady.dir
